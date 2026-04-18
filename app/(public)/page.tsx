@@ -3,15 +3,15 @@
 import Hero from '@/components/public/Hero';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import {
-  ArrowRight,
-  Calendar,
-  CheckCircle2,
-  Heart,
-  MessageSquare,
-  Quote,
-  ShieldCheck,
-  Star,
-  Users
+    ArrowRight,
+    Calendar,
+    CheckCircle2,
+    Heart,
+    MessageSquare,
+    Quote,
+    ShieldCheck,
+    Star,
+    Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -310,6 +310,77 @@ export default function Home() {
                 </div>
              </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* How to Help Section */}
+      <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -ml-48 -mb-48" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-24"
+          >
+            <motion.span variants={itemVariants} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Únete a la Causa</motion.span>
+            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-secondary mb-6 font-primary">Cómo <span className="gradient-text">Ayudar</span></motion.h2>
+            <motion.div variants={itemVariants} className="w-24 h-2 bg-gradient-brand mx-auto rounded-full"></motion.div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Dona",
+                text: "Tu contribución financiera nos ayuda a expandir nuestros programas y llegar a más personas que necesitan apoyo.",
+                icon: Heart,
+                color: "primary",
+                href: "/donaciones",
+                delay: 0.1
+              },
+              {
+                title: "Sé Voluntario",
+                text: "Únete a nuestro equipo de voluntarios y contribuye con tu tiempo y habilidades para hacer la diferencia.",
+                icon: Users,
+                color: "secondary",
+                href: "/voluntariado",
+                delay: 0.2
+              },
+              {
+                title: "Comparte",
+                text: "Ayuda a difundir nuestro mensaje compartiendo nuestras historias y actividades en tus redes sociales.",
+                icon: MessageSquare,
+                color: "primary",
+                href: "/contacto",
+                delay: 0.3
+              }
+            ].map((help, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: help.delay }}
+                whileHover={{ y: -15 }}
+                className="glass p-10 rounded-[3rem] text-center group transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 relative"
+              >
+                <div className={`w-20 h-20 bg-${help.color}/10 rounded-3xl flex items-center justify-center text-${help.color} mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
+                  <help.icon size={40} fill={help.color === 'primary' ? 'currentColor' : 'none'} />
+                </div>
+                <h3 className="text-3xl font-bold text-secondary mb-6">{help.title}</h3>
+                <p className="text-gray-500 leading-relaxed text-lg mb-8">
+                  {help.text}
+                </p>
+                <Link href={help.href} className={`inline-flex items-center gap-2 px-8 py-4 bg-${help.color} text-white font-bold rounded-full hover:shadow-lg transition-all hover:scale-105`}>
+                  Más Información <ArrowRight size={20} />
+                </Link>
+                <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

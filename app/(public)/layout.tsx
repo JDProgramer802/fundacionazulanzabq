@@ -1,5 +1,6 @@
-import Navbar from '@/components/public/Navbar';
 import Footer from '@/components/public/Footer';
+import Navbar from '@/components/public/Navbar';
+import WhatsAppButton from '@/components/public/WhatsAppButton';
 
 export default function PublicLayout({
   children,
@@ -13,6 +14,7 @@ export default function PublicLayout({
         {children}
       </div>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

@@ -11,27 +11,38 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-32 pb-20 md:pt-40">
-      {/* Mesh Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#EE84B522,transparent_50%),radial-gradient(circle_at_80%_50%,#0356CB11,transparent_50%)]" />
+      {/* Floating Icons */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{
-            scale: [1, 1.1, 1],
-            x: [0, 30, 0],
             y: [0, -20, 0],
+            rotate: [0, 5, 0],
           }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
-        />
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/4 text-primary/20"
+        >
+          <Heart size={60} />
+        </motion.div>
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            x: [0, -40, 0],
-            y: [0, 30, 0],
+            y: [0, 20, 0],
+            rotate: [0, -5, 0],
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[120px]"
-        />
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-1/3 right-1/4 text-secondary/20"
+        >
+          <Heart size={50} />
+        </motion.div>
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-1/4 left-1/3 text-primary/15"
+        >
+          <Heart size={40} />
+        </motion.div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
