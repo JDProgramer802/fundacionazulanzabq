@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   },
   description: "Fundación Azulanza brinda asistencia integral en salud mental, seguridad alimentaria y desarrollo comunitario en Colombia.",
   keywords: ["fundación", "salud mental", "asesoría psicológica", "ayuda comunitaria", "donaciones", "voluntariado", "apoyo emocional", "Colombia"],
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
