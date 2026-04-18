@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/noticias', label: 'Noticias' },
+  { href: '/galeria', label: 'Galería' },
   { href: '/asesoria', label: 'Asesoría' },
   { href: '/donaciones', label: 'Donaciones' },
   { href: '/voluntariado', label: 'Voluntariado' },

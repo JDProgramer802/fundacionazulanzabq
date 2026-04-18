@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Star,
   Users,
+  Camera,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,6 +23,7 @@ export default function Home() {
   const [config, setConfig] = useState<any>({});
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
+  const [gallery, setGallery] = useState<any[]>([]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -31,15 +33,19 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [settingsRes, testimonialsRes, eventsRes] = await Promise.all([
+      const [settingsRes, testimonialsRes, eventsRes, galleryRes] = await Promise.all([
         api.get('/api/settings'),
         api.get('/api/testimonials'),
         api.get('/api/events'),
+        api.get('/api/gallery'),
       ]);
 
       if (settingsRes.data) setConfig(settingsRes.data);
       if (Array.isArray(testimonialsRes.data)) setTestimonials(testimonialsRes.data);
       if (Array.isArray(eventsRes.data)) setEvents(eventsRes.data);
+      if (Array.isArray(galleryRes.data)) {
+        setGallery(galleryRes.data.filter((i: any) => i.active).slice(0, 6));
+      }
     };
 
     fetchData();
@@ -328,6 +334,63 @@ export default function Home() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Recent Gallery Section - Added 2026-04-18 */}
+      {gallery.length > 0 && (
+        <section className="py-32 relative overflow-hidden bg-[#fafcff]">
+          <div className="absolute top-1/2 left-0 w-[600px] h-[600px] shape-blob-blue opacity-10 -translate-y-1/2" />
+
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-20 max-w-3xl mx-auto"
+            >
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
+                Momentos que Inspiran
+              </span>
+              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">
+                Nuestra <span className="gradient-text">Galería</span>
+              </h2>
+              <p className="text-gray-500 text-lg">
+                Un vistazo rápido a las sonrisas y el trabajo que realizamos día a día.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {gallery.map((item, i) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="aspect-square relative rounded-3xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                >
+                  <Link href="/galeria">
+                    <Image
+                      src={item.image_url}
+                      alt={item.title || 'Fundación Azulanza'}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <Camera className="text-white" size={24} />
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-16 text-center">
+              <Link href="/galeria" className="btn-glass inline-flex items-center gap-2">
+                Ver Galería Completa <ArrowRight size={18} />
+              </Link>
             </div>
           </div>
         </section>

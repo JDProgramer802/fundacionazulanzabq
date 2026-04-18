@@ -6,6 +6,7 @@ import {
   FileText,
   HeartHandshake,
   HelpCircle,
+  Image as ImageIcon,
   LayoutDashboard,
   LogOut,
   MessageSquare,
@@ -22,6 +23,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const menuItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/contenido', label: 'Contenido', icon: FileText },
+  { href: '/admin/galeria', label: 'Galería', icon: ImageIcon },
   { href: '/admin/noticias', label: 'Noticias', icon: Newspaper },
   { href: '/admin/eventos', label: 'Eventos', icon: Calendar },
   { href: '/admin/citas', label: 'Citas', icon: Calendar },

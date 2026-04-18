@@ -136,3 +136,15 @@ model FAQ {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  title       String?
+  description String?  @db.Text
+  image_url   String
+  category    String   @default("General")
+  active      Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
