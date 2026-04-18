@@ -1,7 +1,7 @@
 import { ContactNotificationEmail } from '@/components/emails/ContactNotificationEmail';
 import { getAuthUser } from '@/lib/auth';
+import { sendMail } from '@/lib/mail-service';
 import prisma from '@/lib/prisma';
-import resend, { FROM_EMAIL } from '@/lib/resend';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -34,22 +34,16 @@ export async function POST(request: Request) {
       },
     });
 
-    // Enviar notificación al admin
-    try {
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: process.env.ADMIN_EMAIL || 'fundacion@azulanza.org',
-        subject: `Nuevo mensaje de: ${data.name}`,
-        react: ContactNotificationEmail({
-          name: data.name,
-          email: data.email,
-          message: data.message,
-        }),
-      });
-    } catch (emailError) {
-      console.error('Error enviando email:', emailError);
-      // No bloqueamos la respuesta si falla el envío de email
-    }
+    // Enviar notificación al admin usando el servicio centralizado
+    await sendMail({
+      to: process.env.ADMIN_EMAIL || 'fundacionazulanza@gmail.com',
+      subject: `Nuevo mensaje de: ${data.name}`,
+      react: ContactNotificationEmail({
+        name: data.name,
+        email: data.email,
+        message: data.message,
+      }),
+    });
 
     return NextResponse.json({ success: true, message: 'Mensaje enviado correctamente' });
   } catch (error) {
