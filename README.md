@@ -1,122 +1,144 @@
 # 💙 Fundación Azulanza - Plataforma Web
 
-Plataforma integral diseñada para la **Fundación Azulanza**, enfocada en la gestión administrativa y la interacción con la comunidad. Construida con tecnologías de vanguardia para garantizar un alto rendimiento, SEO optimizado y una experiencia de usuario fluida.
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
+
+Plataforma integral diseñada para la **Fundación Azulanza**, enfocada en la gestión administrativa y la interacción comunitaria.
 
 ---
 
-## 🚀 Tecnologías Principales
-
-- **Framework:** [Next.js 14](https://nextjs.org/) (App Router) con **TypeScript**.
-- **Estilos:** [Tailwind CSS](https://tailwindcss.com/) + [Framer Motion](https://www.framer.com/motion/) para animaciones.
-- **Base de Datos:** PostgreSQL alojado en [Neon.tech](https://neon.tech/).
-- **ORM:** [Prisma](https://www.prisma.io/).
-- **Emails:** [Resend](https://resend.com/) con plantillas responsivas.
-- **Autenticación:** JWT personalizado con **Cookies HttpOnly** para máxima seguridad.
-- **Almacenamiento:** [Vercel Blob](https://vercel.com/storage/blob) para archivos y comprobantes.
-- **Testing:** [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
-- **Calidad de Código:** ESLint + Prettier + Husky (pre-commit hooks).
+## 📌 Tabla de Contenidos
+- [✨ Características](#-características)
+- [🛠️ Stack Tecnológico](#️-stack-tecnológico)
+- [🏗️ Arquitectura y SOLID](#️-arquitectura-y-solid)
+- [🚀 Inicio Rápido](#-inicio-rápido)
+- [⚙️ Configuración (.env)](#️-configuración-env)
+- [🧪 Calidad y Testing](#-calidad-y-testing)
+- [📂 Estructura](#-estructura)
 
 ---
 
-## ✨ Características y Funcionalidades
+## ✨ Características
 
-### 🌍 Portal Público
-- **Diseño Moderno:** Interfaz intuitiva con componentes animados y visualmente atractivos.
-- **Gestión de Citas:** Sistema para agendar asesorías profesionales gratuitas.
-- **Voluntariado:** Formulario dinámico para la captación de nuevos colaboradores.
-- **Donaciones:** Registro de aportes con carga de comprobantes vía Vercel Blob.
-- **Blog de Noticias:** Sección de actualidad con slugs amigables para SEO.
-- **Preguntas Frecuentes (FAQ):** Acordeones interactivos para resolver dudas comunes.
+<details>
+<summary><b>🌍 Portal Público (Click para expandir)</b></summary>
 
-### � Panel Administrativo
-- **Dashboard Privado:** Gestión centralizada de todas las operaciones de la fundación.
-- **CRUD de Contenido:** Control total sobre noticias, testimonios y eventos.
-- **Gestión de Solicitudes:** Seguimiento y cambio de estados para citas y voluntarios.
-- **Configuración Global:** Edición dinámica de redes sociales, SEO, logos e información de contacto.
+- **Diseño Moderno:** Interfaz fluida con animaciones de Framer Motion.
+- **Gestión de Citas:** [Agenda tu asesoría](https://fundacionazulanzabq.vercel.app/asesoria).
+- **Voluntariado:** Sistema de postulación dinámica.
+- **Donaciones:** Registro seguro con carga de comprobantes.
+- **Blog:** Noticias optimizadas para SEO.
+</details>
 
----
+<details>
+<summary><b>🔐 Panel Administrativo (Click para expandir)</b></summary>
 
-## 🛠️ Arquitectura y Refactorización (SOLID)
-
-El código ha sido refactorizado siguiendo los principios **SOLID** para asegurar su mantenibilidad:
-
-- **Centralized API Client:** Localizado en [`lib/api-client.ts`](./lib/api-client.ts). Maneja todas las peticiones, errores de red y validación de tipos.
-- **Custom Hooks:** Implementación de [`use-form-handler.ts`](./hooks/use-form-handler.ts) para abstraer la lógica de formularios, estados de carga y validaciones.
-- **Mail Service:** Servicio robusto en [`lib/mail-service.ts`](./lib/mail-service.ts) con lógica de reintentos automáticos (exponential backoff) y manejo de errores.
-- **UI Components:** Componentes reutilizables como [`AnimatedBackground.tsx`](./components/ui/AnimatedBackground.tsx) para evitar duplicación de código visual.
+- **Dashboard:** Control centralizado de métricas y solicitudes.
+- **Gestión de Contenido:** CRUD completo de noticias, testimonios y eventos.
+- **Moderación:** Aprobación de voluntarios y verificación de donaciones.
+- **Configuración:** Personalización de SEO, redes sociales y contacto.
+</details>
 
 ---
 
-## 📋 Configuración del Entorno
+## 🛠️ Stack Tecnológico
 
-Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+| Tecnología | Propósito |
+| :--- | :--- |
+| **Next.js 14** | Framework Fullstack (App Router) |
+| **PostgreSQL** | Base de datos relacional (Neon) |
+| **Resend** | Motor de emails transaccionales |
+| **Vercel Blob** | Almacenamiento de archivos en la nube |
+| **Framer Motion** | Animaciones de alta calidad |
+
+---
+
+## 🏗️ Arquitectura y SOLID
+
+El proyecto implementa patrones de diseño para máxima escalabilidad:
+
+- **[api-client.ts](./lib/api-client.ts)**: Cliente centralizado para peticiones HTTP.
+- **[use-form-handler.ts](./hooks/use-form-handler.ts)**: Abstracción de lógica de formularios.
+- **[mail-service.ts](./lib/mail-service.ts)**: Lógica de correos con reintentos automáticos.
+
+---
+
+## 🚀 Inicio Rápido
+
+1. **Clonar y Preparar:**
+   ```bash
+   git clone https://github.com/JDProgramer802/fundacionazulanzabq.git
+   cd fundacionazulanzabq
+   npm install
+   ```
+
+2. **Base de Datos:**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   npx prisma db seed
+   ```
+
+3. **Ejecutar:**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## ⚙️ Configuración (.env)
+
+<details>
+<summary><b>Ver variables requeridas</b></summary>
 
 ```env
 # Base de Datos
-DATABASE_URL="tu_url_de_neon_o_postgres"
+DATABASE_URL="tu_url_de_neon"
 
 # Autenticación
-JWT_SECRET="cadena_aleatoria_muy_larga"
+JWT_SECRET="secreto_largo_y_seguro"
 
-# Resend (Servicio de Email)
-RESEND_API_KEY="re_tu_api_key"
-RESEND_FROM_EMAIL="onboarding@resend.dev" # Cambiar por tu dominio verificado
+# Resend
+RESEND_API_KEY="re_clave"
+RESEND_FROM_EMAIL="onboarding@resend.dev"
 ADMIN_EMAIL="tu@email.com"
 
-# Aplicación
+# App
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
+</details>
 
 ---
 
-## 🏃 Lanzamiento del Proyecto
+## 🧪 Calidad y Testing
 
-### 1. Instalación de Dependencias
+Aseguramos la integridad del código con pruebas automatizadas:
+
 ```bash
-npm install
+# Ejecutar tests unitarios
+npm test
+
+# Reporte de cobertura
+npm run test:coverage
 ```
 
-### 2. Configuración de Base de Datos
-```bash
-npx prisma generate
-npx prisma db push
-npx prisma db seed # Poblar con datos iniciales (Admin predeterminado)
-```
-
-### 3. Ejecución en Desarrollo
-```bash
-npm run dev
-```
+> **Nota:** El proyecto utiliza **Husky** para validar el código antes de cada commit.
 
 ---
 
-## 🧪 Pruebas y Calidad
-
-### Ejecutar Tests
-```bash
-npm test              # Ejecutar todos los tests unitarios
-npm run test:coverage # Ver reporte de cobertura (Objetivo: 80%+)
-```
-
-### Linting y Formateo
-El proyecto utiliza **Husky** para asegurar que el código pase las revisiones de ESLint y Prettier automáticamente antes de cada commit.
-```bash
-npm run lint # Ejecutar linter manualmente
-```
-
----
-
-## 📂 Estructura del Proyecto
+## 📂 Estructura
 
 ```text
-├── app/              # Rutas (Public, Admin, API)
-├── components/       # Componentes React (UI, Emails, Public, Admin)
-├── hooks/            # Hooks personalizados reutilizables
-├── lib/              # Servicios, utilidades y configuración (Prisma, Auth)
-├── prisma/           # Esquema de DB y scripts de seed
-├── public/           # Archivos estáticos
-└── __tests__/        # Pruebas unitarias e integración
+├── app/              # Rutas y lógica de servidor
+├── components/       # Componentes React reutilizables
+├── hooks/            # Hooks de lógica de negocio
+├── lib/              # Servicios y utilidades core
+├── prisma/           # Modelado de datos
+└── __tests__/        # Suite de pruebas
 ```
 
 ---
-Desarrollado para **Fundación Azulanza**. Comprometidos con el bienestar emocional. 💙
+Desarrollado con 💙 para **Fundación Azulanza**.
