@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { formatDate } from '@/lib/utils';
+import { Appointment } from '@prisma/client';
 import {
   AlertCircle,
   Calendar,

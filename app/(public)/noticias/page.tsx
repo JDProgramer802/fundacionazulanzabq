@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { formatDate } from '@/lib/utils';
+import { News } from '@prisma/client';
 import { ArrowRight, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
