@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Champagne & Limousines';
+  src: url('/fonts/ChampagneLimousines.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Champagne & Limousines';
+  src: url('/fonts/ChampagneLimousinesBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --primary: 238 132 181;
+  --secondary: 3 86 203;
+}
+
+body {
+  @apply font-body text-foreground bg-background overflow-x-hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-primary;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-brand;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-primary text-white rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30 active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-secondary text-white rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-secondary/30 active:scale-95;
+}

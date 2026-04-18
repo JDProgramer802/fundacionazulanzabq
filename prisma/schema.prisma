@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password_hash String
+  role          String   @default("admin")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
+model Setting {
+  key       String   @id
+  value     String   // JSON string para valores complejos
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  content        String   @db.Text
+  excerpt        String?
+  image_url      String?
+  image_alt      String?
+  meta_title     String?
+  meta_desc      String?
+  published      Boolean  @default(true)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+}
+
+model Appointment {
+  id           String   @id @default(cuid())
+  client_name  String
+  client_email String
+  client_phone String?
+  datetime     DateTime
+  reason       String?  @db.Text
+  status       String   @default("pendiente") // pendiente, confirmada, completada, cancelada
+  notes        String?  @db.Text
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  message      String   @db.Text
+  is_read      Boolean  @default(false)
+  replied      Boolean  @default(false)
+  reply_text   String?  @db.Text
+  replied_at   DateTime?
+  created_at   DateTime @default(now())
+}
+
+model Donation {
+  id              String   @id @default(cuid())
+  donor_name      String
+  donor_email     String
+  amount          Float
+  receipt_image   String?
+  receipt_number  String?
+  status          String   @default("pendiente_verificacion")
+  verified_at     DateTime?
+  verified_by     String?
+  notes           String?  @db.Text
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+model AvailabilitySlot {
+  id          String   @id @default(cuid())
+  day_of_week Int      // 0 = Domingo, 6 = Sábado
+  start_time  String   // "HH:MM"
+  end_time    String   // "HH:MM"
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
