@@ -9,6 +9,7 @@ export async function GET() {
     });
     return NextResponse.json(items);
   } catch (error) {
+    console.error('Gallery API Error:', error);
     return NextResponse.json({ error: 'Error al obtener la galería' }, { status: 500 });
   }
 }

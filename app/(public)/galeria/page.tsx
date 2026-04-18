@@ -21,6 +21,7 @@ export default function GalleryPage() {
   const [filteredItems, setFilteredItems] = useState<GalleryItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   useEffect(() => {
@@ -31,11 +32,18 @@ export default function GalleryPage() {
     try {
       const res = await fetch('/api/gallery');
       const data = await res.json();
-      const activeItems = data.filter((item: GalleryItem) => item.active);
-      setItems(activeItems);
-      setFilteredItems(activeItems);
+      
+      if (Array.isArray(data)) {
+        const activeItems = data.filter((item: GalleryItem) => item.active);
+        setItems(activeItems);
+        setFilteredItems(activeItems);
+      } else {
+        console.error('Data is not an array:', data);
+        setError('Error al procesar los datos de la galería.');
+      }
     } catch (error) {
       console.error('Error fetching gallery:', error);
+      setError('No se pudo conectar con el servidor.');
     } finally {
       setLoading(false);
     }
@@ -163,7 +171,20 @@ export default function GalleryPage() {
             </motion.div>
           )}
 
-          {!loading && filteredItems.length === 0 && (
+          {!loading && error && (
+            <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100">
+               <ImageIcon size={48} className="mx-auto text-red-300 mb-4" />
+               <p className="text-red-500 font-medium">{error}</p>
+               <button 
+                 onClick={() => { setLoading(true); setError(null); fetchItems(); }}
+                 className="mt-4 text-primary font-bold hover:underline"
+                >
+                  Reintentar
+                </button>
+            </div>
+          )}
+
+          {!loading && !error && filteredItems.length === 0 && (
             <div className="text-center py-20 bg-gray-50 rounded-[3rem] border-2 border-dashed border-gray-100">
               <ImageIcon size={48} className="mx-auto text-gray-300 mb-4" />
               <p className="text-gray-400 font-medium font-body">
@@ -174,9 +195,9 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox with check for valid index */}
       <AnimatePresence>
-        {selectedImage !== null && (
+        {selectedImage !== null && filteredItems[selectedImage] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
