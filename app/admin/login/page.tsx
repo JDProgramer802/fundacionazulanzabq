@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,8 +27,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push('/admin');
-        router.refresh();
+        // Force a full reload to ensure the middleware picks up the new cookie
+        window.location.href = '/admin';
       } else {
         setError(data.error || 'Credenciales inválidas');
       }

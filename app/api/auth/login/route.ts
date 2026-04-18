@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { createToken } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import { createToken, setAuthCookie } from '@/lib/auth';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
@@ -31,9 +31,18 @@ export async function POST(request: Request) {
       role: user.role,
     });
 
-    setAuthCookie(token);
+    const response = NextResponse.json({ success: true });
 
-    return NextResponse.json({ success: true });
+    // Set cookie directly on the response for maximum compatibility
+    response.cookies.set('admin_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24, // 1 day
+      path: '/',
+    });
+
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
