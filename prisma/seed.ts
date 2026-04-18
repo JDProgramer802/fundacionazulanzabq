@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Create Admin User
-  const adminEmail = process.env.ADMIN_EMAIL || 'fundacion@azulanza.org';
+  const adminEmail = process.env.ADMIN_EMAIL || 'fundacionazulanza@gmail.com';
   const hashedPassword = await bcrypt.hash('admin123', 10);
 
   await prisma.user.upsert({
@@ -23,10 +23,11 @@ async function main() {
     { key: 'site_title', value: 'Fundación Azulanza' },
     { key: 'site_description', value: 'Fundación Azulanza brinda asistencia integral en salud mental, seguridad alimentaria y desarrollo comunitario.' },
     { key: 'global_description', value: 'Asistencia integral en salud mental y apoyo comunitario.' },
-    { key: 'contact_email', value: 'fundacion@azulanza.org' },
-    { key: 'contact_phone', value: '+57 300 123 4567' },
+    { key: 'contact_email', value: 'fundacionazulanza@gmail.com' },
+    { key: 'contact_phone', value: '+57 322 721 2546' },
     { key: 'contact_address', value: 'Barranquilla, Colombia' },
-    { key: 'whatsapp_number', value: '573001234567' },
+    { key: 'whatsapp_number', value: '573227212546' },
+    { key: 'nit', value: '901645631-4' },
     { key: 'social_links', value: JSON.stringify({
       facebook: 'https://facebook.com/fundacionazulanza',
       instagram: 'https://instagram.com/fundacionazulanza',
