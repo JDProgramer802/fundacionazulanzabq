@@ -1,6 +1,7 @@
 'use client';
 
 import Hero from '@/components/public/Hero';
+import { api } from '@/lib/api-client';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import {
   ArrowRight,
@@ -28,17 +29,19 @@ export default function Home() {
   });
 
   useEffect(() => {
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => setConfig(data));
+    const fetchData = async () => {
+      const [settingsRes, testimonialsRes, eventsRes] = await Promise.all([
+        api.get('/api/settings'),
+        api.get('/api/testimonials'),
+        api.get('/api/events')
+      ]);
 
-    fetch('/api/testimonials')
-      .then(res => res.json())
-      .then(data => setTestimonials(data));
+      if (settingsRes.data) setConfig(settingsRes.data);
+      if (Array.isArray(testimonialsRes.data)) setTestimonials(testimonialsRes.data);
+      if (Array.isArray(eventsRes.data)) setEvents(eventsRes.data);
+    };
 
-    fetch('/api/events')
-      .then(res => res.json())
-      .then(data => setEvents(data));
+    fetchData();
   }, []);
 
   const containerVariants = {
@@ -126,7 +129,7 @@ export default function Home() {
                 <div className="relative h-full bg-white rounded-[3rem] p-10 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary/20">
                   {/* Accent Line */}
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.accent}`} />
-                  
+
                   {/* Icon Container */}
                   <div className={`w-20 h-20 bg-gradient-to-br ${feature.accent} rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-lg`}>
                     <feature.icon size={40} />
@@ -188,7 +191,7 @@ export default function Home() {
                 className="group relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-pink-300/10 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                
+
                 <div className="relative bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-[2.5rem] text-center group-hover:border-white/40 transition-all duration-300 h-full flex flex-col items-center justify-center">
                   <div className="w-16 h-16 bg-gradient-to-br from-pink-300 to-primary rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-125 transition-transform duration-500 shadow-lg">
                     <stat.icon size={32} />
@@ -208,7 +211,7 @@ export default function Home() {
       {events.length > 0 && (
         <section className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48" />
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -241,7 +244,7 @@ export default function Home() {
                         </div>
                       )}
                       {/* Date Badge */}
-                      <motion.div 
+                      <motion.div
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         transition={{ delay: i * 0.1 + 0.2 }}
@@ -253,11 +256,11 @@ export default function Home() {
                         </div>
                       </motion.div>
                     </div>
-                    
+
                     <div className="p-8 flex-1 flex flex-col">
                       <h3 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors line-clamp-2">{ev.title}</h3>
                       <p className="text-gray-500 text-sm mb-8 line-clamp-3 flex-1">{ev.description}</p>
-                      
+
                       <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                         <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold">
                           <Calendar size={14} className="text-primary" />
@@ -280,7 +283,7 @@ export default function Home() {
       {testimonials.length > 0 && (
         <section className="py-32 bg-gradient-to-b from-blue-50/50 to-white relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -mr-48 -mb-48" />
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -305,7 +308,7 @@ export default function Home() {
                   className="group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                  
+
                   <div className="relative bg-white p-10 rounded-[3rem] h-full border border-gray-100 group-hover:border-primary/20 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-primary/10">
                     <div className="flex justify-between items-start mb-6">
                       <Quote size={40} className="text-primary/20" />

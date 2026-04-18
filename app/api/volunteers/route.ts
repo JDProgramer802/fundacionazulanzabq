@@ -1,3 +1,5 @@
+import { ContactNotificationEmail } from '@/components/emails/ContactNotificationEmail';
+import { sendMail } from '@/lib/mail-service';
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
@@ -24,6 +26,18 @@ export async function POST(request: Request) {
         status: 'pendiente',
       },
     });
+
+    // Enviar notificación al admin
+    await sendMail({
+      to: process.env.ADMIN_EMAIL || 'fundacionazulanza@gmail.com',
+      subject: `Nueva postulación de voluntariado: ${body.name}`,
+      react: ContactNotificationEmail({
+        name: body.name,
+        email: body.email,
+        message: `Intereses: ${body.interests || 'No especificado'}`,
+      }),
+    });
+
     return NextResponse.json(volunteer);
   } catch (error) {
     return NextResponse.json({ error: 'Error al registrar voluntario' }, { status: 500 });

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { api } from '@/lib/api-client';
+import { useState } from 'react';
 
 interface UseFormHandlerOptions<T> {
   initialData: T;
@@ -36,6 +36,8 @@ export function useFormHandler<T>({
 
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+    if (status === 'loading') return; // Prevenir múltiples envíos simultáneos
+
     setStatus('loading');
     setErrorMsg(null);
 

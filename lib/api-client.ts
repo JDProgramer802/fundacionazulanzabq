@@ -16,10 +16,16 @@ export async function apiFetch<T = any>(
       },
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get('content-type');
+    let data;
+    if (contentType && contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      data = await res.text();
+    }
 
     if (!res.ok) {
-      return { error: data.error || `Error: ${res.status} ${res.statusText}` };
+      return { error: data?.error || data || `Error: ${res.status} ${res.statusText}` };
     }
 
     return { data };

@@ -3,7 +3,7 @@
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
 import { useFormHandler } from '@/hooks/use-form-handler';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Heart, Landmark, Loader2, QrCode, Upload, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Heart, Landmark, Loader2, QrCode, Upload, Zap } from 'lucide-react';
 
 export default function DonacionesPage() {
   const { formData, status, setStatus, updateField, handleSubmit } = useFormHandler({
@@ -60,7 +60,8 @@ export default function DonacionesPage() {
             Tu <span className="gradient-text">Generosidad</span> Nos Impulsa
           </h1>
           <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-            Con tu apoyo mantenemos asesorías psicológicas gratuitas, jornadas de salud mental y programas de apoyo comunitario. Juntos transformamos vidas.
+            Con tu apoyo mantenemos asesorías psicológicas gratuitas, jornadas de salud mental y
+            programas de apoyo comunitario. Juntos transformamos vidas.
           </p>
         </motion.div>
 
@@ -75,7 +76,7 @@ export default function DonacionesPage() {
             {/* How to Donate */}
             <div className="bg-white rounded-[3rem] p-10 shadow-xl border border-gray-100 overflow-hidden relative">
               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl" />
-              
+
               <h3 className="text-3xl font-bold text-secondary mb-10 flex items-center gap-3 relative z-10">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center text-white">
                   <Landmark size={24} />
@@ -85,9 +86,21 @@ export default function DonacionesPage() {
 
               <div className="space-y-6 relative z-10">
                 {[
-                  { step: 1, title: "Escanea el QR", desc: "Abre tu app bancaria (Bancolombia, Nequi, Daviplata) y escanea nuestro código." },
-                  { step: 2, title: "Realiza la Transferencia", desc: "Envía la cantidad que desees a nuestra cuenta verificada." },
-                  { step: 3, title: "Reporta tu Donación", desc: "Completa el formulario adjuntando el comprobante." }
+                  {
+                    step: 1,
+                    title: 'Escanea el QR',
+                    desc: 'Abre tu app bancaria (Bancolombia, Nequi, Daviplata) y escanea nuestro código.',
+                  },
+                  {
+                    step: 2,
+                    title: 'Realiza la Transferencia',
+                    desc: 'Envía la cantidad que desees a nuestra cuenta verificada.',
+                  },
+                  {
+                    step: 3,
+                    title: 'Reporta tu Donación',
+                    desc: 'Completa el formulario adjuntando el comprobante.',
+                  },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4">
                     <div className="relative">
@@ -114,7 +127,11 @@ export default function DonacionesPage() {
                 <QrCode size={180} className="text-secondary" />
               </div>
               <p className="text-xs text-gray-600 text-center mt-6 relative z-10 font-semibold">
-                Fundación Azulanza<br/>NIT: 901.645.631-4<br/>Bancolombia Ahorros
+                Fundación Azulanza
+                <br />
+                NIT: 901.645.631-4
+                <br />
+                Bancolombia Ahorros
               </p>
             </div>
 
@@ -125,7 +142,10 @@ export default function DonacionesPage() {
                 <Zap size={32} className="text-yellow-300 shrink-0 mt-1" />
                 <div>
                   <h4 className="text-xl font-bold mb-2">Transparencia Total</h4>
-                  <p className="text-blue-100">100% de las donaciones se destinan a asesorías psicológicas, jornadas de salud y apoyo comunitario.</p>
+                  <p className="text-blue-100">
+                    100% de las donaciones se destinan a asesorías psicológicas, jornadas de salud y
+                    apoyo comunitario.
+                  </p>
                 </div>
               </div>
             </div>
@@ -149,7 +169,8 @@ export default function DonacionesPage() {
                   </div>
                   <h2 className="text-3xl font-bold text-secondary mb-4">¡Gracias de Corazón!</h2>
                   <p className="text-gray-500 mb-8 leading-relaxed">
-                    Tu donación ha sido recibida. Te enviaremos un certificado de donación a tu correo electrónico.
+                    Tu donación ha sido recibida. Te enviaremos un certificado de donación a tu
+                    correo electrónico.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
@@ -159,42 +180,50 @@ export default function DonacionesPage() {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={onFormSubmit} className="space-y-6">
                   <h2 className="text-3xl font-bold text-secondary mb-8">Reportar Donación</h2>
 
                   <div>
-                    <label className="block text-sm font-bold text-secondary mb-3">Nombre del Donante *</label>
+                    <label className="block text-sm font-bold text-secondary mb-3">
+                      Nombre del Donante *
+                    </label>
                     <input
                       type="text"
                       required
                       value={formData.donor_name}
-                      onChange={(e) => setFormData({ ...formData, donor_name: e.target.value })}
+                      onChange={(e) => updateField('donor_name', e.target.value)}
                       className="w-full px-5 py-3 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all focus:ring-2 focus:ring-primary/20"
                       placeholder="Tu nombre o empresa..."
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-secondary mb-3">Correo Electrónico *</label>
+                    <label className="block text-sm font-bold text-secondary mb-3">
+                      Correo Electrónico *
+                    </label>
                     <input
                       type="email"
                       required
                       value={formData.donor_email}
-                      onChange={(e) => setFormData({ ...formData, donor_email: e.target.value })}
+                      onChange={(e) => updateField('donor_email', e.target.value)}
                       className="w-full px-5 py-3 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all focus:ring-2 focus:ring-primary/20"
                       placeholder="tu@email.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-secondary mb-3">Monto Donado ($ COP) *</label>
+                    <label className="block text-sm font-bold text-secondary mb-3">
+                      Monto Donado ($ COP) *
+                    </label>
                     <div className="relative">
-                      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</span>
+                      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 font-bold">
+                        $
+                      </span>
                       <input
                         type="number"
                         required
                         value={formData.amount}
-                        onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                        onChange={(e) => updateField('amount', e.target.value)}
                         className="w-full pl-8 pr-5 py-3 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all focus:ring-2 focus:ring-primary/20"
                         placeholder="50,000"
                       />
@@ -202,12 +231,18 @@ export default function DonacionesPage() {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="block text-sm font-bold text-secondary">Comprobante (Imagen/PDF) *</label>
+                    <label className="block text-sm font-bold text-secondary">
+                      Comprobante (Imagen/PDF) *
+                    </label>
                     <label className="cursor-pointer">
                       <div className="relative w-full h-40 bg-gradient-to-br from-primary/5 to-pink-300/5 rounded-2xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center hover:border-primary hover:bg-primary/5 transition-all group">
                         {formData.receipt_image ? (
                           <div className="relative w-full h-full">
-                            <img src={formData.receipt_image} alt="Comprobante" className="w-full h-full object-contain p-2 rounded-lg" />
+                            <img
+                              src={formData.receipt_image}
+                              alt="Comprobante"
+                              className="w-full h-full object-contain p-2 rounded-lg"
+                            />
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
                               <p className="text-white font-bold">Cambiar imagen</p>
                             </div>
@@ -215,14 +250,15 @@ export default function DonacionesPage() {
                         ) : (
                           <>
                             <Upload className="text-primary mb-2" size={32} />
-                            <span className="text-sm font-semibold text-secondary">Sube tu comprobante</span>
+                            <span className="text-sm font-semibold text-secondary">
+                              Sube tu comprobante
+                            </span>
                             <span className="text-xs text-gray-400">PNG, JPG o PDF</span>
                           </>
                         )}
                       </div>
                       <input
                         type="file"
-                        required
                         onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0])}
                         className="hidden"
                         accept="image/*,.pdf"
@@ -231,7 +267,9 @@ export default function DonacionesPage() {
                   </div>
 
                   {status === 'error' && (
-                    <p className="text-red-500 text-center font-semibold">Ocurrió un error. Intenta de nuevo.</p>
+                    <p className="text-red-500 text-center font-semibold">
+                      Ocurrió un error. Intenta de nuevo.
+                    </p>
                   )}
 
                   <button
@@ -260,4 +298,3 @@ export default function DonacionesPage() {
     </main>
   );
 }
-

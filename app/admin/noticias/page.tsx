@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Plus, Edit2, Trash2, Eye, Loader2 } from 'lucide-react';
-import { formatDate } from '@/lib/utils';
 import { api } from '@/lib/api-client';
+import { formatDate } from '@/lib/utils';
+import { Edit2, Eye, Loader2, Plus, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function AdminNewsPage() {
   const [news, setNews] = useState<any[]>([]);
@@ -16,13 +16,13 @@ export default function AdminNewsPage() {
 
   const fetchNews = async () => {
     const { data, error } = await api.get('/api/news');
-    if (data) setNews(data);
+    if (Array.isArray(data)) setNews(data);
     setLoading(false);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('¿Estás seguro de eliminar esta noticia?')) return;
-    
+
     const { error } = await api.delete(`/api/news/${id}`);
     if (!error) {
       setNews(news.filter(n => n.id !== id));
@@ -88,7 +88,7 @@ export default function AdminNewsPage() {
                     <Link href={`/admin/noticias/${n.id}/editar`} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                       <Edit2 size={18} />
                     </Link>
-                    <button 
+                    <button
                       onClick={() => handleDelete(n.id)}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >

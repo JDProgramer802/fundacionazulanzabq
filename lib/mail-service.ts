@@ -11,8 +11,10 @@ if (!apiKey && process.env.NODE_ENV === 'production') {
 export const resend = new Resend(apiKey || 're_mock_key');
 
 // Configuración de correos
+// NOTA: Si no tienes dominio verificado en Resend, DEBES usar 'onboarding@resend.dev'
+// y solo podrás enviar correos a la dirección con la que te registraste en Resend.
 export const EMAIL_CONFIG = {
-  from: process.env.RESEND_FROM_EMAIL || 'Fundación Azulanza <onboarding@resend.dev>',
+  from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
   replyTo: process.env.ADMIN_EMAIL || 'fundacionazulanza@gmail.com',
 };
 

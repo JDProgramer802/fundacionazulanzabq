@@ -1,6 +1,8 @@
 'use client';
 
 import Hero from '@/components/public/Hero';
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
+import { api } from '@/lib/api-client';
 import { motion } from 'framer-motion';
 import { ArrowRight, Award, Globe, Heart, MessageSquare, ShieldCheck, Sparkles, Target, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -10,30 +12,18 @@ export default function Nosotros() {
   const [config, setConfig] = useState<any>({});
 
   useEffect(() => {
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => setConfig(data));
+    api.get('/api/settings').then(res => {
+      if (res.data) setConfig(res.data);
+    });
   }, []);
 
   return (
-    <main className="bg-gradient-to-b from-white via-primary/5 to-white selection:bg-primary selection:text-white">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <motion.div
-          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-40 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
-          transition={{ duration: 25, repeat: Infinity, delay: 5 }}
-          className="absolute bottom-40 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"
-        />
-      </div>
+    <main className="bg-gradient-to-b from-white via-primary/5 to-white selection:bg-primary selection:text-white relative">
+      <AnimatedBackground />
 
-      <Hero 
-        title="Nuestra Historia" 
-        subtitle="Conoce el corazón de la Fundación Azulanza y nuestro compromiso con la salud mental y el bienestar integral de nuestra comunidad." 
+      <Hero
+        title="Nuestra Historia"
+        subtitle="Conoce el corazón de la Fundación Azulanza y nuestro compromiso con la salud mental y el bienestar integral de nuestra comunidad."
       />
 
       {/* Story Section */}
@@ -81,7 +71,7 @@ export default function Nosotros() {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -115,15 +105,15 @@ export default function Nosotros() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
-              { 
-                icon: Target, 
-                title: "Nuestra Misión", 
+              {
+                icon: Target,
+                title: "Nuestra Misión",
                 text: config.mission_text || "Transformar la realidad de nuestra comunidad a través de la atención integral en salud mental, promoviendo el bienestar emocional, social y psicológico de las personas más vulnerables.",
                 color: "from-primary to-pink-400"
               },
-              { 
-                icon: Globe, 
-                title: "Nuestra Visión", 
+              {
+                icon: Globe,
+                title: "Nuestra Visión",
                 text: config.vision_text || "Ser la organización líder y referente en el abordaje de la salud mental comunitaria, logrando un impacto sostenible que trascienda fronteras y genere un cambio positivo real.",
                 color: "from-secondary to-blue-600"
               }
@@ -201,7 +191,7 @@ export default function Nosotros() {
             className="bg-gradient-to-br from-white to-primary/5 rounded-[4rem] p-16 md:p-24 border border-gray-100 shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full -mr-48 -mt-48 blur-3xl" />
-            
+
             <div className="relative z-10 max-w-3xl mx-auto text-center">
               <h2 className="text-5xl md:text-6xl font-extrabold text-secondary mb-8 font-primary">
                 Únete a nuestra <span className="gradient-text">Causa</span>
