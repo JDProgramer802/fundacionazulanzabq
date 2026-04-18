@@ -1,13 +1,14 @@
 'use client';
 
 import Hero from '@/components/public/Hero';
-import { Heart, ShieldCheck, Users, MessageSquare, ArrowRight, Star, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import { ArrowRight, CheckCircle2, Heart, MessageSquare, ShieldCheck, Star, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [config, setConfig] = useState<any>({});
+  const [testimonials, setTestimonials] = useState<any[]>([]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -19,6 +20,10 @@ export default function Home() {
     fetch('/api/settings')
       .then(res => res.json())
       .then(data => setConfig(data));
+
+    fetch('/api/testimonials')
+      .then(res => res.json())
+      .then(data => setTestimonials(data));
   }, []);
 
   const containerVariants = {
@@ -44,18 +49,18 @@ export default function Home() {
         style={{ scaleX }}
       />
 
-      <Hero 
-        title={config.home_hero_title || "Sanando Corazones"} 
-        subtitle={config.home_hero_subtitle || "Apoyo integral en salud mental y herramientas para el bienestar de nuestra comunidad."} 
+      <Hero
+        title={config.home_hero_title || "Sanando Corazones"}
+        subtitle={config.home_hero_subtitle || "Apoyo integral en salud mental y herramientas para el bienestar de nuestra comunidad."}
       />
 
       {/* Features Section - Interactive Cards */}
       <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -ml-48 -mb-48" />
-        
+
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -69,22 +74,22 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { 
-                title: "Misión", 
+              {
+                title: "Misión",
                 text: config.mission_text || "Transformando vidas a través del apoyo psicológico y social con un enfoque humano y profesional.",
                 icon: Heart,
                 color: "primary",
                 delay: 0.1
               },
-              { 
-                title: "Visión", 
+              {
+                title: "Visión",
                 text: config.vision_text || "Ser referentes en salud mental comunitaria en toda la región, expandiendo nuestro impacto positivo.",
                 icon: ShieldCheck,
                 color: "secondary",
                 delay: 0.2
               },
-              { 
-                title: "Nuestra Historia", 
+              {
+                title: "Nuestra Historia",
                 text: config.history_text || "Fundación Azulanza nació del deseo de ayudar a quienes atraviesan momentos difíciles sin recursos.",
                 icon: Users,
                 color: "primary",
@@ -120,7 +125,7 @@ export default function Home() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 border-[40px] border-white rounded-full animate-float" />
           <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] border-[60px] border-white rounded-full animate-float" style={{ animationDelay: '2s' }} />
         </div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
             {[
@@ -148,10 +153,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      {testimonials.length > 0 && (
+        <section className="py-32 bg-white relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-24"
+            >
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Testimonios</span>
+              <h2 className="text-5xl font-bold text-secondary font-primary">Historias que <span className="gradient-text">inspiran</span></h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {testimonials.slice(0, 3).map((t, i) => (
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-[#F9FAFB] p-10 rounded-[3rem] relative"
+                >
+                  <Quote size={40} className="text-primary/20 mb-6" />
+                  <p className="text-gray-600 mb-8 italic leading-relaxed text-lg">"{t.text}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-300 shadow-sm overflow-hidden border border-gray-100">
+                      {t.image_url ? <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" /> : <Users size={24} />}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-secondary">{t.name}</h4>
+                      <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Call to Action - Ultra Modern Layout */}
       <section className="py-32 relative">
         <div className="container mx-auto px-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -172,15 +219,15 @@ export default function Home() {
                 >
                   <MessageSquare size={48} className="text-white" />
                 </motion.div>
-                
+
                 <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight font-primary">
                   ¿Necesitas <span className="text-primary">apoyo</span> hoy?
                 </h2>
-                
+
                 <p className="text-xl md:text-2xl mb-16 text-blue-100 font-light leading-relaxed max-w-2xl mx-auto">
                   No estás solo. Nuestro equipo está listo para escucharte. Tu bienestar es nuestra prioridad número uno.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
                   <Link href="/asesoria" className="bg-white text-secondary font-bold px-12 py-5 rounded-full text-xl hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all hover:scale-110 active:scale-95 flex items-center gap-3">
                     Agendar Asesoría <ArrowRight size={24} />

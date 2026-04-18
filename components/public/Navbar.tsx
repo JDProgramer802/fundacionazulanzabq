@@ -13,6 +13,8 @@ const navLinks = [
   { href: '/noticias', label: 'Noticias' },
   { href: '/asesoria', label: 'Asesoría' },
   { href: '/donaciones', label: 'Donaciones' },
+  { href: '/voluntariado', label: 'Voluntariado' },
+  { href: '/preguntas', label: 'FAQ' },
   { href: '/contacto', label: 'Contacto' },
 ];
 

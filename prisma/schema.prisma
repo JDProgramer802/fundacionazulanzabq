@@ -86,3 +86,35 @@ model AvailabilitySlot {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 }
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  name       String
+  role       String?  // Ej: Beneficiario, Voluntario, Familiar
+  text       String   @db.Text
+  image_url  String?
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Volunteer {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  interests  String?  @db.Text
+  status     String   @default("pendiente") // pendiente, contactado, activo, inactivo
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model FAQ {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String   @db.Text
+  order      Int      @default(0)
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}

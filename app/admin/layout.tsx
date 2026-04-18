@@ -2,16 +2,19 @@
 
 import { cn } from '@/lib/utils';
 import {
-    Calendar,
-    FileText,
-    Heart,
-    HeartHandshake,
-    LayoutDashboard,
-    LogOut,
-    MessageSquare,
-    Newspaper,
-    Settings,
-    Users
+  Calendar,
+  FileText,
+  Heart,
+  HeartHandshake,
+  HelpCircle,
+  LayoutDashboard,
+  LogOut,
+  MessageSquare,
+  Newspaper,
+  Quote,
+  Settings,
+  UserCheck,
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -23,6 +26,9 @@ const menuItems = [
   { href: '/admin/citas', label: 'Citas', icon: Calendar },
   { href: '/admin/donaciones', label: 'Donaciones', icon: HeartHandshake },
   { href: '/admin/contacto', label: 'Mensajes', icon: MessageSquare },
+  { href: '/admin/voluntarios', label: 'Voluntarios', icon: UserCheck },
+  { href: '/admin/testimonios', label: 'Testimonios', icon: Quote },
+  { href: '/admin/faqs', label: 'Preguntas', icon: HelpCircle },
   { href: '/admin/usuarios', label: 'Usuarios', icon: Users },
   { href: '/admin/configuracion', label: 'Configuración', icon: Settings },
 ];

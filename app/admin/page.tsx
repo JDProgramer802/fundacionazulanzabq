@@ -7,8 +7,7 @@ import {
   CheckCircle2,
   Clock,
   HeartHandshake,
-  MessageSquare,
-  TrendingUp
+  MessageSquare
 } from 'lucide-react';
 
 async function getDashboardData() {
@@ -16,7 +15,9 @@ async function getDashboardData() {
     appointmentsPending,
     messagesUnread,
     donationsPending,
-    totalDonationsThisMonth
+    totalDonationsThisMonth,
+    volunteersCount,
+    testimonialsCount
   ] = await Promise.all([
     prisma.appointment.count({ where: { status: 'pendiente' } }),
     prisma.contactMessage.count({ where: { is_read: false } }),
@@ -29,7 +30,9 @@ async function getDashboardData() {
         }
       },
       _sum: { amount: true }
-    })
+    }),
+    prisma.volunteer.count({ where: { status: 'pendiente' } }),
+    prisma.testimonial.count({ where: { active: true } })
   ]);
 
   const recentAppointments = await prisma.appointment.findMany({
@@ -42,7 +45,9 @@ async function getDashboardData() {
       appointmentsPending,
       messagesUnread,
       donationsPending,
-      totalDonated: totalDonationsThisMonth._sum.amount || 0
+      totalDonated: totalDonationsThisMonth._sum.amount || 0,
+      volunteersPending: volunteersCount,
+      testimonialsActive: testimonialsCount
     },
     recentAppointments
   };
@@ -55,7 +60,7 @@ export default async function AdminDashboard() {
     { label: 'Citas Pendientes', value: stats.appointmentsPending, icon: Calendar, color: 'text-blue-600', bg: 'bg-blue-50' },
     { label: 'Mensajes Nuevos', value: stats.messagesUnread, icon: MessageSquare, color: 'text-primary', bg: 'bg-primary/5' },
     { label: 'Donaciones x Verificar', value: stats.donationsPending, icon: HeartHandshake, color: 'text-orange-600', bg: 'bg-orange-50' },
-    { label: 'Donado este mes', value: `$${stats.totalDonated.toLocaleString()}`, icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-50' },
+    { label: 'Voluntarios Nuevos', value: stats.volunteersPending, icon: Users, color: 'text-purple-600', bg: 'bg-purple-50' },
   ];
 
   return (
