@@ -1,6 +1,8 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { ContactNotificationEmail } from '@/components/emails/ContactNotificationEmail';
 import { getAuthUser } from '@/lib/auth';
+import prisma from '@/lib/prisma';
+import resend, { FROM_EMAIL } from '@/lib/resend';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const user = await getAuthUser();
@@ -19,7 +21,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    
+
     if (!data.name || !data.email || !data.message) {
       return NextResponse.json({ error: 'Todos los campos son obligatorios' }, { status: 400 });
     }
@@ -32,7 +34,22 @@ export async function POST(request: Request) {
       },
     });
 
-    // TODO: Send email notification via Resend
+    // Enviar notificación al admin
+    try {
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: process.env.ADMIN_EMAIL || 'fundacion@azulanza.org',
+        subject: `Nuevo mensaje de: ${data.name}`,
+        react: ContactNotificationEmail({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+        }),
+      });
+    } catch (emailError) {
+      console.error('Error enviando email:', emailError);
+      // No bloqueamos la respuesta si falla el envío de email
+    }
 
     return NextResponse.json({ success: true, message: 'Mensaje enviado correctamente' });
   } catch (error) {

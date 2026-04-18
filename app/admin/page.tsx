@@ -1,14 +1,14 @@
 import prisma from '@/lib/prisma';
-import { 
-  Calendar, 
-  MessageSquare, 
-  HeartHandshake, 
-  TrendingUp,
-  Clock,
-  CheckCircle2,
-  AlertCircle
-} from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import {
+  AlertCircle,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  HeartHandshake,
+  MessageSquare,
+  TrendingUp
+} from 'lucide-react';
 
 async function getDashboardData() {
   const [
@@ -88,7 +88,7 @@ export default async function AdminDashboard() {
           </div>
           <div className="divide-y divide-gray-50">
             {recentAppointments.length > 0 ? (
-              recentAppointments.map((app) => (
+              recentAppointments.map((app: Appointment) => (
                 <div key={app.id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
                   <div>
                     <p className="font-medium text-secondary">{app.client_name}</p>
@@ -98,7 +98,7 @@ export default async function AdminDashboard() {
                     {app.status === 'pendiente' && <AlertCircle size={16} className="text-orange-500" />}
                     {app.status === 'confirmada' && <CheckCircle2 size={16} className="text-blue-500" />}
                     <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full ${
-                      app.status === 'pendiente' ? 'bg-orange-50 text-orange-600' : 
+                      app.status === 'pendiente' ? 'bg-orange-50 text-orange-600' :
                       app.status === 'confirmada' ? 'bg-blue-50 text-blue-600' : 'bg-gray-50 text-gray-600'
                     }`}>
                       {app.status}

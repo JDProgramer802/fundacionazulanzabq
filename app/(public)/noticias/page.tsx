@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
-import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Noticias y Actualidad',
@@ -29,17 +29,17 @@ export default async function NewsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {news.map((item) => (
-            <Link 
-              key={item.id} 
+          {news.map((item: News) => (
+            <Link
+              key={item.id}
               href={`/noticias/${item.slug}`}
               className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100"
             >
               <div className="relative h-64 overflow-hidden">
                 {item.image_url ? (
-                  <img 
-                    src={item.image_url} 
-                    alt={item.title} 
+                  <img
+                    src={item.image_url}
+                    alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 ) : (
@@ -52,7 +52,7 @@ export default async function NewsPage() {
                   {formatDate(item.created_at)}
                 </div>
               </div>
-              
+
               <div className="p-8">
                 <h2 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors line-clamp-2">
                   {item.title}

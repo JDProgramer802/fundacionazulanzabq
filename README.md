@@ -11,7 +11,7 @@ Esta es una aplicación web completa para la **Fundación Azulanza**, construida
 - **Backend:** Next.js API Routes.
 - **Autenticación:** JWT con Cookies HttpOnly.
 - **Almacenamiento:** Vercel Blob para imágenes y comprobantes.
-- **Correos:** Resend.
+- **Correos:** Resend (Requiere configurar `RESEND_API_KEY` y verificar el dominio o email en Resend.com).
 
 ## 🛠️ Ejecución Unificada
 
