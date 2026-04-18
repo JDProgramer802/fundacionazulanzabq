@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Lock, Mail, ArrowRight, Loader2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Heart, Loader2, Lock, Mail, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -198,3 +198,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
+}
