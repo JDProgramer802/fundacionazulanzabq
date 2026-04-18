@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Save, Upload, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Loader2, Save, Upload } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function ConfigPage() {
   const [settings, setSettings] = useState<any>({});
@@ -102,6 +101,12 @@ export default function ConfigPage() {
         >
           Redes Sociales
         </button>
+        <button
+          onClick={() => setActiveTab('nosotros')}
+          className={`px-6 py-3 font-medium transition-all border-b-2 ${activeTab === 'nosotros' ? 'border-primary text-primary' : 'border-transparent text-gray-500'}`}
+        >
+          Nosotros
+        </button>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6">
@@ -153,6 +158,40 @@ export default function ConfigPage() {
                 onChange={(e) => handleChange('contact_phone', e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
               />
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'nosotros' && (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">Nuestra Historia</label>
+              <textarea
+                value={settings.history_text || ''}
+                onChange={(e) => handleChange('history_text', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary h-32"
+                placeholder="Cuenta cómo nació la fundación..."
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-secondary">Misión</label>
+                <textarea
+                  value={settings.mission_text || ''}
+                  onChange={(e) => handleChange('mission_text', e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary h-32"
+                  placeholder="El propósito de la fundación..."
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-bold text-secondary">Visión</label>
+                <textarea
+                  value={settings.vision_text || ''}
+                  onChange={(e) => handleChange('vision_text', e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary h-32"
+                  placeholder="A dónde queremos llegar..."
+                />
+              </div>
             </div>
           </div>
         )}

@@ -1,19 +1,20 @@
 'use client';
 
+import { cn } from '@/lib/utils';
+import {
+    Calendar,
+    FileText,
+    Heart,
+    HeartHandshake,
+    LayoutDashboard,
+    LogOut,
+    MessageSquare,
+    Newspaper,
+    Settings,
+    Users
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Settings, 
-  FileText, 
-  Newspaper, 
-  Calendar, 
-  MessageSquare, 
-  HeartHandshake, 
-  LogOut,
-  Heart
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 const menuItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -22,6 +23,7 @@ const menuItems = [
   { href: '/admin/citas', label: 'Citas', icon: Calendar },
   { href: '/admin/donaciones', label: 'Donaciones', icon: HeartHandshake },
   { href: '/admin/contacto', label: 'Mensajes', icon: MessageSquare },
+  { href: '/admin/usuarios', label: 'Usuarios', icon: Users },
   { href: '/admin/configuracion', label: 'Configuración', icon: Settings },
 ];
 
@@ -55,8 +57,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               href={item.href}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl transition-all",
-                pathname === item.href 
-                  ? "bg-primary text-white shadow-lg shadow-primary/20" 
+                pathname === item.href
+                  ? "bg-primary text-white shadow-lg shadow-primary/20"
                   : "text-gray-500 hover:bg-gray-50 hover:text-secondary"
               )}
             >
