@@ -33,13 +33,13 @@ export default function GalleryPage() {
       const res = await fetch('/api/gallery');
       const data = await res.json();
 
-      if (Array.isArray(data)) {
-        const activeItems = data.filter((item: GalleryItem) => item.active);
+      if (res.ok && Array.isArray(data)) {
+        const activeItems = data.filter((item: GalleryItem) => item && item.active);
         setItems(activeItems);
         setFilteredItems(activeItems);
       } else {
-        console.error('Data is not an array:', data);
-        setError('Error al procesar los datos de la galería.');
+        console.error('Invalid response format:', data);
+        setError(data?.error || 'Error al procesar los datos de la galería.');
       }
     } catch (error) {
       console.error('Error fetching gallery:', error);
@@ -50,10 +50,12 @@ export default function GalleryPage() {
   };
 
   useEffect(() => {
+    if (!Array.isArray(items)) return;
+
     if (selectedCategory === 'Todas') {
       setFilteredItems(items);
     } else {
-      setFilteredItems(items.filter((item) => item.category === selectedCategory));
+      setFilteredItems(items.filter((item) => item?.category === selectedCategory));
     }
   }, [selectedCategory, items]);
 

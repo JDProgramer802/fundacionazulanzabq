@@ -41,9 +41,8 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, type: 'spring', stiffness: 80 }}
-              className="text-6xl md:text-7xl xl:text-[5.5rem] font-extrabold mb-8 leading-[1.05] font-primary tracking-tighter"
+              className="text-6xl md:text-7xl xl:text-[5.5rem] font-extrabold mb-8 leading-[1.1] font-primary tracking-tighter"
             >
-              <span className="block text-secondary mb-3 drop-shadow-sm">Fundación</span>
               <span className="relative inline-block">
                 <span className="gradient-text">{title}</span>
                 <Sparkles

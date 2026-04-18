@@ -22,6 +22,7 @@ export default function AdminGalleryPage() {
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -35,10 +36,21 @@ export default function AdminGalleryPage() {
   }, []);
 
   const fetchItems = async () => {
-    const res = await fetch('/api/gallery');
-    const data = await res.json();
-    setItems(data);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/gallery');
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setItems(data);
+      } else {
+        console.error('Invalid gallery response:', data);
+        setError(data?.error || 'Error al cargar la galería.');
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError('Error de conexión con el servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleFileUpload = async (file: File) => {
@@ -108,8 +120,27 @@ export default function AdminGalleryPage() {
 
   if (loading)
     return (
-      <div className="flex justify-center py-20">
+      <div className="flex justify-center flex-col items-center py-20 gap-4">
         <Loader2 className="animate-spin text-primary" size={48} />
+        <p className="text-gray-400 font-medium">Cargando galería...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100 flex flex-col items-center">
+        <ImageIcon size={48} className="text-red-300 mb-4" />
+        <p className="text-red-500 font-bold mb-4">{error}</p>
+        <button
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            fetchItems();
+          }}
+          className="btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     );
 
@@ -140,60 +171,63 @@ export default function AdminGalleryPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <AnimatePresence>
-          {items.map((item) => (
-            <motion.div
-              layout
-              key={item.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 group relative"
-            >
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src={item.image_url}
-                  alt={item.title || 'Gallery item'}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="p-3 bg-white text-secondary rounded-full hover:bg-primary hover:text-white transition-all shadow-lg"
-                  >
-                    <Edit2 size={18} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="p-3 bg-white text-red-500 rounded-full hover:bg-red-500 hover:text-white transition-all shadow-lg"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+          {Array.isArray(items) &&
+            items.map((item) => (
+              <motion.div
+                layout
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 group relative"
+              >
+                <div className="aspect-square relative overflow-hidden">
+                  <Image
+                    src={item.image_url}
+                    alt={item.title || 'Gallery item'}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                    <button
+                      onClick={() => handleEdit(item)}
+                      className="p-3 bg-white text-secondary rounded-full hover:bg-primary hover:text-white transition-all shadow-lg"
+                    >
+                      <Edit2 size={18} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="p-3 bg-white text-red-500 rounded-full hover:bg-red-500 hover:text-white transition-all shadow-lg"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-secondary shadow-sm">
+                      {item.category}
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <button
+                      onClick={() => toggleActive(item)}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm transition-all ${
+                        item.active ? 'bg-green-500/90 text-white' : 'bg-gray-100/90 text-gray-400'
+                      }`}
+                    >
+                      <Check size={16} />
+                    </button>
+                  </div>
                 </div>
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-secondary shadow-sm">
-                    {item.category}
-                  </span>
+                <div className="p-5">
+                  <h3 className="font-bold text-secondary truncate">
+                    {item.title || 'Sin título'}
+                  </h3>
+                  <p className="text-xs text-gray-400 line-clamp-1 mt-1">
+                    {item.description || 'Sin descripción'}
+                  </p>
                 </div>
-                <div className="absolute top-4 right-4">
-                  <button
-                    onClick={() => toggleActive(item)}
-                    className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm transition-all ${
-                      item.active ? 'bg-green-500/90 text-white' : 'bg-gray-100/90 text-gray-400'
-                    }`}
-                  >
-                    <Check size={16} />
-                  </button>
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="font-bold text-secondary truncate">{item.title || 'Sin título'}</h3>
-                <p className="text-xs text-gray-400 line-clamp-1 mt-1">
-                  {item.description || 'Sin descripción'}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
         </AnimatePresence>
       </div>
 
