@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/utils';
 import { News } from '@prisma/client';
 import { ArrowRight, Calendar, Newspaper } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Noticias y Actualidad | Fundación Azulanza',
@@ -54,10 +55,11 @@ export default async function NewsPage() {
               >
                 <div className="relative h-64 overflow-hidden">
                   {item.image_url ? (
-                    <img
+                    <Image
                       src={item.image_url}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-primary">

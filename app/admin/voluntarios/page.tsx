@@ -137,7 +137,7 @@ export default function VoluntariosAdmin() {
 
             {v.interests && (
               <div className="mt-4 p-3 bg-gray-50 rounded-xl text-xs text-gray-600 italic">
-                "{v.interests}"
+                &quot;{v.interests}&quot;
               </div>
             )}
           </motion.div>

@@ -3,6 +3,7 @@
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
 import { useFormHandler } from '@/hooks/use-form-handler';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   ArrowRight,
   CheckCircle2,
@@ -247,10 +248,11 @@ export default function DonacionesPage() {
                       <div className="relative w-full h-40 bg-gradient-to-br from-primary/5 to-pink-300/5 rounded-2xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center hover:border-primary hover:bg-primary/5 transition-all group">
                         {formData.receipt_image ? (
                           <div className="relative w-full h-full">
-                            <img
+                            <Image
                               src={formData.receipt_image}
                               alt="Comprobante"
-                              className="w-full h-full object-contain p-2 rounded-lg"
+                              fill
+                              className="object-contain p-2 rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
                               <p className="text-white font-bold">Cambiar imagen</p>

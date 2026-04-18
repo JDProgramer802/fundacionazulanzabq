@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import { formatDate } from '@/lib/utils';
 import { ArrowLeft, ArrowRight, Calendar, Heart, MessageSquare, Share2, User } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -31,7 +32,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
       <div className="relative h-[70vh] min-h-[450px] w-full overflow-hidden">
         {news.image_url ? (
           <>
-            <img src={news.image_url} alt={news.title} className="w-full h-full object-cover" />
+            <Image src={news.image_url} alt={news.title} fill priority className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
           </>
         ) : (
@@ -94,7 +95,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
               {/* Content */}
               <div className="px-8 md:px-16 py-12">
                 <div
-                  className="prose prose-lg max-w-none 
+                  className="prose prose-lg max-w-none
                   prose-headings:text-secondary prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
                   prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
                   prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6

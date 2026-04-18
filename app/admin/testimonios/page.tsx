@@ -140,7 +140,7 @@ export default function TestimoniosAdmin() {
               </div>
             </div>
 
-            <p className="text-gray-600 mb-6 italic leading-relaxed">"{t.text}"</p>
+            <p className="text-gray-600 mb-6 italic leading-relaxed">&quot;{t.text}&quot;</p>
 
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 overflow-hidden">

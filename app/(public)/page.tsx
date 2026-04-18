@@ -15,6 +15,7 @@ import {
   Users,
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -291,10 +292,11 @@ export default function Home() {
                   <div className="relative bg-white rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 h-full flex flex-col border border-gray-100 hover:border-primary/20">
                     <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
                       {ev.image_url ? (
-                        <img
+                        <Image
                           src={ev.image_url}
                           alt={ev.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-primary/20">
@@ -390,16 +392,14 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <p className="text-gray-600 mb-8 leading-relaxed text-lg italic">"{t.text}"</p>
+                    <p className="text-gray-600 mb-8 leading-relaxed text-lg italic">
+                      &quot;{t.text}&quot;
+                    </p>
 
                     <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
-                      <div className="w-14 h-14 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center text-white overflow-hidden shadow-md border-2 border-white">
+                      <div className="w-14 h-14 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center text-white overflow-hidden shadow-md border-2 border-white relative">
                         {t.image_url ? (
-                          <img
-                            src={t.image_url}
-                            alt={t.name}
-                            className="w-full h-full object-cover"
-                          />
+                          <Image src={t.image_url} alt={t.name} fill className="object-cover" />
                         ) : (
                           <Users size={28} />
                         )}

@@ -73,8 +73,8 @@ export default function Voluntariado() {
 
             <div className="relative z-10 max-w-2xl">
               <p className="text-2xl md:text-3xl font-light italic leading-relaxed mb-8">
-                "Ser voluntario en Azulanza me ha permitido ver el mundo con más empatía. Cada
-                persona que ayudo me inspira a seguir adelante."
+                &quot;Ser voluntario en Azulanza me ha permitido ver el mundo con más empatía. Cada
+                persona que ayudo me inspira a seguir adelante.&quot;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
