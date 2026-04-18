@@ -22,7 +22,7 @@ El proyecto está configurado para ejecutarse con un solo comando:
 npm install
 npm run dev
 ```
-Levanta el servidor en [http://localhost:3000](http://localhost:3000).
+Levanta el servidor en [https://fundacionazulanzabq.vercel.app](https://fundacionazulanzabq.vercel.app) (en producción) o http://localhost:3000 (local).
 
 ### Producción
 ```bash
