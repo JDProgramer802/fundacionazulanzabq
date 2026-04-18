@@ -8,9 +8,31 @@ export async function GET() {
       orderBy: { created_at: 'desc' },
     });
     return NextResponse.json(items);
-  } catch (error) {
-    console.error('Gallery API Error:', error);
-    return NextResponse.json({ error: 'Error al obtener la galería' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Gallery API Error details:', {
+      message: error.message,
+      code: error.code,
+      stack: error.stack,
+    });
+
+    // Si es un error de conexión, devolvemos un mensaje descriptivo pero seguro
+    if (error.message.includes("Can't reach database server")) {
+      return NextResponse.json(
+        {
+          error: 'El servidor de base de datos no responde. Por favor, reintenta en unos momentos.',
+          type: 'DB_CONNECTION_ERROR',
+        },
+        { status: 503 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        error: 'Error interno al obtener la galería',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined,
+      },
+      { status: 500 }
+    );
   }
 }
 

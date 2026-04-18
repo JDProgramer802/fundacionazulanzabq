@@ -43,7 +43,13 @@ export default function AdminGalleryPage() {
         setItems(data);
       } else {
         console.error('Invalid gallery response:', data);
-        setError(data?.error || 'Error al cargar la galería.');
+        if (res.status === 503) {
+          setError(
+            'La base de datos está tardando demasiado en responder (Timeout). Por favor, intenta de nuevo.'
+          );
+        } else {
+          setError(data?.error || 'Error al cargar la galería.');
+        }
       }
     } catch (err) {
       console.error('Fetch error:', err);

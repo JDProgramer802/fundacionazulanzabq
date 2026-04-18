@@ -21,7 +21,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       },
     });
     return NextResponse.json(item);
-  } catch (error) {
+  } catch (error: any) {
+    console.error('Gallery Update Error:', error);
+    if (error.message.includes("Can't reach database server")) {
+      return NextResponse.json(
+        { error: 'Fallo de conexión con la base de datos' },
+        { status: 503 }
+      );
+    }
     return NextResponse.json({ error: 'Error al actualizar la galería' }, { status: 500 });
   }
 }
