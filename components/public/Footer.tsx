@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Facebook, Heart, Instagram, Mail, MapPin, Phone, Twitter, Send } from 'lucide-react';
+import { Facebook, Instagram, Mail, Phone, Send, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -43,14 +43,16 @@ export default function Footer() {
           <div className="md:col-span-4 space-y-8">
             <Link href="/" className="flex items-center gap-3 group">
               <motion.div
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                className="w-12 h-12 bg-gradient-brand rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary/20 transition-transform"
+                whileHover={{ scale: 1.05 }}
+                className="relative w-48 h-16"
               >
-                <Heart size={24} fill="currentColor" />
+                <Image
+                  src="/logo.png"
+                  alt="Fundación Azulanza"
+                  fill
+                  className="object-contain object-left"
+                />
               </motion.div>
-              <span className="text-3xl font-bold font-primary tracking-tighter text-secondary">
-                Azulanza
-              </span>
             </Link>
             <p className="text-gray-500 text-xl font-light leading-relaxed max-md">
               Transformando el dolor en esperanza a través de la salud mental y la solidaridad incondicional.
@@ -95,16 +97,16 @@ export default function Footer() {
             <p className="text-gray-500 text-sm mb-6 font-light">Suscríbete para recibir noticias y recursos de salud mental.</p>
             <form onSubmit={handleSubscribe} className="space-y-4">
               <div className="relative">
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   required
-                  placeholder="tu@email.com" 
+                  placeholder="tu@email.com"
                   className="w-full px-5 py-3 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:border-primary transition-all text-sm"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={status.type === 'loading'}
                   className="absolute right-1.5 top-1.5 w-8 h-8 bg-primary rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg shadow-primary/20 disabled:opacity-50"
                 >

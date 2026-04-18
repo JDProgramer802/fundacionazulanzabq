@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
 import { getAuthUser } from '@/lib/auth';
+import prisma from '@/lib/prisma';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const settings = await prisma.setting.findMany();
@@ -12,6 +12,12 @@ export async function GET() {
       config[s.key] = s.value;
     }
   });
+
+  // Fallback for logo if not set in DB
+  if (!config.site_logo) {
+    config.site_logo = '/logo.png';
+  }
+
   return NextResponse.json(config);
 }
 
@@ -23,7 +29,7 @@ export async function POST(request: Request) {
 
   try {
     const data = await request.json();
-    
+
     // Save each key in the settings table
     const operations = Object.entries(data).map(([key, value]) => {
       const stringValue = typeof value === 'object' ? JSON.stringify(value) : String(value);

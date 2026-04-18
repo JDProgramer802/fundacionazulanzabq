@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Heart, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -44,17 +44,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              className="w-10 h-10 md:w-12 md:h-12 bg-gradient-brand rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20"
+              whileHover={{ scale: 1.05 }}
+              className="relative w-40 h-12 md:w-48 md:h-14"
             >
-              <Heart size={20} fill="currentColor" className="md:w-6 md:h-6" />
+              <Image
+                src="/logo.png"
+                alt="Fundación Azulanza"
+                fill
+                className="object-contain"
+                priority
+              />
             </motion.div>
-            <span className={cn(
-              "text-2xl md:text-3xl font-bold font-primary tracking-tighter transition-colors",
-              "text-secondary"
-            )}>
-              Azulanza
-            </span>
           </Link>
 
           {/* Desktop Menu */}

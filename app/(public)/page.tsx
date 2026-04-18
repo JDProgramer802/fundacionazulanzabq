@@ -2,7 +2,7 @@
 
 import Hero from '@/components/public/Hero';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Heart, MessageSquare, ShieldCheck, Star, Users } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, Heart, MessageSquare, Quote, ShieldCheck, Star, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 

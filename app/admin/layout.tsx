@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import {
   Calendar,
   FileText,
-  Heart,
   HeartHandshake,
   HelpCircle,
   LayoutDashboard,
@@ -50,11 +49,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
-        <div className="p-6 flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
-            <Heart size={18} fill="currentColor" />
-          </div>
-          <span className="font-bold text-secondary text-lg">Azulanza Admin</span>
+        <div className="p-6">
+          <Link href="/admin" className="relative w-full h-12 block">
+            <Image
+              src="/logo.png"
+              alt="Azulanza Admin"
+              fill
+              className="object-contain object-left"
+            />
+          </Link>
         </div>
 
         <nav className="flex-1 p-4 space-y-2">

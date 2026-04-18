@@ -7,7 +7,8 @@ import {
   CheckCircle2,
   Clock,
   HeartHandshake,
-  MessageSquare
+  MessageSquare,
+  Users
 } from 'lucide-react';
 
 async function getDashboardData() {
