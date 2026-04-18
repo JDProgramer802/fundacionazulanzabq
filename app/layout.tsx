@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <body className={cn(inter.variable, jakarta.variable, 'font-body antialiased')}>
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
