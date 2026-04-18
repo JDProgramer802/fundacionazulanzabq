@@ -31,7 +31,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white pt-24 pb-12 relative overflow-hidden">
+    <footer className="bg-[#fafcff] pt-32 pb-12 relative overflow-hidden">
       {/* Abstract Background for Footer */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
         <div className="absolute top-0 left-10 w-96 h-96 bg-primary rounded-full blur-[100px]" />
@@ -142,7 +142,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="md:col-span-3">
-            <div className="bg-[#F9FAFB] p-8 rounded-[2.5rem] border border-gray-100">
+            <div className="glass p-8 rounded-[2.5rem] border border-white/60">
               <h4 className="font-bold text-secondary text-lg mb-8 font-primary uppercase tracking-widest">
                 Hablemos
               </h4>

@@ -37,9 +37,7 @@ export default function Navbar() {
       <nav
         className={cn(
           'container mx-auto transition-all duration-500 ease-in-out',
-          scrolled
-            ? 'bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] py-3 px-6 md:px-10 rounded-[2.5rem] border border-white/20'
-            : 'bg-transparent py-4 px-4'
+          scrolled ? 'glass-premium py-3 px-6 md:px-10' : 'bg-transparent py-4 px-4'
         )}
       >
         <div className="flex items-center justify-between">
@@ -57,7 +55,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
-            <div className="flex items-center gap-1 bg-gray-50/50 p-1.5 rounded-full border border-gray-100/50">
+            <div className="flex items-center gap-1 bg-white/30 backdrop-blur-md p-1.5 rounded-full border border-white/50 shadow-inner">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}

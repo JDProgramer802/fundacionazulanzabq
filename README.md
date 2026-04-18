@@ -1,149 +1,133 @@
-# 💙 Fundación Azulanza - Plataforma Web
+# 💙 Fundación Azulanza - Ultra Premium Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Plataforma integral diseñada para la **Fundación Azulanza**, enfocada en la gestión administrativa y la interacción comunitaria.
-
----
-
-## 📌 Tabla de Contenidos
-
-- [✨ Características](#-características)
-- [🛠️ Stack Tecnológico](#️-stack-tecnológico)
-- [🏗️ Arquitectura y SOLID](#️-arquitectura-y-solid)
-- [🚀 Inicio Rápido](#-inicio-rápido)
-- [⚙️ Configuración (.env)](#️-configuración-env)
-- [🧪 Calidad y Testing](#-calidad-y-testing)
-- [📂 Estructura](#-estructura)
+> **Elevando la salud mental con un diseño de vanguardia.** Una plataforma integral diseñada para la **Fundación Azulanza**, fusionando una estética ultra-premium con una arquitectura robusta para la gestión comunitaria e institucional.
 
 ---
 
-## ✨ Características
+## ✨ Experiencia Premium (Vibe & Design)
 
-<details>
-<summary><b>🌍 Portal Público (Click para expandir)</b></summary>
+Esta versión de la plataforma introduce una identidad visual **Premium Glassmorphism**, diseñada para inspirar confianza, modernidad y cercanía.
 
-- **Diseño Moderno:** Interfaz fluida con animaciones de Framer Motion.
-- **Gestión de Citas:** [Agenda tu asesoría](https://fundacionazulanzabq.vercel.app/asesoria).
-- **Voluntariado:** Sistema de postulación dinámica.
-- **Donaciones:** Registro seguro con carga de comprobantes.
-- **Blog:** Noticias optimizadas para SEO.
-</details>
+- **🎨 Paleta de Colores Dinámica:** Uso estratégico de Rosa (`#EE84B5`) y Azul (`#0356CB`) en gradientes radiales y mallas orgánicas.
+- **🪄 Micro-interacciones:** Animaciones fluidas impulsadas por Framer Motion que reaccionan al scroll y al cursor (Efectos 3D, Spring Physics).
+- **🪟 Estética de Cristal:** Paneles translúcidos con desenfoque de fondo avanzado (`backdrop-blur-xl`) que proporcionan profundidad y claridad.
+- **🪄 Tipografía Exclusiva:** Implementación de *Champagne & Limousines* para una lectura elegante y distintiva.
 
-<details>
-<summary><b>🔐 Panel Administrativo (Click para expandir)</b></summary>
+---
 
-- **Dashboard:** Control centralizado de métricas y solicitudes.
-- **Gestión de Contenido:** CRUD completo de noticias, testimonios y eventos.
-- **Moderación:** Aprobación de voluntarios y verificación de donaciones.
-- **Configuración:** Personalización de SEO, redes sociales y contacto.
-</details>
+## 🚀 Características Principales
+
+### 🌍 Portal Público
+- **Hero Dinámico:** Encabezado asimétrico con elementos flotantes interactivos.
+- **Gestión de Asesorías:** Sistema intuitivo para agendar citas psicológicas.
+- **Voluntariado:** Proceso de postulación simplificado y moderno.
+- **Donaciones:** Pasarela de reporte con carga de comprobantes y validación visual.
+- **Blog de Actualidad:** Noticias optimizadas para SEO con carga progresiva.
+
+### 🔐 Panel Administrativo (Elite Dashboard)
+- **Métricas Tiempo Real:** Control centralizado de impacto y solicitudes.
+- **CMS Integrado:** Gestión completa de eventos, testimonios y noticias.
+- **Auditoría:** Sistema de verificación para donaciones y voluntarios.
+- **Customización Total:** Configuración de SEO, contactos y redes sociales desde el panel.
 
 ---
 
 ## 🛠️ Stack Tecnológico
 
-| Tecnología        | Propósito                             |
-| :---------------- | :------------------------------------ |
-| **Next.js 14**    | Framework Fullstack (App Router)      |
-| **PostgreSQL**    | Base de datos relacional (Neon)       |
-| **Resend**        | Motor de emails transaccionales       |
-| **Vercel Blob**   | Almacenamiento de archivos en la nube |
-| **Framer Motion** | Animaciones de alta calidad           |
+| Tecnología | Propósito |
+| :--- | :--- |
+| **Next.js 14** | App Router para máxima velocidad y SEO. |
+| **Prisma ORM** | Modelado de datos seguro y eficiente. |
+| **PostgreSQL** | Almacenamiento persistente y escalable. |
+| **Resend** | Notificaciones por correo electrónico transaccionales. |
+| **Vercel Blob** | Gestión de assets y archivos en la nube. |
+| **Lucide Icons** | Set de iconos minimalistas y elegantes. |
 
 ---
 
-## 🏗️ Arquitectura y SOLID
+## 🏗️ Arquitectura y Principios SOLID
 
-El proyecto implementa patrones de diseño para máxima escalabilidad:
+El proyecto sigue estándares de clean code para asegurar su mantenimiento a largo plazo:
 
-- **[api-client.ts](./lib/api-client.ts)**: Cliente centralizado para peticiones HTTP.
-- **[use-form-handler.ts](./hooks/use-form-handler.ts)**: Abstracción de lógica de formularios.
-- **[mail-service.ts](./lib/mail-service.ts)**: Lógica de correos con reintentos automáticos.
+- **Lógica desacoplada:** Servicios reutilizables en [/lib](./lib).
+- **Hooks Personalizados:** Gestión de estados complejos como formularios en [/hooks](./hooks).
+- **Validación Estricta:** Uso integral de **Zod** para esquemas de datos.
 
 ---
 
-## 🚀 Inicio Rápido
+## 💻 Inicio Rápido
 
-1. **Clonar y Preparar:**
+### Requisitos Previos
+- Node.js 18+
+- PostgreSQL (Local o Remoto como Neon)
 
-   ```bash
-   git clone https://github.com/JDProgramer802/fundacionazulanzabq.git
-   cd fundacionazulanzabq
-   npm install
-   ```
+### Instalación
 
-2. **Base de Datos:**
+1.  **Clonar:**
+    ```bash
+    git clone https://github.com/JDProgramer802/fundacionazulanzabq.git
+    cd fundacionazulanzabq
+    ```
 
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   npx prisma db seed
-   ```
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
 
-3. **Ejecutar:**
-   ```bash
-   npm run dev
-   ```
+3.  **Configurar Variables de Entorno:**
+    Crea un archivo `.env` basado en `.env.example` (ver sección abajo).
+
+4.  **Sincronizar DB:**
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    npx prisma db seed
+    ```
+
+5.  **Desarrollar:**
+    ```bash
+    npm run dev
+    ```
 
 ---
 
 ## ⚙️ Configuración (.env)
 
-<details>
-<summary><b>Ver variables requeridas</b></summary>
-
 ```env
-# Base de Datos
-DATABASE_URL="tu_url_de_neon"
+# Database
+DATABASE_URL="tu_url_postgresql"
 
-# Autenticación
-JWT_SECRET="secreto_largo_y_seguro"
+# Authentication
+JWT_SECRET="secreto_seguro"
 
-# Resend
+# Email (Resend)
 RESEND_API_KEY="re_clave"
 RESEND_FROM_EMAIL="onboarding@resend.dev"
-ADMIN_EMAIL="tu@email.com"
+ADMIN_EMAIL="admin@fundacion.org"
 
-# App
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
+# Storage (Vercel Blob)
+BLOB_READ_WRITE_TOKEN="tu_token"
 ```
-
-</details>
 
 ---
 
-## 🧪 Calidad y Testing
-
-Aseguramos la integridad del código con pruebas automatizadas:
-
-```bash
-# Ejecutar tests unitarios
-npm test
-
-# Reporte de cobertura
-npm run test:coverage
-```
-
-> **Nota:** El proyecto utiliza **Husky** para validar el código antes de cada commit.
-
----
-
-## 📂 Estructura
+## 📂 Estructura del Proyecto
 
 ```text
-├── app/              # Rutas y lógica de servidor
-├── components/       # Componentes React reutilizables
-├── hooks/            # Hooks de lógica de negocio
-├── lib/              # Servicios y utilidades core
-├── prisma/           # Modelado de datos
-└── __tests__/        # Suite de pruebas
+├── app/              # Rutas (Public & Admin)
+├── components/       # Componentes UI (React)
+├── hooks/            # Logica reutilizable
+├── lib/              # Servicios (Prisma, Resend, etc)
+├── prisma/           # Esquemas de DB
+└── public/           # Assets estáticos (Logo, Fuentes)
 ```
 
 ---
 
-Desarrollado con 💙 para **Fundación Azulanza**.
+Desarrollado con 💙 para la **Fundación Azulanza**. Transformando vidas, un píxel a la vez.

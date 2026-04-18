@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Heart } from 'lucide-react';
+import { ArrowRight, Heart, Star, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Hero({ title, subtitle }: { title: string; subtitle: string }) {
@@ -10,152 +10,142 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-48">
-      {/* Advanced Gradient Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-blue-50/30 to-pink-50/30" />
-
-      {/* Animated Gradient Blobs */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-primary to-pink-300 rounded-full blur-3xl opacity-20"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            x: [0, -60, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-secondary to-blue-400 rounded-full blur-3xl opacity-20"
-        />
-      </div>
-
-      {/* Floating Icons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 10, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/4 left-1/4 text-primary/15"
-        >
-          <Heart size={80} />
-        </motion.div>
-        <motion.div
-          animate={{
-            y: [0, 30, 0],
-            rotate: [0, -10, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute top-1/3 right-1/4 text-secondary/15"
-        >
-          <Heart size={70} />
-        </motion.div>
-        <motion.div
-          animate={{
-            y: [0, -25, 0],
-            x: [0, 20, 0],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute bottom-1/4 left-1/3 text-primary/10"
-        >
-          <Heart size={60} />
-        </motion.div>
-        <motion.div
-          animate={{
-            y: [0, 25, 0],
-            x: [0, -15, 0],
-          }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-          className="absolute bottom-1/3 right-1/3 text-secondary/10"
-        >
-          <Heart size={50} />
-        </motion.div>
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-32 pb-20 md:pt-40">
+      {/* Ultra Premium Background */}
+      <div className="absolute inset-0 -z-20 bg-[#fafcff]" />
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] shape-blob-pink opacity-40 mix-blend-multiply animate-float" />
+        <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] shape-blob-blue opacity-30 mix-blend-multiply animate-float-delayed" />
+        {/* Removed grid.svg reference assuming it doesnt exist, using CSS radial background trick */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div style={{ y: y1, opacity }} className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-white/50 backdrop-blur-sm rounded-full text-primary font-bold text-xs md:text-sm mb-8 shadow-sm border border-primary/10"
-          >
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-            </span>
-            Salud Mental y Bienestar para Todos
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center min-h-[70vh]">
+          {/* Text Content */}
+          <motion.div style={{ opacity }} className="max-w-2xl text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="inline-flex items-center gap-3 px-5 py-2 glass-premium text-secondary font-bold text-sm mb-10 shadow-sm"
+            >
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+              </span>
+              Salud Mental y Bienestar
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, type: 'spring', stiffness: 80 }}
+              className="text-6xl md:text-7xl xl:text-[5.5rem] font-extrabold mb-8 leading-[1.05] font-primary tracking-tighter"
+            >
+              <span className="block text-secondary mb-3 drop-shadow-sm">Fundación</span>
+              <span className="relative inline-block">
+                <span className="gradient-text">{title}</span>
+                <Sparkles
+                  className="absolute -top-6 -right-10 text-primary animate-pulse-slow"
+                  size={36}
+                />
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg md:text-xl text-gray-500 mb-12 leading-relaxed font-light font-body"
+            >
+              {subtitle}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+            >
+              <Link
+                href="/asesoria"
+                className="btn-primary w-full sm:w-auto text-lg group shadow-lg shadow-primary/30"
+              >
+                Agendar Asesoría
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/donaciones" className="btn-glass w-full sm:w-auto text-lg group">
+                Quiero Apoyar
+                <Heart
+                  size={20}
+                  className="text-primary group-hover:scale-110 transition-transform"
+                />
+              </Link>
+            </motion.div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, type: 'spring', stiffness: 100 }}
-            className="text-5xl md:text-7xl xl:text-8xl font-extrabold mb-8 leading-[1.1] font-primary tracking-tighter"
-          >
-            <span className="block text-secondary mb-2">Fundación</span>
-            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent inline-block relative">
-              {title}
-              <motion.span
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: '100%' }}
-                transition={{ duration: 1.2, delay: 0.8 }}
-                className="absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full"
-              />
-            </span>
-          </motion.h1>
+          {/* Abstract Art / Interactive Element */}
+          <motion.div style={{ y: y1 }} className="hidden lg:block relative h-[600px] w-full">
+            <div className="absolute inset-0 flex items-center justify-center">
+              {/* Central Glass Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, delay: 0.5, type: 'spring', bounce: 0.4 }}
+                className="relative z-20 w-80 h-96 glass-premium p-8 flex flex-col justify-end transform hover:-translate-y-4 hover:shadow-2xl transition-transform duration-500 rounded-[2.5rem]"
+              >
+                <div className="absolute top-8 right-8 w-16 h-16 bg-white/40 rounded-2xl flex items-center justify-center backdrop-blur-md">
+                  <Heart className="text-primary" size={32} fill="currentColor" />
+                </div>
+                <h3 className="text-3xl font-primary font-bold text-secondary mb-2 drop-shadow-md">
+                  Apoyo <br />
+                  Integral
+                </h3>
+                <p className="text-gray-600 font-body text-sm">
+                  Creando espacios de esperanza y sanación para nuestra comunidad.
+                </p>
+              </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl lg:text-2xl text-gray-500 mb-12 max-w-3xl mx-auto leading-relaxed font-light px-4"
-          >
-            {subtitle}
-          </motion.p>
+              {/* Floating Element 1 - Top Left */}
+              <motion.div
+                initial={{ opacity: 0, x: 50, y: 50 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                className="absolute top-10 left-10 z-30 w-40 glass p-5 rounded-3xl animate-float"
+              >
+                <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mb-3">
+                  <Star className="text-secondary" size={20} />
+                </div>
+                <p className="font-bold text-secondary text-sm">+500 Familias</p>
+                <p className="text-xs text-gray-500">Impactadas este año</p>
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
-          >
-            <Link href="/asesoria" className="btn-primary w-full sm:w-auto text-lg group">
-              Agendar Asesoría
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/donaciones" className="btn-secondary w-full sm:w-auto text-lg group">
-              Quiero Apoyar
-              <Heart size={20} className="group-hover:scale-110 transition-transform" />
-            </Link>
+              {/* Floating Element 2 - Bottom Right */}
+              <motion.div
+                initial={{ opacity: 0, x: -50, y: -50 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 1, delay: 1 }}
+                className="absolute bottom-10 right-10 z-10 w-48 glass p-5 rounded-3xl animate-float-delayed"
+              >
+                <div className="flex -space-x-3 mb-3">
+                  <div className="w-8 h-8 rounded-full border-2 border-white bg-primary"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-white bg-secondary"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-white bg-[#b95786]"></div>
+                </div>
+                <p className="font-bold text-secondary text-sm">Red de Voluntarios</p>
+                <p className="text-xs text-gray-500">Únete a la familia</p>
+              </motion.div>
+
+              {/* Decorative Circle */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] border border-white/50 rounded-full z-0" />
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Simplified and Adjusted Wave Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
-        <svg
-          className="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,105,123.59,105.47,185.76,97.21c59.92-8,122.49-30.42,135.63-40.77Z"
-            fill="#F9FAFB"
-          ></path>
-        </svg>
-      </div>
+      {/* Blend background into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none" />
     </section>
   );
 }
