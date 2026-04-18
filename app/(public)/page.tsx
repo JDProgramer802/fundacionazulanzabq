@@ -1,130 +1,201 @@
+'use client';
+
 import Hero from '@/components/public/Hero';
-import prisma from '@/lib/prisma';
-import { Heart, MessageSquare, ShieldCheck, Users } from 'lucide-react';
+import { Heart, ShieldCheck, Users, MessageSquare, ArrowRight, Star, CheckCircle2 } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-async function getHomeData() {
-  const settings = await prisma.setting.findMany();
-  const config: Record<string, any> = {};
-  settings.forEach((s) => {
-    try {
-      config[s.key] = JSON.parse(s.value);
-    } catch {
-      config[s.key] = s.value;
+export default function Home() {
+  const [config, setConfig] = useState<any>({});
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setConfig(data));
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
     }
-  });
+  };
 
-  const recentNews = await prisma.news.findMany({
-    where: { published: true },
-    orderBy: { created_at: 'desc' },
-    take: 3,
-  });
-
-  return { config, recentNews };
-}
-
-export default async function Home() {
-  const { config, recentNews } = await getHomeData();
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
 
   return (
-    <main className="bg-white">
-      <Hero
-        title={config.home_hero_title || "Sanando Corazones"}
-        subtitle={config.home_hero_subtitle || "Apoyo integral en salud mental."}
+    <main className="bg-white selection:bg-primary selection:text-white">
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-primary z-[60] origin-left"
+        style={{ scaleX }}
       />
 
-      {/* Features Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-secondary mb-4">Nuestra Esencia</h2>
-            <div className="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
-          </div>
+      <Hero 
+        title={config.home_hero_title || "Sanando Corazones"} 
+        subtitle={config.home_hero_subtitle || "Apoyo integral en salud mental y herramientas para el bienestar de nuestra comunidad."} 
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass p-8 rounded-3xl text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-6">
-                <Heart size={32} fill="currentColor" />
-              </div>
-              <h3 className="text-2xl font-bold text-secondary mb-4">Misión</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {config.mission_text || "Transformando vidas a través del apoyo psicológico."}
-              </p>
-            </div>
-
-            <div className="glass p-8 rounded-3xl text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mx-auto mb-6">
-                <ShieldCheck size={32} />
-              </div>
-              <h3 className="text-2xl font-bold text-secondary mb-4">Visión</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {config.vision_text || "Ser referentes en salud mental comunitaria."}
-              </p>
-            </div>
-
-            <div className="glass p-8 rounded-3xl text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-6">
-                <Users size={32} />
-              </div>
-              <h3 className="text-2xl font-bold text-secondary mb-4">Nuestra Historia</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {config.history_text || "Fundación Azulanza nació del deseo de ayudar..."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-24 bg-secondary text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-10 left-10 w-64 h-64 border-8 border-white rounded-full"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 border-8 border-white rounded-full opacity-50"></div>
-        </div>
-
+      {/* Features Section - Interactive Cards */}
+      <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -ml-48 -mb-48" />
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-5xl font-bold mb-2">500+</div>
-              <div className="text-blue-100 uppercase tracking-wider text-sm">Familias</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">1.2k</div>
-              <div className="text-blue-100 uppercase tracking-wider text-sm">Asesorías</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">50+</div>
-              <div className="text-blue-100 uppercase tracking-wider text-sm">Voluntarios</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">15+</div>
-              <div className="text-blue-100 uppercase tracking-wider text-sm">Proyectos</div>
-            </div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-24"
+          >
+            <motion.span variants={itemVariants} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Nuestra Esencia</motion.span>
+            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-secondary mb-6 font-primary">Más que una fundación, <br/><span className="gradient-text">somos una familia</span></motion.h2>
+            <motion.div variants={itemVariants} className="w-24 h-2 bg-gradient-brand mx-auto rounded-full"></motion.div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              { 
+                title: "Misión", 
+                text: config.mission_text || "Transformando vidas a través del apoyo psicológico y social con un enfoque humano y profesional.",
+                icon: Heart,
+                color: "primary",
+                delay: 0.1
+              },
+              { 
+                title: "Visión", 
+                text: config.vision_text || "Ser referentes en salud mental comunitaria en toda la región, expandiendo nuestro impacto positivo.",
+                icon: ShieldCheck,
+                color: "secondary",
+                delay: 0.2
+              },
+              { 
+                title: "Nuestra Historia", 
+                text: config.history_text || "Fundación Azulanza nació del deseo de ayudar a quienes atraviesan momentos difíciles sin recursos.",
+                icon: Users,
+                color: "primary",
+                delay: 0.3
+              }
+            ].map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: feature.delay }}
+                whileHover={{ y: -15 }}
+                className="glass p-10 rounded-[3rem] text-center group transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 relative"
+              >
+                <div className={`w-20 h-20 bg-${feature.color}/10 rounded-3xl flex items-center justify-center text-${feature.color} mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
+                  <feature.icon size={40} fill={feature.color === 'primary' ? 'currentColor' : 'none'} />
+                </div>
+                <h3 className="text-3xl font-bold text-secondary mb-6">{feature.title}</h3>
+                <p className="text-gray-500 leading-relaxed text-lg">
+                  {feature.text}
+                </p>
+                <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24">
+      {/* Impact Section - Stats with parallax scroll */}
+      <section className="py-32 bg-secondary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 border-[40px] border-white rounded-full animate-float" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] border-[60px] border-white rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+            {[
+              { label: "Familias Impactadas", value: "500+", icon: Users },
+              { label: "Asesorías Realizadas", value: "1,200+", icon: MessageSquare },
+              { label: "Voluntarios Activos", value: "50+", icon: Star },
+              { label: "Jornadas de Salud", value: "25+", icon: CheckCircle2 }
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-white/20 mb-4 flex justify-center">
+                  <stat.icon size={48} />
+                </div>
+                <div className="text-6xl font-extrabold text-white mb-4 tabular-nums tracking-tighter">{stat.value}</div>
+                <div className="text-blue-200 uppercase tracking-[0.2em] text-xs font-bold">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action - Ultra Modern Layout */}
+      <section className="py-32 relative">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-brand rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
-             <div className="relative z-10 max-w-3xl mx-auto">
-                <MessageSquare size={48} className="mx-auto mb-8 opacity-50" />
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">¿Necesitas hablar con alguien?</h2>
-                <p className="text-xl mb-10 text-white/90">
-                  Estamos aquí para escucharte y brindarte el apoyo que necesitas. Nuestra primera asesoría es totalmente gratuita.
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="bg-secondary rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(3,86,203,0.3)]"
+          >
+            {/* Abstract Background for CTA */}
+            <div className="absolute top-0 left-0 w-full h-full">
+              <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-[100px]" />
+              <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-[100px]" />
+            </div>
+
+             <div className="relative z-10 max-w-4xl mx-auto">
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-[2rem] flex items-center justify-center mx-auto mb-10 border border-white/20"
+                >
+                  <MessageSquare size={48} className="text-white" />
+                </motion.div>
+                
+                <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight font-primary">
+                  ¿Necesitas <span className="text-primary">apoyo</span> hoy?
+                </h2>
+                
+                <p className="text-xl md:text-2xl mb-16 text-blue-100 font-light leading-relaxed max-w-2xl mx-auto">
+                  No estás solo. Nuestro equipo está listo para escucharte. Tu bienestar es nuestra prioridad número uno.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="/asesoria" className="bg-white text-secondary font-bold px-10 py-4 rounded-full hover:shadow-xl transition-all hover:scale-105 active:scale-95">
-                    Agendar Ahora
-                  </a>
-                  <a href="/contacto" className="bg-secondary/20 backdrop-blur-sm border border-white/30 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95">
-                    Contactar
-                  </a>
+                
+                <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+                  <Link href="/asesoria" className="bg-white text-secondary font-bold px-12 py-5 rounded-full text-xl hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all hover:scale-110 active:scale-95 flex items-center gap-3">
+                    Agendar Asesoría <ArrowRight size={24} />
+                  </Link>
+                  <Link href="/contacto" className="text-white font-bold text-xl hover:text-primary transition-colors flex items-center gap-2 group">
+                    Hablar con alguien <span className="group-hover:translate-x-2 transition-transform">→</span>
+                  </Link>
                 </div>
              </div>
-          </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Decorative Wave at the bottom */}
+      <div className="h-24 bg-gradient-to-b from-white to-gray-50" />
     </main>
   );
 }

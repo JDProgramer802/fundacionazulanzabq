@@ -30,7 +30,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-md border border-white/20;
+  @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.glass-dark {
+  @apply bg-secondary/10 backdrop-blur-lg border border-white/10 shadow-2xl;
 }
 
 .gradient-text {
@@ -38,9 +42,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  @apply px-6 py-3 bg-primary text-white rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30 active:scale-95;
+  @apply px-8 py-4 bg-primary text-white rounded-full font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(238,132,181,0.5)] active:scale-95 flex items-center justify-center gap-2;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 bg-secondary text-white rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-secondary/30 active:scale-95;
+  @apply px-8 py-4 bg-secondary text-white rounded-full font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(3,86,203,0.4)] active:scale-95 flex items-center justify-center gap-2;
+}
+
+.card-hover {
+  @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10;
+}
+
+.shape-blob {
+  background: linear-gradient(135deg, rgba(238, 132, 181, 0.2) 0%, rgba(3, 86, 203, 0.2) 100%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  filter: blur(40px);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

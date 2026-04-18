@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Heart, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Heart } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
@@ -31,17 +31,21 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300',
-        scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
+        'fixed top-0 w-full z-50 transition-all duration-500',
+        scrolled ? 'bg-white/70 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] py-3' : 'bg-transparent py-6'
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+        <Link href="/" className="flex items-center gap-3 group">
+          <motion.div
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.5 }}
+            className="w-12 h-12 bg-gradient-brand rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20"
+          >
             <Heart size={24} fill="currentColor" />
-          </div>
+          </motion.div>
           <span className={cn(
-            "text-2xl font-bold font-primary",
+            "text-3xl font-bold font-primary tracking-tighter transition-colors",
             scrolled ? "text-secondary" : "text-secondary"
           )}>
             Azulanza
@@ -49,20 +53,24 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "font-medium transition-colors hover:text-primary",
-                pathname === link.href ? "text-primary" : "text-gray-600"
+                "font-bold text-sm uppercase tracking-widest transition-all hover:text-primary relative group",
+                pathname === link.href ? "text-primary" : "text-secondary/70"
               )}
             >
               {link.label}
+              <span className={cn(
+                "absolute -bottom-2 left-0 h-1 bg-primary transition-all duration-300 rounded-full",
+                pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+              )} />
             </Link>
           ))}
-          <Link href="/donaciones" className="btn-primary py-2 px-5">
+          <Link href="/donaciones" className="btn-primary py-3 px-8 shadow-lg shadow-primary/20">
             Donar Ahora
           </Link>
         </div>
