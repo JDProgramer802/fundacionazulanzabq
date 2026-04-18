@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Mail, Phone, Send, Twitter } from 'lucide-react';
+import NextImage from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -46,7 +47,7 @@ export default function Footer() {
                 whileHover={{ scale: 1.05 }}
                 className="relative w-48 h-16"
               >
-                <Image
+                <NextImage
                   src="/logo.png"
                   alt="Fundación Azulanza"
                   fill

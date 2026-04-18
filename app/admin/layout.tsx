@@ -15,6 +15,7 @@ import {
   UserCheck,
   Users
 } from 'lucide-react';
+import NextImage from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -51,7 +52,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
         <div className="p-6">
           <Link href="/admin" className="relative w-full h-12 block">
-            <Image
+            <NextImage
               src="/logo.png"
               alt="Azulanza Admin"
               fill

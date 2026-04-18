@@ -9,6 +9,8 @@ export const metadata = {
   description: 'Mantente informado sobre las actividades, jornadas de salud y noticias de la Fundación Azulanza.',
 };
 
+export const dynamic = 'force-dynamic';
+
 async function getNews() {
   return await prisma.news.findMany({
     where: { published: true },

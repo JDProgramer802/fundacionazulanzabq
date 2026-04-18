@@ -1,8 +1,10 @@
 import prisma from '@/lib/prisma';
-import { notFound } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
-import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Share2, User } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const news = await prisma.news.findUnique({ where: { slug: params.slug } });

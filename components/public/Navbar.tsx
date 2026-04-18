@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import NextImage from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -47,7 +48,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               className="relative w-40 h-12 md:w-48 md:h-14"
             >
-              <Image
+              <NextImage
                 src="/logo.png"
                 alt="Fundación Azulanza"
                 fill

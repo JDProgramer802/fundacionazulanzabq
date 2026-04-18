@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   const settings = await prisma.setting.findMany();
   const config: Record<string, any> = {};
-  settings.forEach((s) => {
+  settings.forEach((s: { key: string; value: string }) => {
     try {
       config[s.key] = JSON.parse(s.value);
     } catch {
