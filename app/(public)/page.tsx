@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [config, setConfig] = useState<any>({});
   const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [events, setEvents] = useState<any[]>([]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -24,6 +25,10 @@ export default function Home() {
     fetch('/api/testimonials')
       .then(res => res.json())
       .then(data => setTestimonials(data));
+
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(data => setEvents(data));
   }, []);
 
   const containerVariants = {
@@ -152,6 +157,63 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Events Section */}
+      {events.length > 0 && (
+        <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-24"
+            >
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Próximas Actividades</span>
+              <h2 className="text-5xl font-bold text-secondary font-primary">Eventos de la <span className="gradient-text">Fundación</span></h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {events.slice(0, 3).map((ev, i) => (
+                <motion.div
+                  key={ev.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-gray-100"
+                >
+                  <div className="aspect-video relative overflow-hidden">
+                    {ev.image_url ? (
+                      <img src={ev.image_url} alt={ev.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    ) : (
+                      <div className="w-full h-full bg-primary/5 flex items-center justify-center text-primary/20">
+                         <Calendar size={64} />
+                      </div>
+                    )}
+                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
+                      <div className="text-primary font-bold text-xl">{new Date(ev.date).getDate()}</div>
+                      <div className="text-gray-400 text-xs font-bold uppercase tracking-tighter">
+                        {new Date(ev.date).toLocaleDateString('es-ES', { month: 'short' })}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">{ev.title}</h3>
+                    <p className="text-gray-500 text-sm mb-6 line-clamp-2">{ev.description}</p>
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-50">
+                      <div className="flex items-center gap-2 text-gray-400 text-xs">
+                         <Star size={14} className="text-primary" />
+                         {ev.location || "Sede Principal"}
+                      </div>
+                      <Link href="/contacto" className="text-primary font-bold text-sm hover:underline">Inscribirse</Link>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Testimonials Section */}
       {testimonials.length > 0 && (

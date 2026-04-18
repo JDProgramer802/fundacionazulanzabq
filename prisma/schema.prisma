@@ -98,6 +98,24 @@ model Testimonial {
   updated_at DateTime @updatedAt
 }
 
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  date        DateTime
+  location    String?
+  image_url   String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+}
+
 model Volunteer {
   id         String   @id @default(cuid())
   name       String

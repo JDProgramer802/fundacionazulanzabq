@@ -23,6 +23,7 @@ const menuItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/contenido', label: 'Contenido', icon: FileText },
   { href: '/admin/noticias', label: 'Noticias', icon: Newspaper },
+  { href: '/admin/eventos', label: 'Eventos', icon: Calendar },
   { href: '/admin/citas', label: 'Citas', icon: Calendar },
   { href: '/admin/donaciones', label: 'Donaciones', icon: HeartHandshake },
   { href: '/admin/contacto', label: 'Mensajes', icon: MessageSquare },
