@@ -1,8 +1,8 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Heart } from 'lucide-react';
 import Link from 'next/link';
-import { Heart, ArrowRight } from 'lucide-react';
 
 export default function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   const { scrollY } = useScroll();
@@ -10,7 +10,7 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-20">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-32 pb-20 md:pt-40">
       {/* Mesh Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#EE84B522,transparent_50%),radial-gradient(circle_at_80%_50%,#0356CB11,transparent_50%)]" />
@@ -52,7 +52,7 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
             Salud Mental y Bienestar para Todos
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,8 +61,8 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
             <span className="block text-secondary drop-shadow-sm">Fundación</span>
             <span className="gradient-text drop-shadow-sm pb-2 inline-block">{title}</span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -71,7 +71,7 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
             {subtitle}
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

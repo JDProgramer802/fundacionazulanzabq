@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Facebook, Heart, Instagram, Mail, MapPin, Phone, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
@@ -15,9 +16,12 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-8">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-12 h-12 bg-gradient-brand rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary/20 transition-transform group-hover:rotate-12">
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                className="w-12 h-12 bg-gradient-brand rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary/20 transition-transform"
+              >
                 <Heart size={24} fill="currentColor" />
-              </div>
+              </motion.div>
               <span className="text-3xl font-bold font-primary tracking-tighter text-secondary">
                 Azulanza
               </span>
@@ -31,9 +35,15 @@ export default function Footer() {
                 { icon: Instagram, href: "#" },
                 { icon: Twitter, href: "#" }
               ].map((social, i) => (
-                <a key={i} href={social.href} className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white hover:-translate-y-2 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/20">
+                <motion.a
+                  key={i}
+                  href={social.href}
+                  whileHover={{ y: -8, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/20"
+                >
                   <social.icon size={20} />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
