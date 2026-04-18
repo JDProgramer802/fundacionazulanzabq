@@ -3,15 +3,15 @@
 import Hero from '@/components/public/Hero';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import {
-    ArrowRight,
-    Calendar,
-    CheckCircle2,
-    Heart,
-    MessageSquare,
-    Quote,
-    ShieldCheck,
-    Star,
-    Users
+  ArrowRight,
+  Calendar,
+  CheckCircle2,
+  Heart,
+  MessageSquare,
+  Quote,
+  ShieldCheck,
+  Star,
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -70,7 +70,7 @@ export default function Home() {
       />
 
       {/* Features Section - Interactive Cards */}
-      <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-b from-white to-blue-50/50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -ml-48 -mb-48" />
 
@@ -83,32 +83,35 @@ export default function Home() {
             className="text-center mb-24"
           >
             <motion.span variants={itemVariants} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Nuestra Esencia</motion.span>
-            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-secondary mb-6 font-primary">Más que una fundación, <br/><span className="gradient-text">somos una familia</span></motion.h2>
-            <motion.div variants={itemVariants} className="w-24 h-2 bg-gradient-brand mx-auto rounded-full"></motion.div>
+            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-extrabold text-secondary mb-6 font-primary">Más que una fundación, <br/><span className="gradient-text">somos una familia</span></motion.h2>
+            <motion.div variants={itemVariants} className="w-32 h-1 bg-gradient-brand mx-auto rounded-full"></motion.div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
             {[
               {
                 title: "Misión",
                 text: config.mission_text || "Transformando vidas a través del apoyo psicológico y social con un enfoque humano y profesional.",
                 icon: Heart,
                 color: "primary",
-                delay: 0.1
+                delay: 0.1,
+                accent: "from-pink-300 to-primary"
               },
               {
                 title: "Visión",
                 text: config.vision_text || "Ser referentes en salud mental comunitaria en toda la región, expandiendo nuestro impacto positivo.",
                 icon: ShieldCheck,
                 color: "secondary",
-                delay: 0.2
+                delay: 0.2,
+                accent: "from-blue-400 to-secondary"
               },
               {
                 title: "Nuestra Historia",
                 text: config.history_text || "Fundación Azulanza nació del deseo de ayudar a quienes atraviesan momentos difíciles sin recursos.",
                 icon: Users,
                 color: "primary",
-                delay: 0.3
+                delay: 0.3,
+                accent: "from-primary to-pink-300"
               }
             ].map((feature, i) => (
               <motion.div
@@ -117,17 +120,28 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: feature.delay }}
-                whileHover={{ y: -15 }}
-                className="glass p-10 rounded-[3rem] text-center group transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 relative"
+                whileHover={{ y: -20, transition: { duration: 0.3 } }}
+                className="group"
               >
-                <div className={`w-20 h-20 bg-${feature.color}/10 rounded-3xl flex items-center justify-center text-${feature.color} mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
-                  <feature.icon size={40} fill={feature.color === 'primary' ? 'currentColor' : 'none'} />
+                <div className="relative h-full bg-white rounded-[3rem] p-10 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary/20">
+                  {/* Accent Line */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.accent}`} />
+                  
+                  {/* Icon Container */}
+                  <div className={`w-20 h-20 bg-gradient-to-br ${feature.accent} rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-lg`}>
+                    <feature.icon size={40} />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-3xl font-bold text-secondary mb-6 text-center">{feature.title}</h3>
+                  <p className="text-gray-500 leading-relaxed text-lg text-center mb-6">
+                    {feature.text}
+                  </p>
+
+                  {/* Decorative elements */}
+                  <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-secondary/5 to-primary/5 rounded-full blur-2xl" />
                 </div>
-                <h3 className="text-3xl font-bold text-secondary mb-6">{feature.title}</h3>
-                <p className="text-gray-500 leading-relaxed text-lg">
-                  {feature.text}
-                </p>
-                <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
             ))}
           </div>
@@ -135,33 +149,55 @@ export default function Home() {
       </section>
 
       {/* Impact Section - Stats with parallax scroll */}
-      <section className="py-32 bg-secondary relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-br from-secondary via-secondary to-blue-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 border-[40px] border-white rounded-full animate-float" />
           <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] border-[60px] border-white rounded-full animate-float" style={{ animationDelay: '2s' }} />
         </div>
 
+        {/* Top accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-pink-300 to-primary" />
+
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+          {/* Section Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24"
+          >
+            <span className="text-white/80 font-bold tracking-widest uppercase text-sm mb-4 block">Nuestro Impacto</span>
+            <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 font-primary">Números que <span className="text-pink-300">Hablan</span></h2>
+            <p className="text-white/70 max-w-2xl mx-auto text-lg">Cada número representa una vida transformada, una esperanza renovada</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { label: "Familias Impactadas", value: "500+", icon: Users },
-              { label: "Asesorías Realizadas", value: "1,200+", icon: MessageSquare },
-              { label: "Voluntarios Activos", value: "50+", icon: Star },
-              { label: "Jornadas de Salud", value: "25+", icon: CheckCircle2 }
+              { label: "Familias Impactadas", value: "500", icon: Users, suffix: "+" },
+              { label: "Asesorías Realizadas", value: "1", icon: MessageSquare, suffix: ",200+", isDecimal: true },
+              { label: "Voluntarios Activos", value: "50", icon: Star, suffix: "+" },
+              { label: "Jornadas de Salud", value: "25", icon: CheckCircle2, suffix: "+" }
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="group relative"
               >
-                <div className="text-white/20 mb-4 flex justify-center">
-                  <stat.icon size={48} />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-pink-300/10 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                
+                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-[2.5rem] text-center group-hover:border-white/40 transition-all duration-300 h-full flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-300 to-primary rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-125 transition-transform duration-500 shadow-lg">
+                    <stat.icon size={32} />
+                  </div>
+                  <div className="text-5xl md:text-6xl font-extrabold text-white mb-2 tabular-nums tracking-tighter">
+                    {stat.value}{stat.isDecimal ? "" : ""}{stat.suffix}
+                  </div>
+                  <div className="text-white/70 uppercase tracking-[0.15em] text-xs font-bold">{stat.label}</div>
                 </div>
-                <div className="text-6xl font-extrabold text-white mb-4 tabular-nums tracking-tighter">{stat.value}</div>
-                <div className="text-blue-200 uppercase tracking-[0.2em] text-xs font-bold">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -170,8 +206,10 @@ export default function Home() {
 
       {/* Events Section */}
       {events.length > 0 && (
-        <section className="py-32 bg-[#F9FAFB] relative overflow-hidden">
-          <div className="container mx-auto px-4">
+        <section className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +217,8 @@ export default function Home() {
               className="text-center mb-24"
             >
               <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Próximas Actividades</span>
-              <h2 className="text-5xl font-bold text-secondary font-primary">Eventos de la <span className="gradient-text">Fundación</span></h2>
+              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">Eventos de la <span className="gradient-text">Fundación</span></h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">Únete a nuestras actividades y sé parte del cambio en tu comunidad</p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -190,32 +229,44 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-gray-100"
+                  className="group h-full"
                 >
-                  <div className="aspect-video relative overflow-hidden">
-                    {ev.image_url ? (
-                      <img src={ev.image_url} alt={ev.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    ) : (
-                      <div className="w-full h-full bg-primary/5 flex items-center justify-center text-primary/20">
-                         <Calendar size={64} />
-                      </div>
-                    )}
-                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
-                      <div className="text-primary font-bold text-xl">{new Date(ev.date).getDate()}</div>
-                      <div className="text-gray-400 text-xs font-bold uppercase tracking-tighter">
-                        {new Date(ev.date).toLocaleDateString('es-ES', { month: 'short' })}
-                      </div>
+                  <div className="relative bg-white rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 h-full flex flex-col border border-gray-100 hover:border-primary/20">
+                    <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+                      {ev.image_url ? (
+                        <img src={ev.image_url} alt={ev.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-primary/20">
+                          <Calendar size={64} />
+                        </div>
+                      )}
+                      {/* Date Badge */}
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ delay: i * 0.1 + 0.2 }}
+                        className="absolute top-6 left-6 bg-gradient-to-br from-primary to-pink-400 text-white px-5 py-3 rounded-2xl shadow-xl backdrop-blur-sm border border-white/20"
+                      >
+                        <div className="text-2xl font-extrabold">{new Date(ev.date).getDate()}</div>
+                        <div className="text-xs font-bold uppercase tracking-wider opacity-90">
+                          {new Date(ev.date).toLocaleDateString('es-ES', { month: 'short' })}
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">{ev.title}</h3>
-                    <p className="text-gray-500 text-sm mb-6 line-clamp-2">{ev.description}</p>
-                    <div className="flex items-center justify-between pt-6 border-t border-gray-50">
-                      <div className="flex items-center gap-2 text-gray-400 text-xs">
-                         <Star size={14} className="text-primary" />
-                         {ev.location || "Sede Principal"}
+                    
+                    <div className="p-8 flex-1 flex flex-col">
+                      <h3 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors line-clamp-2">{ev.title}</h3>
+                      <p className="text-gray-500 text-sm mb-8 line-clamp-3 flex-1">{ev.description}</p>
+                      
+                      <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                        <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold">
+                          <Calendar size={14} className="text-primary" />
+                          {ev.location || "Sede Principal"}
+                        </div>
+                        <Link href="/contacto" className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-primary to-pink-400 text-white font-bold text-sm rounded-full hover:shadow-lg transition-all hover:scale-105 active:scale-95">
+                          Inscribirse <ArrowRight size={16} />
+                        </Link>
                       </div>
-                      <Link href="/contacto" className="text-primary font-bold text-sm hover:underline">Inscribirse</Link>
                     </div>
                   </div>
                 </motion.div>
@@ -227,8 +278,10 @@ export default function Home() {
 
       {/* Testimonials Section */}
       {testimonials.length > 0 && (
-        <section className="py-32 bg-white relative overflow-hidden">
-          <div className="container mx-auto px-4">
+        <section className="py-32 bg-gradient-to-b from-blue-50/50 to-white relative overflow-hidden">
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -mr-48 -mb-48" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -236,7 +289,8 @@ export default function Home() {
               className="text-center mb-24"
             >
               <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Testimonios</span>
-              <h2 className="text-5xl font-bold text-secondary font-primary">Historias que <span className="gradient-text">inspiran</span></h2>
+              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">Historias que <span className="gradient-text">Inspiran</span></h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">Escucha las voces de quienes han transformado sus vidas con nuestro apoyo</p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -247,17 +301,35 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-[#F9FAFB] p-10 rounded-[3rem] relative"
+                  whileHover={{ y: -10 }}
+                  className="group relative"
                 >
-                  <Quote size={40} className="text-primary/20 mb-6" />
-                  <p className="text-gray-600 mb-8 italic leading-relaxed text-lg">"{t.text}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-300 shadow-sm overflow-hidden border border-gray-100">
-                      {t.image_url ? <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" /> : <Users size={24} />}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                  
+                  <div className="relative bg-white p-10 rounded-[3rem] h-full border border-gray-100 group-hover:border-primary/20 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-primary/10">
+                    <div className="flex justify-between items-start mb-6">
+                      <Quote size={40} className="text-primary/20" />
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={16} className="fill-primary text-primary" />
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-secondary">{t.name}</h4>
-                      <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
+
+                    <p className="text-gray-600 mb-8 leading-relaxed text-lg italic">"{t.text}"</p>
+
+                    <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                      <div className="w-14 h-14 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center text-white overflow-hidden shadow-md border-2 border-white">
+                        {t.image_url ? (
+                          <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <Users size={28} />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-secondary text-lg">{t.name}</h4>
+                        <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role || "Beneficiario"}</p>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

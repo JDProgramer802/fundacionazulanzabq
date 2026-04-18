@@ -10,38 +10,76 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-white pt-32 pb-20 md:pt-40">
-      {/* Floating Icons */}
-      <div className="absolute inset-0 pointer-events-none">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-48">
+      {/* Advanced Gradient Background */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-blue-50/30 to-pink-50/30" />
+      
+      {/* Animated Gradient Blobs */}
+      <div className="absolute inset-0 overflow-hidden -z-10">
         <motion.div
           animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
           }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 text-primary/20"
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-primary to-pink-300 rounded-full blur-3xl opacity-20"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, -60, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-secondary to-blue-400 rounded-full blur-3xl opacity-20"
+        />
+      </div>
+
+      {/* Floating Icons */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            y: [0, -30, 0],
+            rotate: [0, 10, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/4 text-primary/15"
+        >
+          <Heart size={80} />
+        </motion.div>
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            rotate: [0, -10, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-1/3 right-1/4 text-secondary/15"
+        >
+          <Heart size={70} />
+        </motion.div>
+        <motion.div
+          animate={{
+            y: [0, -25, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-1/4 left-1/3 text-primary/10"
         >
           <Heart size={60} />
         </motion.div>
         <motion.div
           animate={{
-            y: [0, 20, 0],
-            rotate: [0, -5, 0],
+            y: [0, 25, 0],
+            x: [0, -15, 0],
           }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-1/4 text-secondary/20"
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute bottom-1/3 right-1/3 text-secondary/10"
         >
           <Heart size={50} />
-        </motion.div>
-        <motion.div
-          animate={{
-            y: [0, -15, 0],
-            x: [0, 10, 0],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 left-1/3 text-primary/15"
-        >
-          <Heart size={40} />
         </motion.div>
       </div>
 
@@ -64,13 +102,21 @@ export default function Hero({ title, subtitle }: { title: string; subtitle: str
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] font-primary tracking-tight"
+            transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 100 }}
+            className="text-5xl md:text-7xl xl:text-8xl font-extrabold mb-8 leading-[1.1] font-primary tracking-tighter"
           >
-            <span className="block text-secondary drop-shadow-sm">Fundación</span>
-            <span className="gradient-text drop-shadow-sm pb-2 inline-block">{title}</span>
+            <span className="block text-secondary mb-2">Fundación</span>
+            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent inline-block relative">
+              {title}
+              <motion.span
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "100%" }}
+                transition={{ duration: 1.2, delay: 0.8 }}
+                className="absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full"
+              />
+            </span>
           </motion.h1>
 
           <motion.p
