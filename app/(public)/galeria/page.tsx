@@ -32,7 +32,7 @@ export default function GalleryPage() {
     try {
       const res = await fetch('/api/gallery');
       const data = await res.json();
-      
+
       if (Array.isArray(data)) {
         const activeItems = data.filter((item: GalleryItem) => item.active);
         setItems(activeItems);
@@ -173,14 +173,18 @@ export default function GalleryPage() {
 
           {!loading && error && (
             <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100">
-               <ImageIcon size={48} className="mx-auto text-red-300 mb-4" />
-               <p className="text-red-500 font-medium">{error}</p>
-               <button 
-                 onClick={() => { setLoading(true); setError(null); fetchItems(); }}
-                 className="mt-4 text-primary font-bold hover:underline"
-                >
-                  Reintentar
-                </button>
+              <ImageIcon size={48} className="mx-auto text-red-300 mb-4" />
+              <p className="text-red-500 font-medium">{error}</p>
+              <button
+                onClick={() => {
+                  setLoading(true);
+                  setError(null);
+                  fetchItems();
+                }}
+                className="mt-4 text-primary font-bold hover:underline"
+              >
+                Reintentar
+              </button>
             </div>
           )}
 
