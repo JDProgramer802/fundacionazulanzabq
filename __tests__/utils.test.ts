@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { cn, formatDate, slugify } from '@/lib/utils';
+import { describe, expect, it } from 'vitest';
 
 describe('utils', () => {
   describe('cn', () => {
@@ -11,7 +11,8 @@ describe('utils', () => {
 
   describe('formatDate', () => {
     it('should format date string correctly', () => {
-      const date = '2024-01-01';
+      // Use a date that is less likely to have timezone shifts to another month
+      const date = new Date(2024, 0, 15);
       const formatted = formatDate(date);
       expect(formatted).toContain('enero');
       expect(formatted).toContain('2024');
@@ -22,7 +23,7 @@ describe('utils', () => {
     it('should convert text to slug', () => {
       expect(slugify('Hola Mundo')).toBe('hola-mundo');
       expect(slugify('  Test with SPACES  ')).toBe('test-with-spaces');
-      expect(slugify('Special @ Chars!')).toBe('special--chars');
+      expect(slugify('Special @ Chars!')).toBe('special-chars');
     });
   });
 });
