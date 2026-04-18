@@ -1,10 +1,7 @@
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const testimonial = await prisma.testimonial.findUnique({
       where: { id: params.id },
@@ -15,10 +12,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
     const testimonial = await prisma.testimonial.update({
@@ -37,10 +31,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     await prisma.testimonial.delete({
       where: { id: params.id },

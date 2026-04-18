@@ -11,6 +11,7 @@ Plataforma integral diseñada para la **Fundación Azulanza**, enfocada en la ge
 ---
 
 ## 📌 Tabla de Contenidos
+
 - [✨ Características](#-características)
 - [🛠️ Stack Tecnológico](#️-stack-tecnológico)
 - [🏗️ Arquitectura y SOLID](#️-arquitectura-y-solid)
@@ -46,13 +47,13 @@ Plataforma integral diseñada para la **Fundación Azulanza**, enfocada en la ge
 
 ## 🛠️ Stack Tecnológico
 
-| Tecnología | Propósito |
-| :--- | :--- |
-| **Next.js 14** | Framework Fullstack (App Router) |
-| **PostgreSQL** | Base de datos relacional (Neon) |
-| **Resend** | Motor de emails transaccionales |
-| **Vercel Blob** | Almacenamiento de archivos en la nube |
-| **Framer Motion** | Animaciones de alta calidad |
+| Tecnología        | Propósito                             |
+| :---------------- | :------------------------------------ |
+| **Next.js 14**    | Framework Fullstack (App Router)      |
+| **PostgreSQL**    | Base de datos relacional (Neon)       |
+| **Resend**        | Motor de emails transaccionales       |
+| **Vercel Blob**   | Almacenamiento de archivos en la nube |
+| **Framer Motion** | Animaciones de alta calidad           |
 
 ---
 
@@ -69,6 +70,7 @@ El proyecto implementa patrones de diseño para máxima escalabilidad:
 ## 🚀 Inicio Rápido
 
 1. **Clonar y Preparar:**
+
    ```bash
    git clone https://github.com/JDProgramer802/fundacionazulanzabq.git
    cd fundacionazulanzabq
@@ -76,6 +78,7 @@ El proyecto implementa patrones de diseño para máxima escalabilidad:
    ```
 
 2. **Base de Datos:**
+
    ```bash
    npx prisma generate
    npx prisma db push
@@ -109,6 +112,7 @@ ADMIN_EMAIL="tu@email.com"
 # App
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
+
 </details>
 
 ---
@@ -141,4 +145,5 @@ npm run test:coverage
 ```
 
 ---
+
 Desarrollado con 💙 para **Fundación Azulanza**.

@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-for-dev-only-that-is-long-enough-32-chars';
+const JWT_SECRET =
+  process.env.JWT_SECRET || 'fallback-secret-for-dev-only-that-is-long-enough-32-chars';
 
 export interface AuthUser {
   id: string;

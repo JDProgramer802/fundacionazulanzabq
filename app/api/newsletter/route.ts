@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
-    
+
     if (!email) {
       return NextResponse.json({ error: 'Email requerido' }, { status: 400 });
     }

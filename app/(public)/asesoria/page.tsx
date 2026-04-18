@@ -37,16 +37,25 @@ export default function AsesoriaPage() {
             Agenda tu <span className="gradient-text">Asesoría</span>
           </h1>
           <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-            Nuestro equipo de profesionales está listo para escucharte sin prejuicios. Un espacio seguro, confidencial y completamente gratuito para tu bienestar emocional.
+            Nuestro equipo de profesionales está listo para escucharte sin prejuicios. Un espacio
+            seguro, confidencial y completamente gratuito para tu bienestar emocional.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto mb-20">
           {/* Benefits Cards */}
           {[
-            { icon: Heart, title: "Apoyo Profesional", desc: "Psicólogos y terapeutas certificados" },
-            { icon: Clock, title: "Horarios Flexibles", desc: "Disponible según tu conveniencia" },
-            { icon: CheckCircle2, title: "Totalmente Gratuito", desc: "Sin costo alguno para la comunidad" }
+            {
+              icon: Heart,
+              title: 'Apoyo Profesional',
+              desc: 'Psicólogos y terapeutas certificados',
+            },
+            { icon: Clock, title: 'Horarios Flexibles', desc: 'Disponible según tu conveniencia' },
+            {
+              icon: CheckCircle2,
+              title: 'Totalmente Gratuito',
+              desc: 'Sin costo alguno para la comunidad',
+            },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -83,7 +92,8 @@ export default function AsesoriaPage() {
                 </div>
                 <h2 className="text-3xl font-bold text-secondary mb-4">¡Cita Solicitada!</h2>
                 <p className="text-gray-500 mb-8">
-                  Hemos recibido tu solicitud. Un miembro de nuestro equipo te contactará pronto para confirmar el horario.
+                  Hemos recibido tu solicitud. Un miembro de nuestro equipo te contactará pronto
+                  para confirmar el horario.
                 </p>
                 <button
                   onClick={() => setStatus('idle')}
@@ -96,7 +106,9 @@ export default function AsesoriaPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">Nombre Completo *</label>
+                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">
+                      Nombre Completo *
+                    </label>
                     <input
                       type="text"
                       required
@@ -107,7 +119,9 @@ export default function AsesoriaPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">Correo Electrónico *</label>
+                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">
+                      Correo Electrónico *
+                    </label>
                     <input
                       type="email"
                       required
@@ -121,7 +135,9 @@ export default function AsesoriaPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">Teléfono</label>
+                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">
+                      Teléfono
+                    </label>
                     <input
                       type="tel"
                       className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all"
@@ -131,7 +147,9 @@ export default function AsesoriaPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">Fecha y Hora Preferida *</label>
+                    <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">
+                      Fecha y Hora Preferida *
+                    </label>
                     <input
                       type="datetime-local"
                       required
@@ -143,7 +161,9 @@ export default function AsesoriaPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">¿Cuál es el motivo de tu consulta? *</label>
+                  <label className="text-sm font-bold text-secondary ml-2 uppercase tracking-wider">
+                    ¿Cuál es el motivo de tu consulta? *
+                  </label>
                   <textarea
                     required
                     rows={4}

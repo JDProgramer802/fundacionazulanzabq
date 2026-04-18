@@ -13,8 +13,8 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetch(`/api/news/${params.id}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setFormData(data);
         setLoading(false);
       });
@@ -55,7 +55,12 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
     }
   };
 
-  if (loading) return <div className="flex justify-center p-12"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center p-12">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -69,7 +74,10 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6"
+      >
         <div className="space-y-2">
           <label className="block text-sm font-bold text-secondary">Título de la noticia</label>
           <input
@@ -86,7 +94,11 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
           <div className="flex items-center gap-4">
             <div className="w-40 h-24 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden">
               {formData.image_url ? (
-                <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                <img
+                  src={formData.image_url}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <Upload className="text-gray-300" />
               )}
@@ -126,18 +138,19 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
             onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
             className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
           />
-          <label htmlFor="published" className="text-sm font-medium text-gray-700">Publicar noticia</label>
+          <label htmlFor="published" className="text-sm font-medium text-gray-700">
+            Publicar noticia
+          </label>
         </div>
 
         <div className="pt-4 flex justify-end gap-4">
-          <Link href="/admin/noticias" className="px-6 py-3 rounded-full font-bold text-gray-500 hover:bg-gray-100 transition-colors">
+          <Link
+            href="/admin/noticias"
+            className="px-6 py-3 rounded-full font-bold text-gray-500 hover:bg-gray-100 transition-colors"
+          >
             Cancelar
           </Link>
-          <button
-            type="submit"
-            disabled={saving}
-            className="btn-primary flex items-center gap-2"
-          >
+          <button type="submit" disabled={saving} className="btn-primary flex items-center gap-2">
             {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
             Guardar Cambios
           </button>

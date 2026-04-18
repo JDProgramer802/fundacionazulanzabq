@@ -21,7 +21,7 @@ export default function FAQAdmin() {
     question: '',
     answer: '',
     order: 0,
-    active: true
+    active: true,
   });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function FAQAdmin() {
       question: f.question,
       answer: f.answer,
       order: f.order,
-      active: f.active
+      active: f.active,
     });
     setShowModal(true);
   };
@@ -81,7 +81,12 @@ export default function FAQAdmin() {
     fetchFaqs();
   };
 
-  if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center py-20">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -117,17 +122,29 @@ export default function FAQAdmin() {
                 <h4 className="font-bold text-secondary text-lg mb-2">{f.question}</h4>
                 <p className="text-gray-500 leading-relaxed text-sm max-w-3xl">{f.answer}</p>
                 <div className="mt-4 flex items-center gap-2">
-                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Orden: {f.order}</span>
+                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
+                    Orden: {f.order}
+                  </span>
                 </div>
               </div>
             </div>
-            
+
             <div className="flex gap-2">
-              <button onClick={() => toggleActive(f)} className={f.active ? "text-green-500" : "text-gray-300"}>
+              <button
+                onClick={() => toggleActive(f)}
+                className={f.active ? 'text-green-500' : 'text-gray-300'}
+              >
                 {f.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
               </button>
-              <button onClick={() => handleEdit(f)} className="text-gray-400 hover:text-primary"><Edit2 size={18} /></button>
-              <button onClick={() => handleDelete(f.id)} className="text-gray-400 hover:text-red-500"><Trash2 size={18} /></button>
+              <button onClick={() => handleEdit(f)} className="text-gray-400 hover:text-primary">
+                <Edit2 size={18} />
+              </button>
+              <button
+                onClick={() => handleDelete(f.id)}
+                className="text-gray-400 hover:text-red-500"
+              >
+                <Trash2 size={18} />
+              </button>
             </div>
           </motion.div>
         ))}
@@ -142,7 +159,9 @@ export default function FAQAdmin() {
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl"
             >
-              <h2 className="text-2xl font-bold text-secondary mb-6">{editingId ? 'Editar Pregunta' : 'Nueva Pregunta'}</h2>
+              <h2 className="text-2xl font-bold text-secondary mb-6">
+                {editingId ? 'Editar Pregunta' : 'Nueva Pregunta'}
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-1">Pregunta</label>
@@ -165,7 +184,9 @@ export default function FAQAdmin() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">Orden de aparición</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">
+                    Orden de aparición
+                  </label>
                   <input
                     type="number"
                     className="w-full px-4 py-2 rounded-xl border border-gray-200 outline-none focus:border-primary"
@@ -174,8 +195,16 @@ export default function FAQAdmin() {
                   />
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-3 border border-gray-200 rounded-xl font-bold text-gray-500">Cancelar</button>
-                  <button type="submit" className="flex-1 btn-primary py-3">Guardar</button>
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 py-3 border border-gray-200 rounded-xl font-bold text-gray-500"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="submit" className="flex-1 btn-primary py-3">
+                    Guardar
+                  </button>
                 </div>
               </form>
             </motion.div>

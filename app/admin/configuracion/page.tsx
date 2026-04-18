@@ -59,11 +59,12 @@ export default function ConfigPage() {
     }
   };
 
-  if (loading) return (
-    <div className="flex items-center justify-center h-64">
-      <Loader2 className="animate-spin text-primary" size={48} />
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -109,7 +110,10 @@ export default function ConfigPage() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6"
+      >
         {activeTab === 'general' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
@@ -117,21 +121,29 @@ export default function ConfigPage() {
               <div className="flex items-center gap-4">
                 <div className="w-24 h-24 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden">
                   {settings.site_logo ? (
-                    <img src={settings.site_logo} alt="Logo" className="w-full h-full object-contain p-2" />
+                    <img
+                      src={settings.site_logo}
+                      alt="Logo"
+                      className="w-full h-full object-contain p-2"
+                    />
                   ) : (
                     <Upload className="text-gray-300" />
                   )}
                 </div>
                 <input
                   type="file"
-                  onChange={(e) => e.target.files?.[0] && handleFileUpload('site_logo', e.target.files[0])}
+                  onChange={(e) =>
+                    e.target.files?.[0] && handleFileUpload('site_logo', e.target.files[0])
+                  }
                   className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                 />
               </div>
             </div>
 
             <div className="space-y-4">
-              <label className="block text-sm font-bold text-secondary">Nombre de la Fundación</label>
+              <label className="block text-sm font-bold text-secondary">
+                Nombre de la Fundación
+              </label>
               <input
                 type="text"
                 value={settings.site_title || ''}
@@ -198,56 +210,60 @@ export default function ConfigPage() {
 
         {activeTab === 'seo' && (
           <div className="space-y-6">
-             <div className="space-y-2">
-                <label className="block text-sm font-bold text-secondary">Descripción Global (SEO)</label>
-                <textarea
-                  value={settings.global_description || ''}
-                  onChange={(e) => handleChange('global_description', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary h-32"
-                />
-             </div>
-             <div className="space-y-2">
-                <label className="block text-sm font-bold text-secondary">Keywords (separadas por coma)</label>
-                <input
-                  type="text"
-                  value={settings.global_keywords || ''}
-                  onChange={(e) => handleChange('global_keywords', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
-                />
-             </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">
+                Descripción Global (SEO)
+              </label>
+              <textarea
+                value={settings.global_description || ''}
+                onChange={(e) => handleChange('global_description', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary h-32"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">
+                Keywords (separadas por coma)
+              </label>
+              <input
+                type="text"
+                value={settings.global_keywords || ''}
+                onChange={(e) => handleChange('global_keywords', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
+              />
+            </div>
           </div>
         )}
 
         {activeTab === 'redes' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-             <div className="space-y-2">
-                <label className="block text-sm font-bold text-secondary">Facebook URL</label>
-                <input
-                  type="text"
-                  value={settings.social_facebook || ''}
-                  onChange={(e) => handleChange('social_facebook', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
-                />
-             </div>
-             <div className="space-y-2">
-                <label className="block text-sm font-bold text-secondary">Instagram URL</label>
-                <input
-                  type="text"
-                  value={settings.social_instagram || ''}
-                  onChange={(e) => handleChange('social_instagram', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
-                />
-             </div>
-             <div className="space-y-2">
-                <label className="block text-sm font-bold text-secondary">WhatsApp Admin</label>
-                <input
-                  type="text"
-                  value={settings.whatsapp_number || ''}
-                  onChange={(e) => handleChange('whatsapp_number', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
-                  placeholder="Ej: 573001234567"
-                />
-             </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">Facebook URL</label>
+              <input
+                type="text"
+                value={settings.social_facebook || ''}
+                onChange={(e) => handleChange('social_facebook', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">Instagram URL</label>
+              <input
+                type="text"
+                value={settings.social_instagram || ''}
+                onChange={(e) => handleChange('social_instagram', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-secondary">WhatsApp Admin</label>
+              <input
+                type="text"
+                value={settings.whatsapp_number || ''}
+                onChange={(e) => handleChange('whatsapp_number', e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary"
+                placeholder="Ej: 573001234567"
+              />
+            </div>
           </div>
         )}
       </form>

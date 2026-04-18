@@ -1,7 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Mail, Phone, Calendar, Trash2, Edit2, CheckCircle, XCircle, UserCheck, Loader2 } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  Calendar,
+  Trash2,
+  Edit2,
+  CheckCircle,
+  XCircle,
+  UserCheck,
+  Loader2,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Volunteer {
@@ -48,13 +58,20 @@ export default function VoluntariosAdmin() {
     }
   };
 
-  if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center py-20">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-secondary font-primary">Gestión de Voluntarios</h1>
-        <p className="text-gray-500">Administra las solicitudes de personas interesadas en ayudar</p>
+        <p className="text-gray-500">
+          Administra las solicitudes de personas interesadas en ayudar
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -69,34 +86,53 @@ export default function VoluntariosAdmin() {
                 <UserCheck size={24} />
               </div>
               <div className="flex gap-2">
-                <button 
-                  onClick={() => { setSelectedVolunteer(v); setShowModal(true); }}
+                <button
+                  onClick={() => {
+                    setSelectedVolunteer(v);
+                    setShowModal(true);
+                  }}
                   className="text-gray-400 hover:text-primary"
                 >
                   <Edit2 size={18} />
                 </button>
-                <button onClick={() => handleDelete(v.id)} className="text-gray-400 hover:text-red-500">
+                <button
+                  onClick={() => handleDelete(v.id)}
+                  className="text-gray-400 hover:text-red-500"
+                >
                   <Trash2 size={18} />
                 </button>
               </div>
             </div>
-            
+
             <h3 className="text-xl font-bold text-secondary mb-1">{v.name}</h3>
             <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-               <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
-                 v.status === 'activo' ? 'bg-green-100 text-green-600' :
-                 v.status === 'contactado' ? 'bg-blue-100 text-blue-600' :
-                 v.status === 'inactivo' ? 'bg-gray-100 text-gray-600' :
-                 'bg-yellow-100 text-yellow-600'
-               }`}>
-                 {v.status}
-               </span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
+                  v.status === 'activo'
+                    ? 'bg-green-100 text-green-600'
+                    : v.status === 'contactado'
+                      ? 'bg-blue-100 text-blue-600'
+                      : v.status === 'inactivo'
+                        ? 'bg-gray-100 text-gray-600'
+                        : 'bg-yellow-100 text-yellow-600'
+                }`}
+              >
+                {v.status}
+              </span>
             </div>
 
             <div className="space-y-3 text-sm text-gray-500">
-              <div className="flex items-center gap-2"><Mail size={16} /> {v.email}</div>
-              {v.phone && <div className="flex items-center gap-2"><Phone size={16} /> {v.phone}</div>}
-              <div className="flex items-center gap-2"><Calendar size={16} /> Registrado: {new Date(v.created_at).toLocaleDateString()}</div>
+              <div className="flex items-center gap-2">
+                <Mail size={16} /> {v.email}
+              </div>
+              {v.phone && (
+                <div className="flex items-center gap-2">
+                  <Phone size={16} /> {v.phone}
+                </div>
+              )}
+              <div className="flex items-center gap-2">
+                <Calendar size={16} /> Registrado: {new Date(v.created_at).toLocaleDateString()}
+              </div>
             </div>
 
             {v.interests && (
@@ -124,8 +160,8 @@ export default function VoluntariosAdmin() {
                     key={status}
                     onClick={() => updateStatus(selectedVolunteer.id, status)}
                     className={`py-3 rounded-xl font-bold capitalize transition-all ${
-                      selectedVolunteer.status === status 
-                        ? 'bg-primary text-white shadow-lg' 
+                      selectedVolunteer.status === status
+                        ? 'bg-primary text-white shadow-lg'
                         : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
                     }`}
                   >
@@ -133,7 +169,7 @@ export default function VoluntariosAdmin() {
                   </button>
                 ))}
               </div>
-              <button 
+              <button
                 onClick={() => setShowModal(false)}
                 className="w-full mt-6 py-3 border border-gray-100 rounded-xl text-gray-400 font-bold"
               >

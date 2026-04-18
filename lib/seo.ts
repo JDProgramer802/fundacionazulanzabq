@@ -14,13 +14,16 @@ export async function getSettings() {
   return config;
 }
 
-export async function generatePageMetadata(titleKey: string, descriptionKey: string): Promise<Metadata> {
+export async function generatePageMetadata(
+  titleKey: string,
+  descriptionKey: string
+): Promise<Metadata> {
   const settings = await getSettings();
-  
-  const siteTitle = settings.site_title || "Fundación Azulanza";
+
+  const siteTitle = settings.site_title || 'Fundación Azulanza';
   const pageTitle = settings[titleKey] || siteTitle;
   const description = settings[descriptionKey] || settings.global_description;
-  const ogImage = settings.og_image || "/og-default.jpg";
+  const ogImage = settings.og_image || '/og-default.jpg';
 
   return {
     title: pageTitle,

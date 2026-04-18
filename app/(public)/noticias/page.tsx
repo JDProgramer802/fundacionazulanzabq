@@ -8,7 +8,8 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Noticias y Actualidad | Fundación Azulanza',
-  description: 'Mantente informado sobre las actividades, jornadas de salud y noticias de la Fundación Azulanza.',
+  description:
+    'Mantente informado sobre las actividades, jornadas de salud y noticias de la Fundación Azulanza.',
 };
 
 export const dynamic = 'force-dynamic';
@@ -78,7 +79,10 @@ export default async function NewsPage() {
                   </p>
                   <div className="flex items-center gap-2 text-primary font-bold text-sm pt-6 border-t border-gray-50">
                     Leer artículo completo{' '}
-                    <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight
+                      size={18}
+                      className="group-hover:translate-x-2 transition-transform"
+                    />
                   </div>
                 </div>
               </Link>
@@ -88,8 +92,13 @@ export default async function NewsPage() {
           {news.length === 0 && (
             <div className="text-center py-32 bg-white/50 backdrop-blur-sm rounded-[3rem] border border-dashed border-gray-200">
               <Newspaper size={64} className="mx-auto text-gray-200 mb-6" />
-              <p className="text-gray-400 text-xl italic">No hay noticias publicadas en este momento.</p>
-              <Link href="/contacto" className="inline-block mt-8 text-primary font-bold hover:underline">
+              <p className="text-gray-400 text-xl italic">
+                No hay noticias publicadas en este momento.
+              </p>
+              <Link
+                href="/contacto"
+                className="inline-block mt-8 text-primary font-bold hover:underline"
+              >
                 Contáctanos para más información
               </Link>
             </div>

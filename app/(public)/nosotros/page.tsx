@@ -4,7 +4,17 @@ import Hero from '@/components/public/Hero';
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
 import { api } from '@/lib/api-client';
 import { motion } from 'framer-motion';
-import { ArrowRight, Award, Globe, Heart, MessageSquare, ShieldCheck, Sparkles, Target, Users } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  Globe,
+  Heart,
+  MessageSquare,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  Users,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +22,7 @@ export default function Nosotros() {
   const [config, setConfig] = useState<any>({});
 
   useEffect(() => {
-    api.get('/api/settings').then(res => {
+    api.get('/api/settings').then((res) => {
       if (res.data) setConfig(res.data);
     });
   }, []);
@@ -41,22 +51,26 @@ export default function Nosotros() {
                 Desde el Corazón
               </div>
               <h2 className="text-5xl md:text-6xl font-extrabold text-secondary mb-8 font-primary leading-tight">
-                ¿Cómo nació <br/><span className="gradient-text">Fundación Azulanza?</span>
+                ¿Cómo nació <br />
+                <span className="gradient-text">Fundación Azulanza?</span>
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  {config.history_text || "Fundación Azulanza nació de la profunda necesidad de brindar apoyo a quienes atraviesan momentos difíciles sin contar con los recursos necesarios. Observamos que la salud mental era a menudo un privilegio, cuando debería ser un derecho fundamental para todos."}
+                  {config.history_text ||
+                    'Fundación Azulanza nació de la profunda necesidad de brindar apoyo a quienes atraviesan momentos difíciles sin contar con los recursos necesarios. Observamos que la salud mental era a menudo un privilegio, cuando debería ser un derecho fundamental para todos.'}
                 </p>
                 <p>
-                  Nuestro camino comenzó con un pequeño grupo de profesionales apasionados que creían en el poder de la escucha y la empatía. Hoy, nos hemos convertido en un faro de esperanza para cientos de familias en nuestra región.
+                  Nuestro camino comenzó con un pequeño grupo de profesionales apasionados que
+                  creían en el poder de la escucha y la empatía. Hoy, nos hemos convertido en un
+                  faro de esperanza para cientos de familias en nuestra región.
                 </p>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-2 gap-8 pt-10">
                 {[
-                  { value: "10+", label: "Años de Impacto" },
-                  { value: "1K+", label: "Vidas Tocadas" }
+                  { value: '10+', label: 'Años de Impacto' },
+                  { value: '1K+', label: 'Vidas Tocadas' },
                 ].map((stat, i) => (
                   <motion.div
                     key={i}
@@ -66,7 +80,9 @@ export default function Nosotros() {
                     className="bg-white rounded-[2rem] p-6 shadow-lg border border-gray-100"
                   >
                     <div className="text-4xl font-extrabold text-primary mb-2">{stat.value}</div>
-                    <div className="text-sm text-gray-500 font-bold uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-sm text-gray-500 font-bold uppercase tracking-wider">
+                      {stat.label}
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -107,16 +123,20 @@ export default function Nosotros() {
             {[
               {
                 icon: Target,
-                title: "Nuestra Misión",
-                text: config.mission_text || "Transformar la realidad de nuestra comunidad a través de la atención integral en salud mental, promoviendo el bienestar emocional, social y psicológico de las personas más vulnerables.",
-                color: "from-primary to-pink-400"
+                title: 'Nuestra Misión',
+                text:
+                  config.mission_text ||
+                  'Transformar la realidad de nuestra comunidad a través de la atención integral en salud mental, promoviendo el bienestar emocional, social y psicológico de las personas más vulnerables.',
+                color: 'from-primary to-pink-400',
               },
               {
                 icon: Globe,
-                title: "Nuestra Visión",
-                text: config.vision_text || "Ser la organización líder y referente en el abordaje de la salud mental comunitaria, logrando un impacto sostenible que trascienda fronteras y genere un cambio positivo real.",
-                color: "from-secondary to-blue-600"
-              }
+                title: 'Nuestra Visión',
+                text:
+                  config.vision_text ||
+                  'Ser la organización líder y referente en el abordaje de la salud mental comunitaria, logrando un impacto sostenible que trascienda fronteras y genere un cambio positivo real.',
+                color: 'from-secondary to-blue-600',
+              },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -127,7 +147,9 @@ export default function Nosotros() {
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-[3rem] p-12 shadow-lg border border-gray-100 hover:shadow-xl transition-all group"
               >
-                <div className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform duration-300`}
+                >
                   <item.icon size={32} />
                 </div>
                 <h3 className="text-3xl font-bold text-secondary mb-6">{item.title}</h3>
@@ -156,10 +178,26 @@ export default function Nosotros() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Empatía", desc: "Sentimos y entendemos el dolor del otro como propio.", icon: Heart },
-              { title: "Integridad", desc: "Actuamos con honestidad y transparencia total.", icon: ShieldCheck },
-              { title: "Excelencia", desc: "Buscamos siempre la máxima calidad profesional.", icon: Award },
-              { title: "Comunidad", desc: "Creemos en el poder de la unión para sanar.", icon: Users }
+              {
+                title: 'Empatía',
+                desc: 'Sentimos y entendemos el dolor del otro como propio.',
+                icon: Heart,
+              },
+              {
+                title: 'Integridad',
+                desc: 'Actuamos con honestidad y transparencia total.',
+                icon: ShieldCheck,
+              },
+              {
+                title: 'Excelencia',
+                desc: 'Buscamos siempre la máxima calidad profesional.',
+                icon: Award,
+              },
+              {
+                title: 'Comunidad',
+                desc: 'Creemos en el poder de la unión para sanar.',
+                icon: Users,
+              },
             ].map((value, i) => (
               <motion.div
                 key={i}
@@ -197,7 +235,8 @@ export default function Nosotros() {
                 Únete a nuestra <span className="gradient-text">Causa</span>
               </h2>
               <p className="text-xl text-gray-500 mb-12 leading-relaxed">
-                Cada pequeño gesto cuenta. Ya sea como voluntario, donante o simplemente compartiendo nuestro mensaje, tú puedes ser parte del cambio que transformará vidas.
+                Cada pequeño gesto cuenta. Ya sea como voluntario, donante o simplemente
+                compartiendo nuestro mensaje, tú puedes ser parte del cambio que transformará vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link

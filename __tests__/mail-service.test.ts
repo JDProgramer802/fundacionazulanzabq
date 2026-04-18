@@ -42,7 +42,8 @@ describe('MailService', () => {
 
   it('debe reintentar en caso de error de Resend', async () => {
     // Mock que falla 2 veces y tiene éxito a la 3ra
-    const mockSend = vi.spyOn(resend.emails, 'send')
+    const mockSend = vi
+      .spyOn(resend.emails, 'send')
       .mockRejectedValueOnce(new Error('Network Error'))
       .mockRejectedValueOnce(new Error('Rate Limit'))
       .mockResolvedValueOnce({
@@ -50,11 +51,14 @@ describe('MailService', () => {
         error: null,
       });
 
-    const result = await sendMail({
-      to: 'retry@example.com',
-      subject: 'Retry Test',
-      react: MockEmail(),
-    }, 3);
+    const result = await sendMail(
+      {
+        to: 'retry@example.com',
+        subject: 'Retry Test',
+        react: MockEmail(),
+      },
+      3
+    );
 
     expect(mockSend).toHaveBeenCalledTimes(3);
     expect(result.data?.id).toBe('retry_success_id');
@@ -63,11 +67,14 @@ describe('MailService', () => {
   it('debe devolver un error después de agotar los reintentos', async () => {
     vi.spyOn(resend.emails, 'send').mockRejectedValue(new Error('Persistent Error'));
 
-    const result = await sendMail({
-      to: 'fail@example.com',
-      subject: 'Fail Test',
-      react: MockEmail(),
-    }, 2);
+    const result = await sendMail(
+      {
+        to: 'fail@example.com',
+        subject: 'Fail Test',
+        react: MockEmail(),
+      },
+      2
+    );
 
     expect(result.error).toBe('Persistent Error');
   });

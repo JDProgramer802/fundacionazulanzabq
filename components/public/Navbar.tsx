@@ -44,10 +44,7 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="relative w-40 h-12 md:w-48 md:h-14"
-            >
+            <motion.div whileHover={{ scale: 1.05 }} className="relative w-40 h-12 md:w-48 md:h-14">
               <NextImage
                 src="/logo.png"
                 alt="Fundación Azulanza"
@@ -66,10 +63,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all relative group overflow-hidden",
-                    pathname === link.href
-                      ? "text-white"
-                      : "text-secondary/60 hover:text-primary"
+                    'px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all relative group overflow-hidden',
+                    pathname === link.href ? 'text-white' : 'text-secondary/60 hover:text-primary'
                   )}
                 >
                   <span className="relative z-10">{link.label}</span>
@@ -77,14 +72,17 @@ export default function Navbar() {
                     <motion.div
                       layoutId="nav-active"
                       className="absolute inset-0 bg-primary shadow-lg shadow-primary/20"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
                 </Link>
               ))}
             </div>
 
-            <Link href="/donaciones" className="btn-primary py-3 px-8 text-sm shadow-lg shadow-primary/20">
+            <Link
+              href="/donaciones"
+              className="btn-primary py-3 px-8 text-sm shadow-lg shadow-primary/20"
+            >
               Donar Ahora
             </Link>
           </div>
@@ -114,10 +112,10 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "text-lg font-bold py-4 px-6 rounded-2xl transition-all",
+                      'text-lg font-bold py-4 px-6 rounded-2xl transition-all',
                       pathname === link.href
-                        ? "bg-primary/10 text-primary"
-                        : "text-secondary/70 hover:bg-gray-50"
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-secondary/70 hover:bg-gray-50'
                     )}
                   >
                     {link.label}

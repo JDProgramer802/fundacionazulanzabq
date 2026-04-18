@@ -3,10 +3,7 @@ import prisma from '@/lib/prisma';
 import { getAuthUser } from '@/lib/auth';
 import { slugify } from '@/lib/utils';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const news = await prisma.news.findUnique({
       where: { id: params.id },
@@ -18,10 +15,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   const user = await getAuthUser();
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
 
@@ -43,10 +37,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   const user = await getAuthUser();
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
 

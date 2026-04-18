@@ -48,7 +48,7 @@ export default function LoginPage() {
           <motion.div
             animate={{
               scale: [1, 1.2, 1],
-              rotate: [0, 90, 0]
+              rotate: [0, 90, 0],
             }}
             transition={{ duration: 20, repeat: Infinity }}
             className="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
@@ -56,7 +56,7 @@ export default function LoginPage() {
           <motion.div
             animate={{
               scale: [1, 1.3, 1],
-              rotate: [0, -90, 0]
+              rotate: [0, -90, 0],
             }}
             transition={{ duration: 25, repeat: Infinity }}
             className="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl"
@@ -86,14 +86,15 @@ export default function LoginPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-blue-100/80 font-light leading-relaxed"
           >
-            Bienvenido al panel administrativo de la Fundación Azulanza. Aquí es donde transformamos la solidaridad en impacto real.
+            Bienvenido al panel administrativo de la Fundación Azulanza. Aquí es donde transformamos
+            la solidaridad en impacto real.
           </motion.p>
         </div>
 
         {/* Decoración inferior */}
         <div className="absolute bottom-10 left-12 flex items-center gap-4 text-blue-100/40 text-sm">
-           <ShieldCheck size={18} />
-           <span>Acceso restringido a personal autorizado</span>
+          <ShieldCheck size={18} />
+          <span>Acceso restringido a personal autorizado</span>
         </div>
       </div>
 
@@ -101,9 +102,12 @@ export default function LoginPage() {
       <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative">
         {/* Enlace para volver al sitio público en móvil */}
         <div className="absolute top-8 right-8">
-           <Link href="/" className="text-sm font-bold text-secondary hover:text-primary transition-colors flex items-center gap-2">
-             Volver al sitio <ArrowRight size={16} />
-           </Link>
+          <Link
+            href="/"
+            className="text-sm font-bold text-secondary hover:text-primary transition-colors flex items-center gap-2"
+          >
+            Volver al sitio <ArrowRight size={16} />
+          </Link>
         </div>
 
         <motion.div
@@ -165,13 +169,21 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-between py-2">
-               <label className="flex items-center gap-2 cursor-pointer group">
-                  <input type="checkbox" className="w-5 h-5 rounded-lg border-gray-200 text-primary focus:ring-primary transition-all" />
-                  <span className="text-sm text-gray-500 group-hover:text-secondary transition-colors">Recordarme</span>
-               </label>
-               <button type="button" className="text-sm font-bold text-primary hover:text-secondary transition-colors">
-                 ¿Olvidaste tu clave?
-               </button>
+              <label className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 rounded-lg border-gray-200 text-primary focus:ring-primary transition-all"
+                />
+                <span className="text-sm text-gray-500 group-hover:text-secondary transition-colors">
+                  Recordarme
+                </span>
+              </label>
+              <button
+                type="button"
+                className="text-sm font-bold text-primary hover:text-secondary transition-colors"
+              >
+                ¿Olvidaste tu clave?
+              </button>
             </div>
 
             <button
@@ -183,16 +195,20 @@ export default function LoginPage() {
                 <Loader2 className="animate-spin" size={24} />
               ) : (
                 <>
-                  Entrar al Panel <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  Entrar al Panel{' '}
+                  <ArrowRight
+                    size={20}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
                 </>
               )}
             </button>
           </form>
 
           <div className="mt-12 text-center">
-             <p className="text-sm text-gray-400 font-light">
-               © {new Date().getFullYear()} Fundación Azulanza. Sistema de Gestión Interna.
-             </p>
+            <p className="text-sm text-gray-400 font-light">
+              © {new Date().getFullYear()} Fundación Azulanza. Sistema de Gestión Interna.
+            </p>
           </div>
         </motion.div>
       </div>

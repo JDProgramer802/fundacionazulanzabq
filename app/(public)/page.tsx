@@ -12,7 +12,7 @@ import {
   Quote,
   ShieldCheck,
   Star,
-  Users
+  Users,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ export default function Home() {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Home() {
       const [settingsRes, testimonialsRes, eventsRes] = await Promise.all([
         api.get('/api/settings'),
         api.get('/api/testimonials'),
-        api.get('/api/events')
+        api.get('/api/events'),
       ]);
 
       if (settingsRes.data) setConfig(settingsRes.data);
@@ -49,14 +49,14 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   return (
@@ -68,8 +68,11 @@ export default function Home() {
       />
 
       <Hero
-        title={config.home_hero_title || "Sanando Corazones"}
-        subtitle={config.home_hero_subtitle || "Apoyo integral en salud mental y herramientas para el bienestar de nuestra comunidad."}
+        title={config.home_hero_title || 'Sanando Corazones'}
+        subtitle={
+          config.home_hero_subtitle ||
+          'Apoyo integral en salud mental y herramientas para el bienestar de nuestra comunidad.'
+        }
       />
 
       {/* Features Section - Interactive Cards */}
@@ -85,37 +88,57 @@ export default function Home() {
             variants={containerVariants}
             className="text-center mb-24"
           >
-            <motion.span variants={itemVariants} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Nuestra Esencia</motion.span>
-            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-extrabold text-secondary mb-6 font-primary">Más que una fundación, <br/><span className="gradient-text">somos una familia</span></motion.h2>
-            <motion.div variants={itemVariants} className="w-32 h-1 bg-gradient-brand mx-auto rounded-full"></motion.div>
+            <motion.span
+              variants={itemVariants}
+              className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block"
+            >
+              Nuestra Esencia
+            </motion.span>
+            <motion.h2
+              variants={itemVariants}
+              className="text-5xl md:text-6xl font-extrabold text-secondary mb-6 font-primary"
+            >
+              Más que una fundación, <br />
+              <span className="gradient-text">somos una familia</span>
+            </motion.h2>
+            <motion.div
+              variants={itemVariants}
+              className="w-32 h-1 bg-gradient-brand mx-auto rounded-full"
+            ></motion.div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
             {[
               {
-                title: "Misión",
-                text: config.mission_text || "Transformando vidas a través del apoyo psicológico y social con un enfoque humano y profesional.",
+                title: 'Misión',
+                text:
+                  config.mission_text ||
+                  'Transformando vidas a través del apoyo psicológico y social con un enfoque humano y profesional.',
                 icon: Heart,
-                color: "primary",
+                color: 'primary',
                 delay: 0.1,
-                accent: "from-pink-300 to-primary"
+                accent: 'from-pink-300 to-primary',
               },
               {
-                title: "Visión",
-                text: config.vision_text || "Ser referentes en salud mental comunitaria en toda la región, expandiendo nuestro impacto positivo.",
+                title: 'Visión',
+                text:
+                  config.vision_text ||
+                  'Ser referentes en salud mental comunitaria en toda la región, expandiendo nuestro impacto positivo.',
                 icon: ShieldCheck,
-                color: "secondary",
+                color: 'secondary',
                 delay: 0.2,
-                accent: "from-blue-400 to-secondary"
+                accent: 'from-blue-400 to-secondary',
               },
               {
-                title: "Nuestra Historia",
-                text: config.history_text || "Fundación Azulanza nació del deseo de ayudar a quienes atraviesan momentos difíciles sin recursos.",
+                title: 'Nuestra Historia',
+                text:
+                  config.history_text ||
+                  'Fundación Azulanza nació del deseo de ayudar a quienes atraviesan momentos difíciles sin recursos.',
                 icon: Users,
-                color: "primary",
+                color: 'primary',
                 delay: 0.3,
-                accent: "from-primary to-pink-300"
-              }
+                accent: 'from-primary to-pink-300',
+              },
             ].map((feature, i) => (
               <motion.div
                 key={i}
@@ -128,15 +151,21 @@ export default function Home() {
               >
                 <div className="relative h-full bg-white rounded-[3rem] p-10 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary/20">
                   {/* Accent Line */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.accent}`} />
+                  <div
+                    className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.accent}`}
+                  />
 
                   {/* Icon Container */}
-                  <div className={`w-20 h-20 bg-gradient-to-br ${feature.accent} rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-lg`}>
+                  <div
+                    className={`w-20 h-20 bg-gradient-to-br ${feature.accent} rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-lg`}
+                  >
                     <feature.icon size={40} />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-3xl font-bold text-secondary mb-6 text-center">{feature.title}</h3>
+                  <h3 className="text-3xl font-bold text-secondary mb-6 text-center">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-500 leading-relaxed text-lg text-center mb-6">
                     {feature.text}
                   </p>
@@ -155,7 +184,10 @@ export default function Home() {
       <section className="py-32 bg-gradient-to-br from-secondary via-secondary to-blue-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 border-[40px] border-white rounded-full animate-float" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] border-[60px] border-white rounded-full animate-float" style={{ animationDelay: '2s' }} />
+          <div
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] border-[60px] border-white rounded-full animate-float"
+            style={{ animationDelay: '2s' }}
+          />
         </div>
 
         {/* Top accent bar */}
@@ -169,17 +201,29 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-24"
           >
-            <span className="text-white/80 font-bold tracking-widest uppercase text-sm mb-4 block">Nuestro Impacto</span>
-            <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 font-primary">Números que <span className="text-pink-300">Hablan</span></h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg">Cada número representa una vida transformada, una esperanza renovada</p>
+            <span className="text-white/80 font-bold tracking-widest uppercase text-sm mb-4 block">
+              Nuestro Impacto
+            </span>
+            <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 font-primary">
+              Números que <span className="text-pink-300">Hablan</span>
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto text-lg">
+              Cada número representa una vida transformada, una esperanza renovada
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { label: "Familias Impactadas", value: "500", icon: Users, suffix: "+" },
-              { label: "Asesorías Realizadas", value: "1", icon: MessageSquare, suffix: ",200+", isDecimal: true },
-              { label: "Voluntarios Activos", value: "50", icon: Star, suffix: "+" },
-              { label: "Jornadas de Salud", value: "25", icon: CheckCircle2, suffix: "+" }
+              { label: 'Familias Impactadas', value: '500', icon: Users, suffix: '+' },
+              {
+                label: 'Asesorías Realizadas',
+                value: '1',
+                icon: MessageSquare,
+                suffix: ',200+',
+                isDecimal: true,
+              },
+              { label: 'Voluntarios Activos', value: '50', icon: Star, suffix: '+' },
+              { label: 'Jornadas de Salud', value: '25', icon: CheckCircle2, suffix: '+' },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -197,9 +241,13 @@ export default function Home() {
                     <stat.icon size={32} />
                   </div>
                   <div className="text-5xl md:text-6xl font-extrabold text-white mb-2 tabular-nums tracking-tighter">
-                    {stat.value}{stat.isDecimal ? "" : ""}{stat.suffix}
+                    {stat.value}
+                    {stat.isDecimal ? '' : ''}
+                    {stat.suffix}
                   </div>
-                  <div className="text-white/70 uppercase tracking-[0.15em] text-xs font-bold">{stat.label}</div>
+                  <div className="text-white/70 uppercase tracking-[0.15em] text-xs font-bold">
+                    {stat.label}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -219,9 +267,15 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-center mb-24"
             >
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Próximas Actividades</span>
-              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">Eventos de la <span className="gradient-text">Fundación</span></h2>
-              <p className="text-gray-500 max-w-2xl mx-auto">Únete a nuestras actividades y sé parte del cambio en tu comunidad</p>
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
+                Próximas Actividades
+              </span>
+              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">
+                Eventos de la <span className="gradient-text">Fundación</span>
+              </h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">
+                Únete a nuestras actividades y sé parte del cambio en tu comunidad
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -237,7 +291,11 @@ export default function Home() {
                   <div className="relative bg-white rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 h-full flex flex-col border border-gray-100 hover:border-primary/20">
                     <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
                       {ev.image_url ? (
-                        <img src={ev.image_url} alt={ev.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <img
+                          src={ev.image_url}
+                          alt={ev.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-primary/20">
                           <Calendar size={64} />
@@ -258,15 +316,22 @@ export default function Home() {
                     </div>
 
                     <div className="p-8 flex-1 flex flex-col">
-                      <h3 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors line-clamp-2">{ev.title}</h3>
-                      <p className="text-gray-500 text-sm mb-8 line-clamp-3 flex-1">{ev.description}</p>
+                      <h3 className="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors line-clamp-2">
+                        {ev.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm mb-8 line-clamp-3 flex-1">
+                        {ev.description}
+                      </p>
 
                       <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                         <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold">
                           <Calendar size={14} className="text-primary" />
-                          {ev.location || "Sede Principal"}
+                          {ev.location || 'Sede Principal'}
                         </div>
-                        <Link href="/contacto" className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-primary to-pink-400 text-white font-bold text-sm rounded-full hover:shadow-lg transition-all hover:scale-105 active:scale-95">
+                        <Link
+                          href="/contacto"
+                          className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-primary to-pink-400 text-white font-bold text-sm rounded-full hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                        >
                           Inscribirse <ArrowRight size={16} />
                         </Link>
                       </div>
@@ -291,9 +356,15 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-center mb-24"
             >
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Testimonios</span>
-              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">Historias que <span className="gradient-text">Inspiran</span></h2>
-              <p className="text-gray-500 max-w-2xl mx-auto">Escucha las voces de quienes han transformado sus vidas con nuestro apoyo</p>
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
+                Testimonios
+              </span>
+              <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">
+                Historias que <span className="gradient-text">Inspiran</span>
+              </h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">
+                Escucha las voces de quienes han transformado sus vidas con nuestro apoyo
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -324,14 +395,20 @@ export default function Home() {
                     <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
                       <div className="w-14 h-14 bg-gradient-to-br from-primary to-pink-400 rounded-full flex items-center justify-center text-white overflow-hidden shadow-md border-2 border-white">
                         {t.image_url ? (
-                          <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" />
+                          <img
+                            src={t.image_url}
+                            alt={t.name}
+                            className="w-full h-full object-cover"
+                          />
                         ) : (
                           <Users size={28} />
                         )}
                       </div>
                       <div className="flex-1">
                         <h4 className="font-bold text-secondary text-lg">{t.name}</h4>
-                        <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role || "Beneficiario"}</p>
+                        <p className="text-xs text-primary font-bold uppercase tracking-wider">
+                          {t.role || 'Beneficiario'}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -358,32 +435,40 @@ export default function Home() {
               <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-[100px]" />
             </div>
 
-             <div className="relative z-10 max-w-4xl mx-auto">
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-[2rem] flex items-center justify-center mx-auto mb-10 border border-white/20"
+            <div className="relative z-10 max-w-4xl mx-auto">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-[2rem] flex items-center justify-center mx-auto mb-10 border border-white/20"
+              >
+                <MessageSquare size={48} className="text-white" />
+              </motion.div>
+
+              <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight font-primary">
+                ¿Necesitas <span className="text-primary">apoyo</span> hoy?
+              </h2>
+
+              <p className="text-xl md:text-2xl mb-16 text-blue-100 font-light leading-relaxed max-w-2xl mx-auto">
+                No estás solo. Nuestro equipo está listo para escucharte. Tu bienestar es nuestra
+                prioridad número uno.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+                <Link
+                  href="/asesoria"
+                  className="bg-white text-secondary font-bold px-12 py-5 rounded-full text-xl hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all hover:scale-110 active:scale-95 flex items-center gap-3"
                 >
-                  <MessageSquare size={48} className="text-white" />
-                </motion.div>
-
-                <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight font-primary">
-                  ¿Necesitas <span className="text-primary">apoyo</span> hoy?
-                </h2>
-
-                <p className="text-xl md:text-2xl mb-16 text-blue-100 font-light leading-relaxed max-w-2xl mx-auto">
-                  No estás solo. Nuestro equipo está listo para escucharte. Tu bienestar es nuestra prioridad número uno.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-                  <Link href="/asesoria" className="bg-white text-secondary font-bold px-12 py-5 rounded-full text-xl hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all hover:scale-110 active:scale-95 flex items-center gap-3">
-                    Agendar Asesoría <ArrowRight size={24} />
-                  </Link>
-                  <Link href="/contacto" className="text-white font-bold text-xl hover:text-primary transition-colors flex items-center gap-2 group">
-                    Hablar con alguien <span className="group-hover:translate-x-2 transition-transform">→</span>
-                  </Link>
-                </div>
-             </div>
+                  Agendar Asesoría <ArrowRight size={24} />
+                </Link>
+                <Link
+                  href="/contacto"
+                  className="text-white font-bold text-xl hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  Hablar con alguien{' '}
+                  <span className="group-hover:translate-x-2 transition-transform">→</span>
+                </Link>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -401,37 +486,50 @@ export default function Home() {
             variants={containerVariants}
             className="text-center mb-24"
           >
-            <motion.span variants={itemVariants} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Únete a la Causa</motion.span>
-            <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-secondary mb-6 font-primary">Cómo <span className="gradient-text">Ayudar</span></motion.h2>
-            <motion.div variants={itemVariants} className="w-24 h-2 bg-gradient-brand mx-auto rounded-full"></motion.div>
+            <motion.span
+              variants={itemVariants}
+              className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block"
+            >
+              Únete a la Causa
+            </motion.span>
+            <motion.h2
+              variants={itemVariants}
+              className="text-5xl md:text-6xl font-bold text-secondary mb-6 font-primary"
+            >
+              Cómo <span className="gradient-text">Ayudar</span>
+            </motion.h2>
+            <motion.div
+              variants={itemVariants}
+              className="w-24 h-2 bg-gradient-brand mx-auto rounded-full"
+            ></motion.div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               {
-                title: "Dona",
-                text: "Tu contribución financiera nos ayuda a expandir nuestros programas y llegar a más personas que necesitan apoyo.",
+                title: 'Dona',
+                text: 'Tu contribución financiera nos ayuda a expandir nuestros programas y llegar a más personas que necesitan apoyo.',
                 icon: Heart,
-                color: "primary",
-                href: "/donaciones",
-                delay: 0.1
+                color: 'primary',
+                href: '/donaciones',
+                delay: 0.1,
               },
               {
-                title: "Sé Voluntario",
-                text: "Únete a nuestro equipo de voluntarios y contribuye con tu tiempo y habilidades para hacer la diferencia.",
+                title: 'Sé Voluntario',
+                text: 'Únete a nuestro equipo de voluntarios y contribuye con tu tiempo y habilidades para hacer la diferencia.',
                 icon: Users,
-                color: "secondary",
-                href: "/voluntariado",
-                delay: 0.2
+                color: 'secondary',
+                href: '/voluntariado',
+                delay: 0.2,
               },
               {
-                title: "Comparte",
-                text: "Ayuda a difundir nuestro mensaje compartiendo nuestras historias y actividades en tus redes sociales.",
+                title: 'Comparte',
+                text: 'Ayuda a difundir nuestro mensaje compartiendo nuestras historias y actividades en tus redes sociales.',
                 icon: MessageSquare,
-                color: "primary",
-                href: "/contacto",
-                delay: 0.3
-              }
+                color: 'primary',
+                href: '/contacto',
+                delay: 0.3,
+              },
             ].map((help, i) => (
               <motion.div
                 key={i}
@@ -442,14 +540,17 @@ export default function Home() {
                 whileHover={{ y: -15 }}
                 className="glass p-10 rounded-[3rem] text-center group transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 relative"
               >
-                <div className={`w-20 h-20 bg-${help.color}/10 rounded-3xl flex items-center justify-center text-${help.color} mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
+                <div
+                  className={`w-20 h-20 bg-${help.color}/10 rounded-3xl flex items-center justify-center text-${help.color} mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}
+                >
                   <help.icon size={40} fill={help.color === 'primary' ? 'currentColor' : 'none'} />
                 </div>
                 <h3 className="text-3xl font-bold text-secondary mb-6">{help.title}</h3>
-                <p className="text-gray-500 leading-relaxed text-lg mb-8">
-                  {help.text}
-                </p>
-                <Link href={help.href} className={`inline-flex items-center gap-2 px-8 py-4 bg-${help.color} text-white font-bold rounded-full hover:shadow-lg transition-all hover:scale-105`}>
+                <p className="text-gray-500 leading-relaxed text-lg mb-8">{help.text}</p>
+                <Link
+                  href={help.href}
+                  className={`inline-flex items-center gap-2 px-8 py-4 bg-${help.color} text-white font-bold rounded-full hover:shadow-lg transition-all hover:scale-105`}
+                >
                   Más Información <ArrowRight size={20} />
                 </Link>
                 <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />

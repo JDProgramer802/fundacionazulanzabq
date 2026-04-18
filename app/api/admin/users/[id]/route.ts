@@ -2,10 +2,7 @@ import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
 // DELETE /api/admin/users/[id] - Delete a user
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
 

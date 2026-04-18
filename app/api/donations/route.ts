@@ -19,7 +19,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    
+
     if (!data.donor_name || !data.donor_email || !data.amount) {
       return NextResponse.json({ error: 'Faltan campos obligatorios' }, { status: 400 });
     }

@@ -41,7 +41,9 @@ export function useFormHandler<T>({
     setStatus('loading');
     setErrorMsg(null);
 
-    const { data, error } = await (method === 'POST' ? api.post(endpoint, formData) : api.put(endpoint, formData));
+    const { data, error } = await (method === 'POST'
+      ? api.post(endpoint, formData)
+      : api.put(endpoint, formData));
 
     if (error) {
       setStatus('error');

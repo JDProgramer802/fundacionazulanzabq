@@ -143,14 +143,19 @@ export default function UsuariosPage() {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-secondary">Invitar Nuevo Administrador</h2>
-              <button onClick={() => setShowInviteModal(false)} className="text-gray-400 hover:text-secondary">
+              <button
+                onClick={() => setShowInviteModal(false)}
+                className="text-gray-400 hover:text-secondary"
+              >
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Email del Usuario</label>
+                <label className="block text-sm font-bold text-gray-700 mb-2">
+                  Email del Usuario
+                </label>
                 <input
                   type="email"
                   required
@@ -162,7 +167,9 @@ export default function UsuariosPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Contraseña Temporal</label>
+                <label className="block text-sm font-bold text-gray-700 mb-2">
+                  Contraseña Temporal
+                </label>
                 <input
                   type="password"
                   required
@@ -186,11 +193,15 @@ export default function UsuariosPage() {
               </div>
 
               {status.message && (
-                <div className={`p-4 rounded-xl text-sm ${
-                  status.type === 'error' ? 'bg-red-50 text-red-600' : 
-                  status.type === 'success' ? 'bg-green-50 text-green-600' : 
-                  'bg-blue-50 text-blue-600'
-                }`}>
+                <div
+                  className={`p-4 rounded-xl text-sm ${
+                    status.type === 'error'
+                      ? 'bg-red-50 text-red-600'
+                      : status.type === 'success'
+                        ? 'bg-green-50 text-green-600'
+                        : 'bg-blue-50 text-blue-600'
+                  }`}
+                >
                   {status.message}
                 </div>
               )}

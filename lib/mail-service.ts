@@ -51,7 +51,9 @@ export async function sendMail(params: SendEmailParams, retries = 3) {
           throw new Error(resendError.message);
         }
 
-        console.info(`[Email Success] Subject: "${validatedParams.subject}" To: ${validatedParams.to}`);
+        console.info(
+          `[Email Success] Subject: "${validatedParams.subject}" To: ${validatedParams.to}`
+        );
         return { data, error: null };
       } catch (err: any) {
         attempt++;

@@ -36,18 +36,18 @@ export const ResetPasswordEmail = ({ resetLink }: ResetPasswordEmailProps) => (
         </Section>
         <Heading style={h1}>Restablecer contraseña</Heading>
         <Text style={text}>
-          Has solicitado restablecer la contraseña de tu cuenta administrativa en la Fundación Azulanza.
+          Has solicitado restablecer la contraseña de tu cuenta administrativa en la Fundación
+          Azulanza.
         </Text>
-        <Text style={text}>
-          Haz clic en el siguiente botón para elegir una nueva contraseña:
-        </Text>
+        <Text style={text}>Haz clic en el siguiente botón para elegir una nueva contraseña:</Text>
         <Section style={btnContainer}>
           <Link style={button} href={resetLink}>
             Restablecer contraseña
           </Link>
         </Section>
         <Text style={text}>
-          Si no solicitaste este cambio, puedes ignorar este correo de forma segura. Tu contraseña no cambiará.
+          Si no solicitaste este cambio, puedes ignorar este correo de forma segura. Tu contraseña
+          no cambiará.
         </Text>
         <Hr style={hr} />
         <Text style={footer}>Fundación Azulanza - Panel Administrativo</Text>

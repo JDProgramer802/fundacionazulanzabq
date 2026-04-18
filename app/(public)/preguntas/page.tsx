@@ -98,7 +98,9 @@ export default function FAQPublic() {
                       </div>
                       <h3
                         className={`text-lg font-bold transition-colors duration-300 ${
-                          openId === f.id ? 'text-secondary' : 'text-gray-700 group-hover:text-secondary'
+                          openId === f.id
+                            ? 'text-secondary'
+                            : 'text-gray-700 group-hover:text-secondary'
                         }`}
                       >
                         {f.question}

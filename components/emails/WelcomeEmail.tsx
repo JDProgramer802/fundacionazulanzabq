@@ -48,9 +48,7 @@ export const WelcomeEmail = ({ userName }: WelcomeEmailProps) => (
             Conoce más sobre nosotros
           </Link>
         </Section>
-        <Text style={text}>
-          Si tienes alguna pregunta, no dudes en responder a este correo.
-        </Text>
+        <Text style={text}>Si tienes alguna pregunta, no dudes en responder a este correo.</Text>
         <Hr style={hr} />
         <Text style={footer}>Fundación Azulanza - Barranquilla, Colombia</Text>
       </Container>

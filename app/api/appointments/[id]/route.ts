@@ -2,10 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getAuthUser } from '@/lib/auth';
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   const user = await getAuthUser();
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
 

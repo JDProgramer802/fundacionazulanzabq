@@ -25,13 +25,18 @@ export default function AdminNewsPage() {
 
     const { error } = await api.delete(`/api/news/${id}`);
     if (!error) {
-      setNews(news.filter(n => n.id !== id));
+      setNews(news.filter((n) => n.id !== id));
     } else {
       alert('Error al eliminar: ' + error);
     }
   };
 
-  if (loading) return <div className="flex justify-center p-12"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center p-12">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -75,17 +80,20 @@ export default function AdminNewsPage() {
                   <p className="font-bold text-secondary line-clamp-1">{n.title}</p>
                   <p className="text-xs text-gray-400">/{n.slug}</p>
                 </td>
-                <td className="px-8 py-4 text-sm text-gray-500">
-                  {formatDate(n.created_at)}
-                </td>
+                <td className="px-8 py-4 text-sm text-gray-500">{formatDate(n.created_at)}</td>
                 <td className="px-8 py-4">
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${n.published ? 'bg-green-50 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
+                  <span
+                    className={`text-xs font-bold px-3 py-1 rounded-full ${n.published ? 'bg-green-50 text-green-600' : 'bg-gray-100 text-gray-600'}`}
+                  >
                     {n.published ? 'Publicado' : 'Borrador'}
                   </span>
                 </td>
                 <td className="px-8 py-4 text-right">
                   <div className="flex justify-end gap-2">
-                    <Link href={`/admin/noticias/${n.id}/editar`} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <Link
+                      href={`/admin/noticias/${n.id}/editar`}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    >
                       <Edit2 size={18} />
                     </Link>
                     <button
@@ -101,9 +109,7 @@ export default function AdminNewsPage() {
           </tbody>
         </table>
         {news.length === 0 && (
-          <div className="p-12 text-center text-gray-500 italic">
-            No hay noticias creadas aún.
-          </div>
+          <div className="p-12 text-center text-gray-500 italic">No hay noticias creadas aún.</div>
         )}
       </div>
     </div>

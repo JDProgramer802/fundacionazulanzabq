@@ -3,7 +3,16 @@
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
 import { useFormHandler } from '@/hooks/use-form-handler';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Heart, Landmark, Loader2, QrCode, Upload, Zap } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  Heart,
+  Landmark,
+  Loader2,
+  QrCode,
+  Upload,
+  Zap,
+} from 'lucide-react';
 
 export default function DonacionesPage() {
   const { formData, status, setStatus, updateField, handleSubmit } = useFormHandler({

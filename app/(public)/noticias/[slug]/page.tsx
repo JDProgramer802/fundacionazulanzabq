@@ -53,7 +53,8 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
               {news.title}
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl leading-relaxed">
-              {news.excerpt || 'Descubre más sobre esta importante noticia de la Fundación Azulanza'}
+              {news.excerpt ||
+                'Descubre más sobre esta importante noticia de la Fundación Azulanza'}
             </p>
           </div>
         </div>
@@ -71,8 +72,12 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
                     <Calendar size={18} className="text-primary" />
                   </div>
                   <div>
-                    <span className="text-gray-400 block text-xs uppercase font-bold">Publicado</span>
-                    <span className="text-gray-700 font-semibold">{formatDate(news.created_at)}</span>
+                    <span className="text-gray-400 block text-xs uppercase font-bold">
+                      Publicado
+                    </span>
+                    <span className="text-gray-700 font-semibold">
+                      {formatDate(news.created_at)}
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -88,7 +93,8 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
 
               {/* Content */}
               <div className="px-8 md:px-16 py-12">
-                <div className="prose prose-lg max-w-none 
+                <div
+                  className="prose prose-lg max-w-none 
                   prose-headings:text-secondary prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
                   prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
                   prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6
@@ -98,7 +104,8 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
                   prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
                   prose-img:rounded-2xl prose-img:shadow-lg
                   prose-code:bg-gray-100 prose-code:text-primary prose-code:px-2 prose-code:py-1 prose-code:rounded
-                  whitespace-pre-wrap">
+                  whitespace-pre-wrap"
+                >
                   {news.content}
                 </div>
 
@@ -135,7 +142,8 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
                   ¿Te impactó esta noticia?
                 </h3>
                 <p className="text-white/80 mb-8 leading-relaxed">
-                  Tú puedes marcar la diferencia. Ayúdanos a continuar transformando vidas a través de tu generosidad o voluntariado.
+                  Tú puedes marcar la diferencia. Ayúdanos a continuar transformando vidas a través
+                  de tu generosidad o voluntariado.
                 </p>
                 <div className="space-y-3">
                   <Link
@@ -175,7 +183,10 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
                     <span className="font-semibold text-gray-700 group-hover:text-primary transition-colors">
                       {item.text}
                     </span>
-                    <ArrowRight size={16} className="ml-auto text-gray-300 group-hover:text-primary transition-colors" />
+                    <ArrowRight
+                      size={16}
+                      className="ml-auto text-gray-300 group-hover:text-primary transition-colors"
+                    />
                   </Link>
                 ))}
               </div>

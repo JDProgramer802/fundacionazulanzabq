@@ -23,7 +23,7 @@ export default function EventosAdmin() {
     description: '',
     date: '',
     location: '',
-    image_url: ''
+    image_url: '',
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function EventosAdmin() {
       description: ev.description,
       date: new Date(ev.date).toISOString().split('T')[0],
       location: ev.location || '',
-      image_url: ev.image_url || ''
+      image_url: ev.image_url || '',
     });
     setShowModal(true);
   };
@@ -75,7 +75,12 @@ export default function EventosAdmin() {
     }
   };
 
-  if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center py-20">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -105,18 +110,32 @@ export default function EventosAdmin() {
           >
             <div className="aspect-video bg-gray-100 relative overflow-hidden">
               {ev.image_url ? (
-                <img src={ev.image_url} alt={ev.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img
+                  src={ev.image_url}
+                  alt={ev.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-300">
                   <ImageIcon size={48} />
                 </div>
               )}
               <div className="absolute top-4 right-4 flex gap-2">
-                <button onClick={() => handleEdit(ev)} className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-primary shadow-lg"><Edit2 size={18} /></button>
-                <button onClick={() => handleDelete(ev.id)} className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-red-500 shadow-lg"><Trash2 size={18} /></button>
+                <button
+                  onClick={() => handleEdit(ev)}
+                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-primary shadow-lg"
+                >
+                  <Edit2 size={18} />
+                </button>
+                <button
+                  onClick={() => handleDelete(ev.id)}
+                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-red-500 shadow-lg"
+                >
+                  <Trash2 size={18} />
+                </button>
               </div>
             </div>
-            
+
             <div className="p-6">
               <div className="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest mb-3">
                 <Calendar size={14} />
@@ -144,7 +163,9 @@ export default function EventosAdmin() {
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl"
             >
-              <h2 className="text-2xl font-bold text-secondary mb-6">{editingId ? 'Editar Evento' : 'Nuevo Evento'}</h2>
+              <h2 className="text-2xl font-bold text-secondary mb-6">
+                {editingId ? 'Editar Evento' : 'Nuevo Evento'}
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-1">Título</label>
@@ -197,8 +218,16 @@ export default function EventosAdmin() {
                   />
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-3 border border-gray-100 rounded-xl font-bold text-gray-500">Cancelar</button>
-                  <button type="submit" className="flex-1 btn-primary py-3">Guardar</button>
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 py-3 border border-gray-100 rounded-xl font-bold text-gray-500"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="submit" className="flex-1 btn-primary py-3">
+                    Guardar
+                  </button>
                 </div>
               </form>
             </motion.div>

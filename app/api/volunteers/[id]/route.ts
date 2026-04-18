@@ -1,10 +1,7 @@
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
     const volunteer = await prisma.volunteer.update({
@@ -19,10 +16,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     await prisma.volunteer.delete({
       where: { id: params.id },

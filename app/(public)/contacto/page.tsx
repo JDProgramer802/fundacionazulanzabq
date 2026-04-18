@@ -3,7 +3,16 @@
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
 import { useFormHandler } from '@/hooks/use-form-handler';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Clock, Loader2, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
+import {
+  CheckCircle2,
+  Clock,
+  Loader2,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Send,
+} from 'lucide-react';
 
 export default function ContactPage() {
   const { formData, status, setStatus, updateField, handleSubmit } = useFormHandler({
@@ -31,20 +40,31 @@ export default function ContactPage() {
             <span className="gradient-text">Contáctanos</span>
           </h1>
           <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-            ¿Tienes dudas, sugerencias o quieres sumarte a nuestra causa? Tu mensaje es importante para nosotros. Responderemos lo antes posible.
+            ¿Tienes dudas, sugerencias o quieres sumarte a nuestra causa? Tu mensaje es importante
+            para nosotros. Responderemos lo antes posible.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {/* Contact Info Cards */}
           {[
-            { icon: Mail, title: "Escríbenos", content: "fundacionazulanza@gmail.com", action: "mailto:fundacionazulanza@gmail.com" },
-            { icon: Phone, title: "Llámanos", content: "+57 322 721 2546", action: "tel:+573227212546" },
-            { icon: MapPin, title: "Ubicación", content: "Barranquilla, Colombia", action: null }
+            {
+              icon: Mail,
+              title: 'Escríbenos',
+              content: 'fundacionazulanza@gmail.com',
+              action: 'mailto:fundacionazulanza@gmail.com',
+            },
+            {
+              icon: Phone,
+              title: 'Llámanos',
+              content: '+57 322 721 2546',
+              action: 'tel:+573227212546',
+            },
+            { icon: MapPin, title: 'Ubicación', content: 'Barranquilla, Colombia', action: null },
           ].map((item, i) => (
             <motion.a
               key={i}
-              href={item.action || "#"}
+              href={item.action || '#'}
               onClick={(e) => !item.action && e.preventDefault()}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +75,9 @@ export default function ContactPage() {
               <div className="w-14 h-14 bg-gradient-to-br from-secondary to-blue-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                 <item.icon size={28} />
               </div>
-              <h3 className="text-xl font-bold text-secondary mb-2 group-hover:text-secondary transition-colors">{item.title}</h3>
+              <h3 className="text-xl font-bold text-secondary mb-2 group-hover:text-secondary transition-colors">
+                {item.title}
+              </h3>
               <p className="text-gray-500 font-semibold">{item.content}</p>
             </motion.a>
           ))}
@@ -73,9 +95,18 @@ export default function ContactPage() {
               <h3 className="text-3xl font-bold text-secondary mb-6">Preguntas Frecuentes</h3>
               <div className="space-y-6">
                 {[
-                  { q: "¿Cómo puedo ser voluntario?", a: "Puedes postularte en nuestra sección de voluntariado completando el formulario." },
-                  { q: "¿Las asesorías tienen costo?", a: "No, todas nuestras asesorías profesionales son completamente gratuitas." },
-                  { q: "¿Dónde están ubicados?", a: "Nuestra sede principal está en Barranquilla, pero brindamos apoyo a nivel nacional." }
+                  {
+                    q: '¿Cómo puedo ser voluntario?',
+                    a: 'Puedes postularte en nuestra sección de voluntariado completando el formulario.',
+                  },
+                  {
+                    q: '¿Las asesorías tienen costo?',
+                    a: 'No, todas nuestras asesorías profesionales son completamente gratuitas.',
+                  },
+                  {
+                    q: '¿Dónde están ubicados?',
+                    a: 'Nuestra sede principal está en Barranquilla, pero brindamos apoyo a nivel nacional.',
+                  },
                 ].map((faq, i) => (
                   <div key={i}>
                     <h4 className="font-bold text-secondary mb-2">{faq.q}</h4>
@@ -104,7 +135,8 @@ export default function ContactPage() {
                 </div>
                 <h2 className="text-3xl font-bold text-secondary mb-4">¡Mensaje Enviado!</h2>
                 <p className="text-gray-500 mb-8">
-                  Gracias por contactarnos. Te responderemos lo más pronto posible a tu correo electrónico.
+                  Gracias por contactarnos. Te responderemos lo más pronto posible a tu correo
+                  electrónico.
                 </p>
                 <button
                   onClick={() => setStatus('idle')}
@@ -127,7 +159,9 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-secondary ml-4">Correo Electrónico</label>
+                  <label className="text-sm font-bold text-secondary ml-4">
+                    Correo Electrónico
+                  </label>
                   <input
                     type="email"
                     required
@@ -174,4 +208,3 @@ export default function ContactPage() {
     </main>
   );
 }
-

@@ -13,7 +13,7 @@ import {
   Quote,
   Settings,
   UserCheck,
-  Users
+  Users,
 } from 'lucide-react';
 import NextImage from 'next/image';
 import Link from 'next/link';
@@ -67,10 +67,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all",
+                'flex items-center gap-3 px-4 py-3 rounded-xl transition-all',
                 pathname === item.href
-                  ? "bg-primary text-white shadow-lg shadow-primary/20"
-                  : "text-gray-500 hover:bg-gray-50 hover:text-secondary"
+                  ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                  : 'text-gray-500 hover:bg-gray-50 hover:text-secondary'
               )}
             >
               <item.icon size={20} />
@@ -93,11 +93,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-end px-8 md:hidden">
-           {/* Mobile header could go here */}
+          {/* Mobile header could go here */}
         </header>
-        <div className="p-8">
-          {children}
-        </div>
+        <div className="p-8">{children}</div>
       </main>
     </div>
   );

@@ -38,7 +38,8 @@ export default function Voluntariado() {
               ¿Por qué ser <span className="gradient-text">Voluntario?</span>
             </h2>
             <p className="text-gray-500 text-lg">
-              El voluntariado en Azulanza es una oportunidad para crecer personalmente mientras generas un impacto positivo en tu comunidad.
+              El voluntariado en Azulanza es una oportunidad para crecer personalmente mientras
+              generas un impacto positivo en tu comunidad.
             </p>
           </div>
 
@@ -72,7 +73,8 @@ export default function Voluntariado() {
 
             <div className="relative z-10 max-w-2xl">
               <p className="text-2xl md:text-3xl font-light italic leading-relaxed mb-8">
-                "Ser voluntario en Azulanza me ha permitido ver el mundo con más empatía. Cada persona que ayudo me inspira a seguir adelante."
+                "Ser voluntario en Azulanza me ha permitido ver el mundo con más empatía. Cada
+                persona que ayudo me inspira a seguir adelante."
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
@@ -104,15 +106,24 @@ export default function Voluntariado() {
                   Postúlate Ahora
                 </h3>
                 <p className="text-gray-500 text-lg leading-relaxed mb-8">
-                  Completa el formulario con tus datos e intereses. Nuestro equipo se pondrá en contacto contigo para conocer mejor cómo puedes contribuir.
+                  Completa el formulario con tus datos e intereses. Nuestro equipo se pondrá en
+                  contacto contigo para conocer mejor cómo puedes contribuir.
                 </p>
               </div>
 
               <div className="space-y-6">
                 {[
                   { icon: Users, title: 'Flexible', desc: 'Elige tus propios horarios' },
-                  { icon: Heart, title: 'Significativo', desc: 'Marca la diferencia en vidas reales' },
-                  { icon: Award, title: 'Valorado', desc: 'Tu trabajo es reconocido y certificado' },
+                  {
+                    icon: Heart,
+                    title: 'Significativo',
+                    desc: 'Marca la diferencia en vidas reales',
+                  },
+                  {
+                    icon: Award,
+                    title: 'Valorado',
+                    desc: 'Tu trabajo es reconocido y certificado',
+                  },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-pink-400 text-white flex items-center justify-center shrink-0">
@@ -156,11 +167,15 @@ export default function Voluntariado() {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <h2 className="text-3xl font-bold text-secondary mb-8">Formulario de Postulación</h2>
+                    <h2 className="text-3xl font-bold text-secondary mb-8">
+                      Formulario de Postulación
+                    </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-bold text-secondary mb-3">Nombre Completo *</label>
+                        <label className="block text-sm font-bold text-secondary mb-3">
+                          Nombre Completo *
+                        </label>
                         <input
                           type="text"
                           required
@@ -171,7 +186,9 @@ export default function Voluntariado() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-bold text-secondary mb-3">Email *</label>
+                        <label className="block text-sm font-bold text-secondary mb-3">
+                          Email *
+                        </label>
                         <input
                           type="email"
                           required
@@ -184,7 +201,9 @@ export default function Voluntariado() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-bold text-secondary mb-3">Teléfono</label>
+                      <label className="block text-sm font-bold text-secondary mb-3">
+                        Teléfono
+                      </label>
                       <input
                         type="tel"
                         value={formData.phone}
@@ -195,7 +214,9 @@ export default function Voluntariado() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-bold text-secondary mb-3">¿En qué áreas te gustaría ayudar? *</label>
+                      <label className="block text-sm font-bold text-secondary mb-3">
+                        ¿En qué áreas te gustaría ayudar? *
+                      </label>
                       <textarea
                         required
                         rows={4}
@@ -207,7 +228,9 @@ export default function Voluntariado() {
                     </div>
 
                     {status === 'error' && (
-                      <p className="text-red-500 text-center font-semibold">Ocurrió un error. Intenta de nuevo.</p>
+                      <p className="text-red-500 text-center font-semibold">
+                        Ocurrió un error. Intenta de nuevo.
+                      </p>
                     )}
 
                     <button

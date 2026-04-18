@@ -1,7 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Heart, DollarSign, User, Mail, Eye, Loader2, CheckCircle2, XCircle, FileText } from 'lucide-react';
+import {
+  Heart,
+  DollarSign,
+  User,
+  Mail,
+  Eye,
+  Loader2,
+  CheckCircle2,
+  XCircle,
+  FileText,
+} from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 export default function AdminDonacionesPage() {
@@ -28,14 +38,19 @@ export default function AdminDonacionesPage() {
         body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        setDonations(donations.map(d => d.id === id ? { ...d, status } : d));
+        setDonations(donations.map((d) => (d.id === id ? { ...d, status } : d)));
       }
     } catch (err) {
       alert('Error al actualizar estado');
     }
   };
 
-  if (loading) return <div className="flex justify-center p-12"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center p-12">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -66,20 +81,23 @@ export default function AdminDonacionesPage() {
                 <td className="px-8 py-4">
                   <span className="font-bold text-green-600">${d.amount.toLocaleString()}</span>
                 </td>
-                <td className="px-8 py-4 text-sm text-gray-500">
-                  {formatDate(d.created_at)}
-                </td>
+                <td className="px-8 py-4 text-sm text-gray-500">{formatDate(d.created_at)}</td>
                 <td className="px-8 py-4">
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                    d.status === 'pendiente_verificacion' ? 'bg-orange-50 text-orange-600' : 
-                    d.status === 'verificada' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
-                  }`}>
+                  <span
+                    className={`text-xs font-bold px-3 py-1 rounded-full ${
+                      d.status === 'pendiente_verificacion'
+                        ? 'bg-orange-50 text-orange-600'
+                        : d.status === 'verificada'
+                          ? 'bg-green-50 text-green-600'
+                          : 'bg-red-50 text-red-600'
+                    }`}
+                  >
                     {d.status === 'pendiente_verificacion' ? 'Pendiente' : d.status}
                   </span>
                 </td>
                 <td className="px-8 py-4">
                   {d.receipt_image ? (
-                    <button 
+                    <button
                       onClick={() => setSelectedReceipt(d.receipt_image)}
                       className="flex items-center gap-2 text-primary hover:underline text-sm font-medium"
                     >
@@ -93,14 +111,14 @@ export default function AdminDonacionesPage() {
                   <div className="flex justify-end gap-2">
                     {d.status === 'pendiente_verificacion' && (
                       <>
-                        <button 
+                        <button
                           onClick={() => updateStatus(d.id, 'verificada')}
                           className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
                           title="Verificar"
                         >
                           <CheckCircle2 size={20} />
                         </button>
-                        <button 
+                        <button
                           onClick={() => updateStatus(d.id, 'rechazada')}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           title="Rechazar"
@@ -124,17 +142,17 @@ export default function AdminDonacionesPage() {
 
       {/* Lightbox para el comprobante */}
       {selectedReceipt && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-8"
           onClick={() => setSelectedReceipt(null)}
         >
           <div className="max-w-4xl w-full max-h-full relative">
-            <img 
-              src={selectedReceipt} 
-              alt="Comprobante" 
+            <img
+              src={selectedReceipt}
+              alt="Comprobante"
               className="w-full h-auto max-h-[80vh] object-contain rounded-xl"
             />
-            <button 
+            <button
               className="absolute top-4 right-4 bg-white rounded-full p-2 text-secondary"
               onClick={() => setSelectedReceipt(null)}
             >

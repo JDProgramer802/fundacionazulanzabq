@@ -23,7 +23,7 @@ export default function TestimoniosAdmin() {
     role: '',
     text: '',
     image_url: '',
-    active: true
+    active: true,
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function TestimoniosAdmin() {
       role: t.role || '',
       text: t.text,
       image_url: t.image_url || '',
-      active: t.active
+      active: t.active,
     });
     setShowModal(true);
   };
@@ -84,7 +84,12 @@ export default function TestimoniosAdmin() {
     fetchTestimonials();
   };
 
-  if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary" size={48} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center py-20">
+        <Loader2 className="animate-spin text-primary" size={48} />
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -117,19 +122,33 @@ export default function TestimoniosAdmin() {
                 <Quote size={24} />
               </div>
               <div className="flex gap-2">
-                <button onClick={() => toggleActive(t)} className={t.active ? "text-green-500" : "text-gray-300"}>
+                <button
+                  onClick={() => toggleActive(t)}
+                  className={t.active ? 'text-green-500' : 'text-gray-300'}
+                >
                   {t.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
                 </button>
-                <button onClick={() => handleEdit(t)} className="text-gray-400 hover:text-primary"><Edit2 size={18} /></button>
-                <button onClick={() => handleDelete(t.id)} className="text-gray-400 hover:text-red-500"><Trash2 size={18} /></button>
+                <button onClick={() => handleEdit(t)} className="text-gray-400 hover:text-primary">
+                  <Edit2 size={18} />
+                </button>
+                <button
+                  onClick={() => handleDelete(t.id)}
+                  className="text-gray-400 hover:text-red-500"
+                >
+                  <Trash2 size={18} />
+                </button>
               </div>
             </div>
-            
+
             <p className="text-gray-600 mb-6 italic leading-relaxed">"{t.text}"</p>
-            
+
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 overflow-hidden">
-                {t.image_url ? <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" /> : <User size={20} />}
+                {t.image_url ? (
+                  <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" />
+                ) : (
+                  <User size={20} />
+                )}
               </div>
               <div>
                 <h4 className="font-bold text-secondary">{t.name}</h4>
@@ -149,7 +168,9 @@ export default function TestimoniosAdmin() {
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl"
             >
-              <h2 className="text-2xl font-bold text-secondary mb-6">{editingId ? 'Editar Testimonio' : 'Nuevo Testimonio'}</h2>
+              <h2 className="text-2xl font-bold text-secondary mb-6">
+                {editingId ? 'Editar Testimonio' : 'Nuevo Testimonio'}
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -184,7 +205,9 @@ export default function TestimoniosAdmin() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1">URL Imagen (Opcional)</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">
+                    URL Imagen (Opcional)
+                  </label>
                   <input
                     type="text"
                     className="w-full px-4 py-2 rounded-xl border border-gray-200 outline-none focus:border-primary"
@@ -193,8 +216,16 @@ export default function TestimoniosAdmin() {
                   />
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-3 border border-gray-200 rounded-xl font-bold text-gray-500">Cancelar</button>
-                  <button type="submit" className="flex-1 btn-primary py-3">Guardar</button>
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 py-3 border border-gray-200 rounded-xl font-bold text-gray-500"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="submit" className="flex-1 btn-primary py-3">
+                    Guardar
+                  </button>
                 </div>
               </form>
             </motion.div>
