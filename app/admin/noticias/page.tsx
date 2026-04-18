@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Plus, Edit2, Trash2, Eye, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { api } from '@/lib/api-client';
 
 export default function AdminNewsPage() {
   const [news, setNews] = useState<any[]>([]);
@@ -14,22 +15,19 @@ export default function AdminNewsPage() {
   }, []);
 
   const fetchNews = async () => {
-    const res = await fetch('/api/news');
-    const data = await res.json();
-    setNews(data);
+    const { data, error } = await api.get('/api/news');
+    if (data) setNews(data);
     setLoading(false);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('¿Estás seguro de eliminar esta noticia?')) return;
     
-    try {
-      const res = await fetch(`/api/news/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        setNews(news.filter(n => n.id !== id));
-      }
-    } catch (err) {
-      alert('Error al eliminar');
+    const { error } = await api.delete(`/api/news/${id}`);
+    if (!error) {
+      setNews(news.filter(n => n.id !== id));
+    } else {
+      alert('Error al eliminar: ' + error);
     }
   };
 
