@@ -21,20 +21,20 @@ export default function NotFound() {
           <motion.div
             initial={{ scale: 0.8, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 260, 
+            transition={{
+              type: 'spring',
+              stiffness: 260,
               damping: 20,
               repeat: Infinity,
-              repeatType: "reverse",
-              duration: 2
+              repeatType: 'reverse',
+              duration: 2,
             }}
             className="w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-[2.5rem] flex items-center justify-center mx-auto mb-12 border border-primary/20 shadow-xl shadow-primary/5"
           >
             <Search size={64} className="text-primary" />
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -42,8 +42,8 @@ export default function NotFound() {
           >
             404
           </motion.h1>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -52,31 +52,31 @@ export default function NotFound() {
             This page could not be found.
           </motion.h2>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             className="text-gray-500 text-lg mb-12 leading-relaxed"
           >
-            Lo sentimos, la página que estás buscando no existe o ha sido movida. 
-            Vuelve al inicio para seguir explorando nuestra labor.
+            Lo sentimos, la página que estás buscando no existe o ha sido movida. Vuelve al inicio
+            para seguir explorando nuestra labor.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="btn-primary flex items-center gap-2 px-8 py-4 text-lg shadow-lg shadow-primary/20 group"
             >
               <Home size={20} />
               Ir al Inicio
             </Link>
-            
-            <button 
+
+            <button
               onClick={() => window.history.back()}
               className="btn-glass flex items-center gap-2 px-8 py-4 text-lg group"
             >
