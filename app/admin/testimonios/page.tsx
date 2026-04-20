@@ -25,16 +25,26 @@ export default function TestimoniosAdmin() {
     image_url: '',
     active: true,
   });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTestimonials();
   }, []);
 
   const fetchTestimonials = async () => {
-    const res = await fetch('/api/testimonials');
-    const data = await res.json();
-    setTestimonials(data);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/testimonials');
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setTestimonials(data);
+      } else {
+        setError(data?.error || 'Error al cargar los testimonios.');
+      }
+    } catch (err) {
+      setError('Error de conexión con el servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -86,8 +96,27 @@ export default function TestimoniosAdmin() {
 
   if (loading)
     return (
-      <div className="flex justify-center py-20">
+      <div className="flex justify-center flex-col items-center py-20 gap-4">
         <Loader2 className="animate-spin text-primary" size={48} />
+        <p className="text-gray-400 font-medium">Cargando testimonios...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100 flex flex-col items-center">
+        <Quote size={48} className="text-red-300 mb-4" />
+        <p className="text-red-500 font-bold mb-4">{error}</p>
+        <button
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            fetchTestimonials();
+          }}
+          className="btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     );
 
@@ -111,52 +140,56 @@ export default function TestimoniosAdmin() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((t) => (
-          <motion.div
-            layout
-            key={t.id}
-            className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative group"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                <Quote size={24} />
+        {Array.isArray(testimonials) &&
+          testimonials.map((t) => (
+            <motion.div
+              layout
+              key={t.id}
+              className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative group"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                  <Quote size={24} />
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => toggleActive(t)}
+                    className={t.active ? 'text-green-500' : 'text-gray-300'}
+                  >
+                    {t.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
+                  </button>
+                  <button
+                    onClick={() => handleEdit(t)}
+                    className="text-gray-400 hover:text-primary"
+                  >
+                    <Edit2 size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(t.id)}
+                    className="text-gray-400 hover:text-red-500"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => toggleActive(t)}
-                  className={t.active ? 'text-green-500' : 'text-gray-300'}
-                >
-                  {t.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
-                </button>
-                <button onClick={() => handleEdit(t)} className="text-gray-400 hover:text-primary">
-                  <Edit2 size={18} />
-                </button>
-                <button
-                  onClick={() => handleDelete(t.id)}
-                  className="text-gray-400 hover:text-red-500"
-                >
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            </div>
 
-            <p className="text-gray-600 mb-6 italic leading-relaxed">&quot;{t.text}&quot;</p>
+              <p className="text-gray-600 mb-6 italic leading-relaxed">&quot;{t.text}&quot;</p>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 overflow-hidden">
-                {t.image_url ? (
-                  <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" />
-                ) : (
-                  <User size={20} />
-                )}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 overflow-hidden">
+                  {t.image_url ? (
+                    <img src={t.image_url} alt={t.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <User size={20} />
+                  )}
+                </div>
+                <div>
+                  <h4 className="font-bold text-secondary">{t.name}</h4>
+                  <p className="text-xs text-gray-400 uppercase tracking-wider">{t.role}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-secondary">{t.name}</h4>
-                <p className="text-xs text-gray-400 uppercase tracking-wider">{t.role}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
       </div>
 
       <AnimatePresence>

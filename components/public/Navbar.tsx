@@ -46,7 +46,7 @@ export default function Navbar() {
             <motion.div whileHover={{ scale: 1.05 }} className="relative w-40 h-12 md:w-48 md:h-14">
               <NextImage
                 src="/logo.png"
-                alt="Fundación Azulanza"
+                alt="Fundación Azulanza BQ"
                 fill
                 className="object-contain"
                 priority

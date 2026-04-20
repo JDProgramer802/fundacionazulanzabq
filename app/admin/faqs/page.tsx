@@ -23,16 +23,26 @@ export default function FAQAdmin() {
     order: 0,
     active: true,
   });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchFaqs();
   }, []);
 
   const fetchFaqs = async () => {
-    const res = await fetch('/api/faqs');
-    const data = await res.json();
-    setFaqs(data);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/faqs');
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setFaqs(data);
+      } else {
+        setError(data?.error || 'Error al cargar las preguntas.');
+      }
+    } catch (err) {
+      setError('Error de conexión con el servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -83,8 +93,27 @@ export default function FAQAdmin() {
 
   if (loading)
     return (
-      <div className="flex justify-center py-20">
+      <div className="flex justify-center flex-col items-center py-20 gap-4">
         <Loader2 className="animate-spin text-primary" size={48} />
+        <p className="text-gray-400 font-medium">Cargando preguntas...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100 flex flex-col items-center">
+        <HelpCircle size={48} className="text-red-300 mb-4" />
+        <p className="text-red-500 font-bold mb-4">{error}</p>
+        <button
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            fetchFaqs();
+          }}
+          className="btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     );
 
@@ -108,46 +137,47 @@ export default function FAQAdmin() {
       </div>
 
       <div className="space-y-4">
-        {faqs.map((f) => (
-          <motion.div
-            layout
-            key={f.id}
-            className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start justify-between group"
-          >
-            <div className="flex gap-4">
-              <div className="w-10 h-10 bg-blue-100/50 rounded-xl flex items-center justify-center text-blue-600">
-                <HelpCircle size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-secondary text-lg mb-2">{f.question}</h4>
-                <p className="text-gray-500 leading-relaxed text-sm max-w-3xl">{f.answer}</p>
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
-                    Orden: {f.order}
-                  </span>
+        {Array.isArray(faqs) &&
+          faqs.map((f) => (
+            <motion.div
+              layout
+              key={f.id}
+              className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start justify-between group"
+            >
+              <div className="flex gap-4">
+                <div className="w-10 h-10 bg-blue-100/50 rounded-xl flex items-center justify-center text-blue-600">
+                  <HelpCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-secondary text-lg mb-2">{f.question}</h4>
+                  <p className="text-gray-500 leading-relaxed text-sm max-w-3xl">{f.answer}</p>
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
+                      Orden: {f.order}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex gap-2">
-              <button
-                onClick={() => toggleActive(f)}
-                className={f.active ? 'text-green-500' : 'text-gray-300'}
-              >
-                {f.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
-              </button>
-              <button onClick={() => handleEdit(f)} className="text-gray-400 hover:text-primary">
-                <Edit2 size={18} />
-              </button>
-              <button
-                onClick={() => handleDelete(f.id)}
-                className="text-gray-400 hover:text-red-500"
-              >
-                <Trash2 size={18} />
-              </button>
-            </div>
-          </motion.div>
-        ))}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => toggleActive(f)}
+                  className={f.active ? 'text-green-500' : 'text-gray-300'}
+                >
+                  {f.active ? <CheckCircle size={18} /> : <XCircle size={18} />}
+                </button>
+                <button onClick={() => handleEdit(f)} className="text-gray-400 hover:text-primary">
+                  <Edit2 size={18} />
+                </button>
+                <button
+                  onClick={() => handleDelete(f.id)}
+                  className="text-gray-400 hover:text-red-500"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+            </motion.div>
+          ))}
       </div>
 
       <AnimatePresence>

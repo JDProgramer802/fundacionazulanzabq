@@ -46,7 +46,7 @@ export default function Footer() {
               <motion.div whileHover={{ scale: 1.05 }} className="relative w-48 h-16">
                 <NextImage
                   src="/logo.png"
-                  alt="Fundación Azulanza"
+                  alt="Fundación Azulanza BQ"
                   fill
                   className="object-contain object-left"
                 />

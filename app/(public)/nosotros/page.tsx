@@ -33,7 +33,7 @@ export default function Nosotros() {
 
       <Hero
         title="Nuestra Historia"
-        subtitle="Conoce el corazón de la Fundación Azulanza y nuestro compromiso con la salud mental y el bienestar integral de nuestra comunidad."
+        subtitle="Conoce el corazón de la Fundación Azulanza BQ y nuestro compromiso con la salud mental y el bienestar integral de nuestra comunidad en Barranquilla."
       />
 
       {/* Story Section */}
@@ -52,12 +52,12 @@ export default function Nosotros() {
               </div>
               <h2 className="text-5xl md:text-6xl font-extrabold text-secondary mb-8 font-primary leading-tight">
                 ¿Cómo nació <br />
-                <span className="gradient-text">Fundación Azulanza?</span>
+                <span className="gradient-text">Fundación Azulanza BQ?</span>
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
                   {config.history_text ||
-                    'Fundación Azulanza nació de la profunda necesidad de brindar apoyo a quienes atraviesan momentos difíciles sin contar con los recursos necesarios. Observamos que la salud mental era a menudo un privilegio, cuando debería ser un derecho fundamental para todos.'}
+                    'Fundación Azulanza BQ nació de la profunda necesidad de brindar apoyo a quienes atraviesan momentos difíciles sin contar con los recursos necesarios en Barranquilla. Observamos que la salud mental era a menudo un privilegio, cuando debería ser un derecho fundamental para todos.'}
                 </p>
                 <p>
                   Nuestro camino comenzó con un pequeño grupo de profesionales apasionados que

@@ -25,16 +25,26 @@ export default function EventosAdmin() {
     location: '',
     image_url: '',
   });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEvents();
   }, []);
 
   const fetchEvents = async () => {
-    const res = await fetch('/api/events');
-    const data = await res.json();
-    setEvents(data);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/events');
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setEvents(data);
+      } else {
+        setError(data?.error || 'Error al cargar los eventos.');
+      }
+    } catch (err) {
+      setError('Error de conexión con el servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -77,8 +87,27 @@ export default function EventosAdmin() {
 
   if (loading)
     return (
-      <div className="flex justify-center py-20">
+      <div className="flex justify-center flex-col items-center py-20 gap-4">
         <Loader2 className="animate-spin text-primary" size={48} />
+        <p className="text-gray-400 font-medium">Cargando eventos...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100 flex flex-col items-center">
+        <Calendar size={48} className="text-red-300 mb-4" />
+        <p className="text-red-500 font-bold mb-4">{error}</p>
+        <button
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            fetchEvents();
+          }}
+          className="btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     );
 
@@ -102,56 +131,57 @@ export default function EventosAdmin() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((ev) => (
-          <motion.div
-            layout
-            key={ev.id}
-            className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden group"
-          >
-            <div className="aspect-video bg-gray-100 relative overflow-hidden">
-              {ev.image_url ? (
-                <img
-                  src={ev.image_url}
-                  alt={ev.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-300">
-                  <ImageIcon size={48} />
+        {Array.isArray(events) &&
+          events.map((ev) => (
+            <motion.div
+              layout
+              key={ev.id}
+              className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden group"
+            >
+              <div className="aspect-video bg-gray-100 relative overflow-hidden">
+                {ev.image_url ? (
+                  <img
+                    src={ev.image_url}
+                    alt={ev.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-300">
+                    <ImageIcon size={48} />
+                  </div>
+                )}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <button
+                    onClick={() => handleEdit(ev)}
+                    className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-primary shadow-lg"
+                  >
+                    <Edit2 size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(ev.id)}
+                    className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-red-500 shadow-lg"
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
-              )}
-              <div className="absolute top-4 right-4 flex gap-2">
-                <button
-                  onClick={() => handleEdit(ev)}
-                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-primary shadow-lg"
-                >
-                  <Edit2 size={18} />
-                </button>
-                <button
-                  onClick={() => handleDelete(ev.id)}
-                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-red-500 shadow-lg"
-                >
-                  <Trash2 size={18} />
-                </button>
               </div>
-            </div>
 
-            <div className="p-6">
-              <div className="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest mb-3">
-                <Calendar size={14} />
-                {new Date(ev.date).toLocaleDateString()}
-              </div>
-              <h3 className="text-xl font-bold text-secondary mb-2">{ev.title}</h3>
-              <p className="text-gray-500 text-sm line-clamp-2 mb-4">{ev.description}</p>
-              {ev.location && (
-                <div className="flex items-center gap-2 text-gray-400 text-xs">
-                  <MapPin size={14} />
-                  {ev.location}
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest mb-3">
+                  <Calendar size={14} />
+                  {new Date(ev.date).toLocaleDateString()}
                 </div>
-              )}
-            </div>
-          </motion.div>
-        ))}
+                <h3 className="text-xl font-bold text-secondary mb-2">{ev.title}</h3>
+                <p className="text-gray-500 text-sm line-clamp-2 mb-4">{ev.description}</p>
+                {ev.location && (
+                  <div className="flex items-center gap-2 text-gray-400 text-xs">
+                    <MapPin size={14} />
+                    {ev.location}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
       </div>
 
       <AnimatePresence>

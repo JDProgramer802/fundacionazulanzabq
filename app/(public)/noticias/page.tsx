@@ -8,9 +8,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Noticias y Actualidad | Fundación Azulanza',
+  title: 'Noticias y Actualidad | Fundación Azulanza BQ',
   description:
-    'Mantente informado sobre las actividades, jornadas de salud y noticias de la Fundación Azulanza.',
+    'Mantente informado sobre las actividades, jornadas de salud mental y noticias de impacto de la Fundación Azulanza BQ en Barranquilla.',
 };
 
 export const dynamic = 'force-dynamic';

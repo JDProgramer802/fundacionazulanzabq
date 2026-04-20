@@ -17,13 +17,14 @@ Esta versión de la plataforma introduce una identidad visual **Premium Glassmor
 - **🎨 Paleta de Colores Dinámica:** Uso estratégico de Rosa (`#EE84B5`) y Azul (`#0356CB`) en gradientes radiales y mallas orgánicas.
 - **🪄 Micro-interacciones:** Animaciones fluidas impulsadas por Framer Motion que reaccionan al scroll y al cursor (Efectos 3D, Spring Physics).
 - **🪟 Estética de Cristal:** Paneles translúcidos con desenfoque de fondo avanzado (`backdrop-blur-xl`) que proporcionan profundidad y claridad.
-- **🪄 Tipografía Exclusiva:** Implementación de *Champagne & Limousines* para una lectura elegante y distintiva.
+- **🪄 Tipografía Exclusiva:** Implementación de _Champagne & Limousines_ para una lectura elegante y distintiva.
 
 ---
 
 ## 🚀 Características Principales
 
 ### 🌍 Portal Público
+
 - **Hero Dinámico:** Encabezado asimétrico con elementos flotantes interactivos.
 - **Gestión de Asesorías:** Sistema intuitivo para agendar citas psicológicas.
 - **Voluntariado:** Proceso de postulación simplificado y moderno.
@@ -31,6 +32,7 @@ Esta versión de la plataforma introduce una identidad visual **Premium Glassmor
 - **Blog de Actualidad:** Noticias optimizadas para SEO con carga progresiva.
 
 ### 🔐 Panel Administrativo (Elite Dashboard)
+
 - **Métricas Tiempo Real:** Control centralizado de impacto y solicitudes.
 - **CMS Integrado:** Gestión completa de eventos, testimonios y noticias.
 - **Auditoría:** Sistema de verificación para donaciones y voluntarios.
@@ -40,14 +42,14 @@ Esta versión de la plataforma introduce una identidad visual **Premium Glassmor
 
 ## 🛠️ Stack Tecnológico
 
-| Tecnología | Propósito |
-| :--- | :--- |
-| **Next.js 14** | App Router para máxima velocidad y SEO. |
-| **Prisma ORM** | Modelado de datos seguro y eficiente. |
-| **PostgreSQL** | Almacenamiento persistente y escalable. |
-| **Resend** | Notificaciones por correo electrónico transaccionales. |
-| **Vercel Blob** | Gestión de assets y archivos en la nube. |
-| **Lucide Icons** | Set de iconos minimalistas y elegantes. |
+| Tecnología       | Propósito                                              |
+| :--------------- | :----------------------------------------------------- |
+| **Next.js 14**   | App Router para máxima velocidad y SEO.                |
+| **Prisma ORM**   | Modelado de datos seguro y eficiente.                  |
+| **PostgreSQL**   | Almacenamiento persistente y escalable.                |
+| **Resend**       | Notificaciones por correo electrónico transaccionales. |
+| **Vercel Blob**  | Gestión de assets y archivos en la nube.               |
+| **Lucide Icons** | Set de iconos minimalistas y elegantes.                |
 
 ---
 
@@ -64,18 +66,21 @@ El proyecto sigue estándares de clean code para asegurar su mantenimiento a lar
 ## 💻 Inicio Rápido
 
 ### Requisitos Previos
+
 - Node.js 18+
 - PostgreSQL (Local o Remoto como Neon)
 
 ### Instalación
 
 1.  **Clonar:**
+
     ```bash
     git clone https://github.com/JDProgramer802/fundacionazulanzabq.git
     cd fundacionazulanzabq
     ```
 
 2.  **Instalar dependencias:**
+
     ```bash
     npm install
     ```
@@ -84,6 +89,7 @@ El proyecto sigue estándares de clean code para asegurar su mantenimiento a lar
     Crea un archivo `.env` basado en `.env.example` (ver sección abajo).
 
 4.  **Sincronizar DB:**
+
     ```bash
     npx prisma generate
     npx prisma db push

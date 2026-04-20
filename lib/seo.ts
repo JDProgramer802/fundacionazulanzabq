@@ -20,9 +20,12 @@ export async function generatePageMetadata(
 ): Promise<Metadata> {
   const settings = await getSettings();
 
-  const siteTitle = settings.site_title || 'Fundación Azulanza';
+  const siteTitle = settings.site_title || 'Fundación Azulanza BQ';
   const pageTitle = settings[titleKey] || siteTitle;
-  const description = settings[descriptionKey] || settings.global_description;
+  const description =
+    settings[descriptionKey] ||
+    settings.global_description ||
+    'Fundación Azulanza BQ brindamos asistencia integral en salud mental y desarrollo comunitario.';
   const ogImage = settings.og_image || '/og-default.jpg';
 
   return {

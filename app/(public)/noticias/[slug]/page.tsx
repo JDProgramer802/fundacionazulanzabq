@@ -87,7 +87,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
                   </div>
                   <div>
                     <span className="text-gray-400 block text-xs uppercase font-bold">Por</span>
-                    <span className="text-gray-700 font-semibold">Fundación Azulanza</span>
+                    <span className="text-gray-700 font-semibold">Fundación Azulanza BQ</span>
                   </div>
                 </div>
               </div>

@@ -2,22 +2,34 @@
 
 import { api } from '@/lib/api-client';
 import { formatDate } from '@/lib/utils';
-import { Edit2, Eye, Loader2, Plus, Trash2 } from 'lucide-react';
+import { Edit2, Eye, Loader2, Newspaper, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function AdminNewsPage() {
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchNews();
   }, []);
 
   const fetchNews = async () => {
-    const { data, error } = await api.get('/api/news');
-    if (Array.isArray(data)) setNews(data);
-    setLoading(false);
+    try {
+      const { data, error } = await api.get('/api/news');
+      if (error) {
+        setError(error);
+      } else if (Array.isArray(data)) {
+        setNews(data);
+      } else {
+        setError('Formato de datos inválido.');
+      }
+    } catch (err) {
+      setError('Error de conexión.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async (id: string) => {
@@ -33,8 +45,27 @@ export default function AdminNewsPage() {
 
   if (loading)
     return (
-      <div className="flex justify-center p-12">
+      <div className="flex justify-center flex-col items-center py-20 gap-4">
         <Loader2 className="animate-spin text-primary" size={48} />
+        <p className="text-gray-400 font-medium">Cargando noticias...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100 flex flex-col items-center">
+        <Newspaper size={48} className="text-red-300 mb-4" />
+        <p className="text-red-500 font-bold mb-4">{error}</p>
+        <button
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            fetchNews();
+          }}
+          className="btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     );
 
