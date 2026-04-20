@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description: 'Asistencia integral en salud mental y desarrollo comunitario en Barranquilla.',
   },
   verification: {
-    google: 'mRkNE509lzNdkdC2hs1pyFxPSeD0sbtC9j9sEaE7tcQ',
+    google: 'googlefb13558cfef6d24a',
   },
 };
 
