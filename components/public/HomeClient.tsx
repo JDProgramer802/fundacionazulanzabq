@@ -9,11 +9,13 @@ import {
   Heart,
   Instagram,
   MessageSquare,
+  Play,
   Quote,
   ShieldCheck,
   Star,
   Users,
 } from 'lucide-react';
+import InstagramProfile from '@/components/public/InstagramProfile';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -321,62 +323,8 @@ export default function HomeClient({ config, testimonials, events, gallery }: Ho
         </section>
       )}
 
-      {/* Instagram Feed Section */}
-      <section className="py-32 relative overflow-hidden bg-white">
-        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] shape-blob-blue opacity-5 -translate-y-1/2" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20 max-w-3xl mx-auto"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              className="w-16 h-16 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-lg"
-            >
-              <Instagram size={32} />
-            </motion.div>
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
-              Publicaciones Reales
-            </span>
-            <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">
-              Nuestra Vida en <span className="gradient-text">Instagram</span>
-            </h2>
-            <p className="text-gray-500 text-lg">
-              Explora nuestras últimas actividades y momentos directamente desde nuestro perfil
-              oficial.
-            </p>
-          </motion.div>
-
-          {/* Elfsight Instagram Widget */}
-          <div className="max-w-6xl mx-auto glass-premium p-4 md:p-8 rounded-[3rem] overflow-hidden min-h-[500px] relative">
-            <Script
-              src="https://static.elfsight.com/platform/platform.js"
-              strategy="afterInteractive"
-            />
-            <div
-              className="elfsight-app-61783451-9c8a-493a-8686-2736149f1345"
-              data-elfsight-app-lazy
-            ></div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <a
-              href="https://www.instagram.com/fundacionazulanza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center gap-3 px-10 py-4 shadow-xl shadow-primary/20 hover:shadow-primary/40"
-            >
-              <Instagram size={20} />
-              Ver perfil completo
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* Full Instagram Profile Integration */}
+      <InstagramProfile />
 
       {/* Testimonials Section */}
       {testimonials.length > 0 && (
