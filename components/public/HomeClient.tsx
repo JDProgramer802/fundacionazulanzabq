@@ -352,8 +352,11 @@ export default function HomeClient({ config, testimonials, events, gallery }: Ho
           </motion.div>
 
           {/* Elfsight Instagram Widget */}
-          <div className="max-w-6xl mx-auto glass-premium p-4 md:p-8 rounded-[3rem] overflow-hidden min-h-[500px]">
-            <script src="https://static.elfsight.com/platform/platform.js" async></script>
+          <div className="max-w-6xl mx-auto glass-premium p-4 md:p-8 rounded-[3rem] overflow-hidden min-h-[500px] relative">
+            <Script
+              src="https://static.elfsight.com/platform/platform.js"
+              strategy="afterInteractive"
+            />
             <div
               className="elfsight-app-61783451-9c8a-493a-8686-2736149f1345"
               data-elfsight-app-lazy
