@@ -80,7 +80,7 @@ export default function RootLayout({
     },
     sameAs: [
       'https://www.facebook.com/fundacionazulanza',
-      'https://www.instagram.com/fundacionazulanza',
+      'https://www.instagram.com/fundacionazulanza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
       'https://twitter.com/fundacionazulanza',
     ],
   };

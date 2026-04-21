@@ -12,10 +12,9 @@ import {
   ShieldCheck,
   Star,
   Users,
-  Camera,
 } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface HomeClientProps {
   config: any;
@@ -320,10 +319,10 @@ export default function HomeClient({ config, testimonials, events, gallery }: Ho
         </section>
       )}
 
-      {/* Recent Gallery Section - Added 2026-04-18 */}
+      {/* Instagram Feed Section */}
       {gallery.length > 0 && (
-        <section className="py-32 relative overflow-hidden bg-[#fafcff]">
-          <div className="absolute top-1/2 left-0 w-[600px] h-[600px] shape-blob-blue opacity-10 -translate-y-1/2" />
+        <section className="py-32 relative overflow-hidden bg-white">
+          <div className="absolute top-1/2 left-0 w-[600px] h-[600px] shape-blob-blue opacity-5 -translate-y-1/2" />
 
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
@@ -332,46 +331,67 @@ export default function HomeClient({ config, testimonials, events, gallery }: Ho
               viewport={{ once: true }}
               className="text-center mb-20 max-w-3xl mx-auto"
             >
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                className="w-16 h-16 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-lg"
+              >
+                <Instagram size={32} />
+              </motion.div>
               <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">
-                Momentos que Inspiran
+                Momentos en Instagram
               </span>
               <h2 className="text-5xl md:text-6xl font-extrabold text-secondary font-primary mb-6">
-                Nuestra <span className="gradient-text">Galería</span>
+                Síguenos en <span className="gradient-text">Redes</span>
               </h2>
               <p className="text-gray-500 text-lg">
-                Un vistazo rápido a las sonrisas y el trabajo que realizamos día a día.
+                Conéctate con nuestro día a día y sé parte de nuestra comunidad digital.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {gallery.map((item, i) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {gallery.slice(0, 8).map((item, i) => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="aspect-square relative rounded-3xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                  className="aspect-square relative rounded-2xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500"
                 >
-                  <Link href="/galeria">
+                  <a
+                    href="https://www.instagram.com/fundacionazulanza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Image
                       src={item.image_url}
                       alt={item.title || 'Fundación Azulanza BQ'}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Camera className="text-white" size={24} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white">
+                      <Instagram className="mb-2" size={32} />
+                      <span className="text-xs font-bold uppercase tracking-widest">
+                        Ver en Instagram
+                      </span>
                     </div>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </div>
 
             <div className="mt-16 text-center">
-              <Link href="/galeria" className="btn-glass inline-flex items-center gap-2">
-                Ver Galería Completa <ArrowRight size={18} />
-              </Link>
+              <a
+                href="https://www.instagram.com/fundacionazulanza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center gap-3 px-10 py-4 shadow-xl shadow-primary/20 hover:shadow-primary/40"
+              >
+                <Instagram size={20} />
+                Seguir en Instagram
+              </a>
             </div>
           </div>
         </section>

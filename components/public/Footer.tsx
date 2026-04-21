@@ -58,13 +58,18 @@ export default function Footer() {
             </p>
             <div className="flex gap-6">
               {[
-                { icon: Facebook, href: '#' },
-                { icon: Instagram, href: '#' },
-                { icon: Twitter, href: '#' },
+                { icon: Facebook, href: 'https://www.facebook.com/fundacionazulanza' },
+                {
+                  icon: Instagram,
+                  href: 'https://www.instagram.com/fundacionazulanza?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+                },
+                { icon: Twitter, href: 'https://twitter.com/fundacionazulanza' },
               ].map((social, i) => (
                 <motion.a
                   key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -8, scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                   className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/20"
