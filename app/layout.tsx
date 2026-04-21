@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     icon: '/icon.png',
     apple: '/icon.png',
   },
+  manifest: '/manifest.json',
   alternates: {
     canonical: 'https://fundacionazulanzabq.org',
   },
